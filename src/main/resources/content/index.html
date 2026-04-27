@@ -76,8 +76,7 @@ layout: main
         (grouped[key] = grouped[key] || { coords: c, talks: [] }).talks.push(t);
     });
 
-    const map = L.map('map', { scrollWheelZoom: false, zoomControl: true, attributionControl: true })
-                 .setView([49, 8], 4);
+    const map = L.map('map', { scrollWheelZoom: false, zoomControl: true, attributionControl: true });
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
         subdomains: 'abcd',
         maxZoom: 10,
@@ -95,13 +94,21 @@ layout: main
         iconAnchor: [11, 11]
     });
 
+    const points = [];
     Object.entries(grouped).forEach(([city, data]) => {
         const m = L.marker(data.coords, { icon }).addTo(map);
         const items = data.talks.map(t =>
             '<a href="' + t.url + '"><span class="yr">' + t.date + '</span>' + t.title + '</a>'
         ).join('');
         m.bindPopup('<div class="city">' + city + '</div>' + items);
+        points.push(data.coords);
     });
+
+    if (points.length) {
+        map.fitBounds(L.latLngBounds(points), { padding: [30, 30], maxZoom: 5 });
+    } else {
+        map.setView([49, 8], 4);
+    }
 })();
 </script>
 |}
