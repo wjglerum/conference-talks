@@ -20,12 +20,40 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: Generate Roq Site
-        uses: quarkiverse/quarkus-roq@v1
+      - name: Set up Java
+        uses: actions/setup-java@v5
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
           java-version: '25'
-          site-future: 'true'
+          distribution: temurin
+          cache: maven
+
+      - name: Resolve GitHub Pages URL
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          url=$(gh api "repos/$GITHUB_REPOSITORY/pages" --jq '.html_url')
+          base=$(echo "$url" | sed -E 's|(https?://[^/]+).*|\1|')
+          path=$(echo "$url" | sed -E 's|https?://[^/]+||')
+          [ -z "$path" ] && path=/
+          echo "SITE_URL=$base" >> "$GITHUB_ENV"
+          echo "SITE_PATH=$path" >> "$GITHUB_ENV"
+
+      - name: Build static site
+        env:
+          QUARKUS_ROQ_GENERATOR_BATCH: 'true'
+        run: |
+          ./mvnw -B package quarkus:run -DskipTests \
+            -Dquarkus.http.root-path=$SITE_PATH \
+            -Dsite.url=$SITE_URL \
+            -Dsite.future=true
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v6
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: target/roq
 
   deploy:
     needs: build
