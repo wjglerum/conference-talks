@@ -28,6 +28,7 @@ layout: main
             <span>📅 {talk.date.format('MMMM yyyy')}</span>
             <span>📍 {talk.data("location")}</span>
             {#if talk.data("coSpeaker")}<span>👥 with {talk.data("coSpeaker")}</span>{/if}
+            {#if talk.data("video")}<span class="recording" title="Recording available">▶ Recording</span>{/if}
         </div>
     </a>
     {/for}
