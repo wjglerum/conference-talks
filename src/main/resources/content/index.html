@@ -1,35 +1,107 @@
 ---
 title: Conference Talks
-description: Presentations by Willem Jan Glerum, Principal Software Engineer at Lunatech
+description: Conference talks given by Willem Jan Glerum, Principal Software Engineer at Lunatech.
 author: Willem Jan Glerum
 layout: main
 ---
-<div class="hero">
-    <h2>Conference Talks</h2>
-    <p>Presentations by Willem Jan Glerum — Principal Software Engineer at <a href="https://lunatech.com" style="color:#6366f1">Lunatech</a></p>
-</div>
+<section class="hero">
+    <div>
+        <h1 class="serif">Talks I've given,<br>and where I gave them.</h1>
+        <p>A running list of conference talks, podcasts and workshops. Mostly Java, increasingly Quarkus, and lately a lot about virtual threads and AI agents.</p>
+        <span class="count"><strong>{site.collections.talks.size}</strong> sessions · 2018 — 2026</span>
+    </div>
+    <div id="map" aria-label="Map of talk locations"></div>
+</section>
 
-<div class="stats">
-    <div class="stat"><div class="number">{site.collections.talks.size}</div><div class="label">Total talks</div></div>
-</div>
+<section class="talks-section">
+    <h2>All sessions</h2>
+    <div class="talks-grid">
+        {#for talk in site.collections.talks}
+        <a class="talk-card" href="{talk.url}">
+            <div class="conference">
+                <span class="name">{talk.data("conference")}</span>
+                {#if talk.data("type") == 'talk'}<span class="tag talk">Conference</span>{/if}
+                {#if talk.data("type") == 'deepdive'}<span class="tag deepdive">Deep Dive</span>{/if}
+                {#if talk.data("type") == 'workshop'}<span class="tag workshop">Workshop</span>{/if}
+                {#if talk.data("type") == 'podcast'}<span class="tag podcast">Podcast</span>{/if}
+                {#if talk.data("type") == 'techtalk'}<span class="tag techtalk">Tech Talk</span>{/if}
+            </div>
+            <h3 class="serif">{talk.title}</h3>
+            <div class="meta">
+                <span>{talk.date.format('MMM yyyy')}</span>
+                <span>{talk.data("location")}</span>
+                {#if talk.data("video")}<span class="recording">▸ Recording</span>{/if}
+            </div>
+        </a>
+        {/for}
+    </div>
+</section>
 
-<div class="talks-grid">
-    {#for talk in site.collections.talks}
-    <a class="talk-card" href="{talk.url}">
-        <div class="conference">{talk.data("conference")}
-            {#if talk.data("type") == 'talk'}<span class="tag talk">Conference</span>{/if}
-            {#if talk.data("type") == 'deepdive'}<span class="tag deepdive">Deep Dive</span>{/if}
-            {#if talk.data("type") == 'workshop'}<span class="tag workshop">Workshop</span>{/if}
-            {#if talk.data("type") == 'podcast'}<span class="tag podcast">Podcast</span>{/if}
-            {#if talk.data("type") == 'techtalk'}<span class="tag techtalk">Tech Talk</span>{/if}
-        </div>
-        <h3>{talk.title}</h3>
-        <div class="meta">
-            <span>📅 {talk.date.format('MMMM yyyy')}</span>
-            <span>📍 {talk.data("location")}</span>
-            {#if talk.data("coSpeaker")}<span>👥 with {talk.data("coSpeaker")}</span>{/if}
-            {#if talk.data("video")}<span class="recording" title="Recording available">▶ Recording</span>{/if}
-        </div>
-    </a>
-    {/for}
-</div>
+<script id="talks-data" type="application/json">[
+{#for talk in site.collections.talks}
+  \{"title":"{talk.title.replace('\"','\\\"')}","url":"{talk.url}","date":"{talk.date.format('MMM yyyy')}","location":"{talk.data('location')}","video":{#if talk.data('video')}true{#else}false{/if}\}{#if !talk_isLast},{/if}
+{/for}
+]</script>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+{|
+<script>
+(function() {
+    const cities = {
+        "Rotterdam, The Netherlands": [51.9244, 4.4777],
+        "Rotterdam, Netherlands":     [51.9244, 4.4777],
+        "Kyiv, Ukraine":              [50.4501, 30.5234],
+        "Kraków, Poland":             [50.0647, 19.945],
+        "Oslo, Norway":               [59.9139, 10.7522],
+        "Marrakesh, Morocco":         [31.6295, -7.9811],
+        "Agadir, Morocco":            [30.4278, -9.5981],
+        "Mainz, Germany":             [49.9929, 8.2473],
+        "Sophia Antipolis, France":   [43.6155, 7.0682],
+        "Sofia, Bulgaria":            [42.6977, 23.3219],
+        "Rovinj, Croatia":            [45.0815, 13.6386],
+        "Ede, The Netherlands":       [52.0334, 5.671],
+        "Hannover, Germany":          [52.3759, 9.732],
+        "Rust, Germany":              [48.2684, 7.7224],
+        "Brussels, Belgium":          [50.8503, 4.3517],
+        "Antwerp, Belgium":           [51.2194, 4.4025],
+        "Paris, France":              [48.8566, 2.3522]
+    };
+
+    const talks = JSON.parse(document.getElementById('talks-data').textContent);
+    const grouped = {};
+    talks.forEach(t => {
+        const c = cities[t.location];
+        if (!c) return;
+        const key = t.location;
+        (grouped[key] = grouped[key] || { coords: c, talks: [] }).talks.push(t);
+    });
+
+    const map = L.map('map', { scrollWheelZoom: false, zoomControl: true, attributionControl: true })
+                 .setView([49, 8], 4);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
+        subdomains: 'abcd',
+        maxZoom: 10,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
+    }).addTo(map);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png', {
+        subdomains: 'abcd',
+        maxZoom: 10
+    }).addTo(map);
+
+    const icon = L.divIcon({
+        className: 'talk-marker',
+        html: '<svg width="22" height="22" viewBox="0 0 22 22"><circle cx="11" cy="11" r="6" fill="#b04510" stroke="#fbf6ec" stroke-width="2"/></svg>',
+        iconSize: [22, 22],
+        iconAnchor: [11, 11]
+    });
+
+    Object.entries(grouped).forEach(([city, data]) => {
+        const m = L.marker(data.coords, { icon }).addTo(map);
+        const items = data.talks.map(t =>
+            '<a href="' + t.url + '"><span class="yr">' + t.date + '</span>' + t.title + '</a>'
+        ).join('');
+        m.bindPopup('<div class="city">' + city + '</div>' + items);
+    });
+})();
+</script>
+|}

@@ -3,51 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{#if page.title}{page.title} | {/if}{site.title}</title>
+    <title>{#if page.title}{page.title} — {/if}{site.title}</title>
     <meta name="description" content="{site.description}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
     <style>
+        :root {
+            --bg: #f4ede0;
+            --paper: #fbf6ec;
+            --ink: #1a1614;
+            --muted: #6b5e51;
+            --rule: #d8cdb6;
+            --accent: #b04510;
+            --accent-soft: #f3e2d2;
+            --recording: #c0392b;
+        }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f172a; color: #e2e8f0; line-height: 1.6; }
-        header { background: #1e293b; border-bottom: 1px solid #334155; padding: 1rem 2rem; display: flex; align-items: center; gap: 1rem; }
-        header h1 { font-size: 1.25rem; color: #f8fafc; }
-        header h1 a { color: inherit; text-decoration: none; }
-        header span { color: #64748b; font-size: 0.875rem; }
-        main { max-width: 1200px; margin: 0 auto; padding: 2rem; }
-        .hero { text-align: center; padding: 3rem 0 2rem; }
-        .hero h2 { font-size: 2rem; color: #f8fafc; margin-bottom: 0.5rem; }
-        .hero p { color: #94a3b8; font-size: 1.1rem; }
-        .stats { display: flex; justify-content: center; gap: 2rem; margin: 2rem 0; }
-        .stat { text-align: center; }
-        .stat .number { font-size: 2rem; font-weight: 700; color: #6366f1; }
-        .stat .label { color: #94a3b8; font-size: 0.875rem; }
-        .talks-grid { display: grid; gap: 1rem; grid-template-columns: 1fr; }
-        @media (min-width: 700px) { .talks-grid { grid-template-columns: repeat(2, 1fr); } }
+        html, body { background: var(--bg); }
+        body { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif; color: var(--ink); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+        a { color: var(--accent); }
+        a:hover { color: var(--ink); }
+        .serif { font-family: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif; font-weight: 500; letter-spacing: -0.01em; }
+        .mono { font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace; }
+        header.site { display: flex; align-items: baseline; justify-content: space-between; gap: 2rem; padding: 1.75rem 2rem 1rem; max-width: 1100px; margin: 0 auto; border-bottom: 1px solid var(--rule); }
+        header.site .name { font-size: 1.05rem; font-weight: 600; letter-spacing: -0.01em; }
+        header.site .name a { color: var(--ink); text-decoration: none; }
+        header.site .name a:hover { color: var(--accent); }
+        header.site .role { font-size: 0.85rem; color: var(--muted); }
+        main { max-width: 1100px; margin: 0 auto; padding: 2.5rem 2rem 4rem; }
+        .hero { display: grid; gap: 2rem; align-items: end; margin-bottom: 2.5rem; }
+        @media (min-width: 800px) { .hero { grid-template-columns: 1.1fr 1fr; gap: 3rem; } }
+        .hero h1 { font-size: clamp(2.4rem, 5vw, 3.4rem); line-height: 1.05; margin-bottom: 1rem; }
+        .hero p { font-size: 1.05rem; color: var(--muted); max-width: 38ch; }
+        .hero .count { display: inline-block; margin-top: 1rem; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 0.6rem; }
+        .hero .count strong { color: var(--ink); font-weight: 600; }
+        #map { height: 320px; border: 1px solid var(--rule); background: var(--paper); }
+        #map .leaflet-control-attribution { background: rgba(251,246,236,0.8); }
+        #map .leaflet-popup-content { font-family: inherit; font-size: 0.85rem; line-height: 1.5; margin: 0.6rem 0.75rem; }
+        #map .leaflet-popup-content .city { font-weight: 600; margin-bottom: 0.35rem; }
+        #map .leaflet-popup-content a { display: block; color: var(--ink); text-decoration: none; padding: 0.15rem 0; }
+        #map .leaflet-popup-content a:hover { color: var(--accent); }
+        #map .leaflet-popup-content .yr { color: var(--muted); margin-right: 0.4rem; }
+        .talks-section h2 { font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.25rem; padding-bottom: 0.6rem; border-bottom: 1px solid var(--rule); }
+        .talks-grid { display: grid; gap: 0; grid-template-columns: 1fr; }
+        @media (min-width: 720px) { .talks-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (min-width: 1000px) { .talks-grid { grid-template-columns: repeat(3, 1fr); } }
-        .talk-card { background: #1e293b; border: 1px solid #334155; border-radius: 0.75rem; padding: 1.5rem; text-decoration: none; color: inherit; display: flex; flex-direction: column; transition: border-color 0.2s, transform 0.2s; }
-        .talk-card h3 { flex-grow: 1; }
-        .talk-card:hover { border-color: #6366f1; transform: translateY(-2px); }
-        .talk-card .conference { color: #6366f1; font-size: 0.875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
-        .talk-card h3 { color: #f8fafc; font-size: 1.1rem; margin-bottom: 0.5rem; }
-        .talk-card .meta { display: flex; gap: 1rem; color: #64748b; font-size: 0.875rem; flex-wrap: wrap; margin-top: 0.75rem; }
-        .talk-card .meta span::before { margin-right: 0.25rem; }
-        .talk-card .meta .recording { color: #f87171; font-weight: 600; }
-        .tag { display: inline-block; border-radius: 0.25rem; padding: 0.125rem 0.5rem; font-size: 0.75rem; margin-left: 0.5rem; vertical-align: middle; }
-        .tag.talk { background: #1e293b; color: #94a3b8; border: 1px solid #334155; }
-        .tag.deepdive { background: #1e3a5f; color: #93c5fd; }
-        .tag.workshop { background: #3d1f6b; color: #c4b5fd; }
-        .tag.podcast { background: #1a3a2a; color: #6ee7b7; }
-        .tag.techtalk { background: #3a2a1a; color: #fcd34d; }
-        footer { text-align: center; padding: 2rem; color: #475569; font-size: 0.875rem; border-top: 1px solid #1e293b; margin-top: 3rem; }
+        .talk-card { display: flex; flex-direction: column; padding: 1.25rem 1.25rem 1.5rem; text-decoration: none; color: inherit; border-bottom: 1px solid var(--rule); border-right: 1px solid var(--rule); transition: background 0.15s; }
+        .talk-card:hover { background: var(--paper); }
+        .talks-grid .talk-card:nth-child(3n) { border-right: none; }
+        @media (max-width: 999px) and (min-width: 720px) { .talks-grid .talk-card:nth-child(3n) { border-right: 1px solid var(--rule); } .talks-grid .talk-card:nth-child(2n) { border-right: none; } }
+        @media (max-width: 719px) { .talks-grid .talk-card { border-right: none; } }
+        .talk-card .conference { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+        .talk-card .conference .name { color: var(--accent); font-weight: 600; }
+        .talk-card h3 { font-size: 1.15rem; line-height: 1.3; margin-bottom: 0.85rem; flex-grow: 1; }
+        .talk-card .meta { display: flex; gap: 1.25rem; flex-wrap: wrap; font-size: 0.78rem; color: var(--muted); }
+        .talk-card .meta .recording { color: var(--recording); font-weight: 600; letter-spacing: 0.02em; }
+        .tag { display: inline-block; font-size: 0.65rem; letter-spacing: 0.08em; padding: 0.1rem 0.45rem; border: 1px solid currentColor; }
+        .tag.talk { color: var(--muted); }
+        .tag.deepdive { color: #1d4ed8; }
+        .tag.workshop { color: #6d28d9; }
+        .tag.podcast { color: #047857; }
+        .tag.techtalk { color: #b45309; }
+        footer.site { text-align: center; padding: 2.5rem 2rem; color: var(--muted); font-size: 0.8rem; border-top: 1px solid var(--rule); max-width: 1100px; margin: 0 auto; }
+        footer.site a { color: var(--accent); text-decoration: none; }
     </style>
 </head>
 <body>
-    <header>
-        <h1><a href="/">Willem Jan Glerum</a></h1>
-        <span>Conference Talks</span>
+    <header class="site">
+        <div class="name"><a href="/">Willem Jan Glerum</a></div>
+        <div class="role">Principal Software Engineer · <a href="https://lunatech.com" style="color: inherit; text-decoration: underline;">Lunatech</a></div>
     </header>
     <main>
         {#insert /}
     </main>
-    <footer>Built with <a href="https://quarkus.io" style="color:#6366f1">Quarkus</a> + <a href="https://github.com/quarkiverse/quarkus-roq" style="color:#6366f1">Roq</a></footer>
+    <footer class="site">Built with <a href="https://quarkus.io">Quarkus</a> &amp; <a href="https://github.com/quarkiverse/quarkus-roq">Roq</a>. Source on <a href="https://github.com/wjglerum/conference-talks">GitHub</a>.</footer>
 </body>
 </html>
