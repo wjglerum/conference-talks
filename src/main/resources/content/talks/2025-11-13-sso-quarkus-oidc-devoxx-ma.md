@@ -1,13 +1,13 @@
 ---
 title: SSO made easy with Quarkus OIDC
-date: 2025-10-14
+date: 2025-11-13
 layout: talk
-conference: JavaCro 2025
-location: Rovinj, Croatia
+conference: Devoxx Morocco 2025
+location: Marrakesh, Morocco
 type: talk
 slides:
-link: /talks/2025-10-14-sso-quarkus-oidc-javacro/
-
+video: https://www.youtube.com/watch?v=YGDe2Vk4Ixw
+link: /talks/2025-11-13-sso-quarkus-oidc-devoxx-ma/
 ---
 
 <div class="abstract">

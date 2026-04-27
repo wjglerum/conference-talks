@@ -1,13 +1,13 @@
 ---
 title: Reactive Quarkus
-date: 2021-09-17
+date: 2021-11-19
 layout: talk
-conference: LunaConf 2021
-location: Rotterdam, The Netherlands
+conference: Devoxx Ukraine 2021
+location: Online
 type: talk
 slides:
-link: /talks/2021-09-17-reactive-quarkus-lunaconf/
-
+video: https://www.youtube.com/watch?v=kd08So0H_ks
+link: /talks/2021-11-19-reactive-quarkus-devoxxua/
 ---
 
 <div class="abstract">

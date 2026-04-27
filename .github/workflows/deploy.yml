@@ -20,20 +20,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-java@v4
+      - name: Generate Roq Site
+        uses: quarkiverse/quarkus-roq@v1
         with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           java-version: '25'
-          distribution: temurin
-          cache: maven
-
-      - name: Generate static site
-        run: ./mvnw -B package
-          -Dquarkus.roq.generator.batch=true
-          -Dquarkus.roq.site-base-url=https://wjglerum.github.io/conference-talks
-
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: target/roq/
+          site-future: 'true'
 
   deploy:
     needs: build
@@ -41,6 +33,10 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      pages: write
+      id-token: write
     steps:
-      - uses: actions/deploy-pages@v4
+      - name: Deploy to GitHub Pages
         id: deployment
+        uses: actions/deploy-pages@v4

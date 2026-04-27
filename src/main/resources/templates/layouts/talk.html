@@ -22,8 +22,11 @@
         .btn-primary:hover { background: #4f46e5; }
         .btn-secondary { background: #1e293b; color: #94a3b8; border: 1px solid #334155; }
         .btn-secondary:hover { color: #f8fafc; border-color: #6366f1; }
-        .tag { display: inline-block; background: #1e3a5f; color: #93c5fd; border-radius: 0.25rem; padding: 0.125rem 0.5rem; font-size: 0.75rem; margin-right: 0.25rem; }
+        .tag { display: inline-block; border-radius: 0.25rem; padding: 0.125rem 0.5rem; font-size: 0.75rem; margin-left: 0.5rem; vertical-align: middle; }
+        .tag.deepdive { background: #1e3a5f; color: #93c5fd; }
         .tag.workshop { background: #3d1f6b; color: #c4b5fd; }
+        .tag.podcast { background: #1a3a2a; color: #6ee7b7; }
+        .tag.techtalk { background: #3a2a1a; color: #fcd34d; }
         .abstract { background: #1e293b; border: 1px solid #334155; border-radius: 0.75rem; padding: 1.5rem; }
         .abstract h2 { color: #f8fafc; font-size: 1rem; margin-bottom: 0.75rem; }
         .abstract p { color: #cbd5e1; }
@@ -37,6 +40,15 @@
         <a href="/">← Back to all talks</a>
     </header>
     <main>
+        <div class="talk-header">
+            <div class="conference-badge">{page.data("conference")}{#if page.data("type") == 'deepdive'} <span class="tag deepdive">Deep Dive</span>{/if}{#if page.data("type") == 'workshop'} <span class="tag workshop">Workshop</span>{/if}{#if page.data("type") == 'podcast'} <span class="tag podcast">Podcast</span>{/if}</div>
+            <h1>{page.title}</h1>
+            <div class="meta">
+                <span>📅 {page.date.format('MMMM d, yyyy')}</span>
+                <span>📍 {page.data("location")}</span>
+            </div>
+            <div class="links">{#if page.data("video")}<a class="btn btn-primary" href="{page.data("video")}" target="_blank">▶ Watch recording</a>{/if}{#if page.data("slides")}<a class="btn btn-secondary" href="{page.data("slides")}" target="_blank">📊 Slides</a>{/if}</div>
+        </div>
         {#insert /}
     </main>
     <footer>Built with <a href="https://quarkus.io" style="color:#6366f1">Quarkus</a> + <a href="https://github.com/quarkiverse/quarkus-roq" style="color:#6366f1">Roq</a></footer>
