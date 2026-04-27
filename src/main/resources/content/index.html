@@ -10,7 +10,10 @@ layout: main
         <p>A running list of conference talks, podcasts and workshops. Mostly Java, increasingly Quarkus, and lately a lot about virtual threads and AI agents.</p>
         <span class="count"><strong>{site.collections.talks.size}</strong> sessions · 2018 — 2026</span>
     </div>
-    <div id="map" aria-label="Map of talk locations"></div>
+    <div class="map-wrap">
+        <svg id="map" viewBox="0 0 800 500" role="img" aria-label="Map of talk locations"></svg>
+        <div id="map-tooltip" class="map-tooltip"></div>
+    </div>
 </section>
 
 <section class="talks-section">
@@ -43,7 +46,8 @@ layout: main
 {/for}
 ]</script>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
 {|
 <script>
 (function() {
@@ -72,42 +76,77 @@ layout: main
     talks.forEach(t => {
         const c = cities[t.location];
         if (!c) return;
-        const key = t.location;
-        (grouped[key] = grouped[key] || { coords: c, talks: [] }).talks.push(t);
+        (grouped[t.location] = grouped[t.location] || { coords: c, talks: [] }).talks.push(t);
     });
 
-    const map = L.map('map', { scrollWheelZoom: false, zoomControl: true, attributionControl: true });
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
-        subdomains: 'abcd',
-        maxZoom: 10,
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
-    }).addTo(map);
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png', {
-        subdomains: 'abcd',
-        maxZoom: 10
-    }).addTo(map);
+    const W = 800, H = 500;
+    const svg = d3.select('#map');
+    const tooltip = document.getElementById('map-tooltip');
 
-    const icon = L.divIcon({
-        className: 'talk-marker',
-        html: '<svg width="22" height="22" viewBox="0 0 22 22"><circle cx="11" cy="11" r="6" fill="#b04510" stroke="#fbf6ec" stroke-width="2"/></svg>',
-        iconSize: [22, 22],
-        iconAnchor: [11, 11]
-    });
+    // Compute bounds (lat/lng) and project around the talk locations.
+    const cityList = Object.values(grouped);
+    const lats = cityList.map(c => c.coords[0]);
+    const lngs = cityList.map(c => c.coords[1]);
+    const bounds = [
+        [Math.min(...lngs) - 4, Math.min(...lats) - 2],   // [west, south]
+        [Math.max(...lngs) + 4, Math.max(...lats) + 4]    // [east, north]
+    ];
+    const featureBounds = {
+        type: "FeatureCollection",
+        features: [
+            { type: "Feature", geometry: { type: "Point", coordinates: bounds[0] } },
+            { type: "Feature", geometry: { type: "Point", coordinates: bounds[1] } }
+        ]
+    };
+    const projection = d3.geoMercator().fitSize([W, H], featureBounds);
+    const path = d3.geoPath(projection);
 
-    const points = [];
-    Object.entries(grouped).forEach(([city, data]) => {
-        const m = L.marker(data.coords, { icon }).addTo(map);
+    fetch('https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-110m.json')
+        .then(r => r.json())
+        .then(world => {
+            const countries = topojson.feature(world, world.objects.countries);
+            svg.selectAll('path.country')
+                .data(countries.features)
+                .join('path')
+                .attr('class', d => 'country' + (d.properties.name === 'Netherlands' ? ' home' : ''))
+                .attr('d', path);
+
+            // Draw markers
+            Object.entries(grouped).forEach(([city, data]) => {
+                const [x, y] = projection([data.coords[1], data.coords[0]]);
+                if (!isFinite(x) || !isFinite(y)) return;
+                const g = svg.append('g').attr('transform', `translate(${x},${y})`);
+                g.append('circle').attr('class', 'marker').attr('r', 4.5);
+                g.append('circle')
+                    .attr('class', 'marker-hit')
+                    .attr('r', 12)
+                    .on('mouseenter touchstart', () => showTooltip(city, data, x, y))
+                    .on('mouseleave', () => hideTooltip());
+            });
+        });
+
+    let tooltipPinned = false;
+    function showTooltip(city, data, x, y) {
         const items = data.talks.map(t =>
-            '<a href="' + t.url + '"><span class="yr">' + t.date + '</span>' + t.title + '</a>'
+            '<a href="' + t.url + '"><span class="yr">' + t.date + '</span>' + escapeHtml(t.title) + '</a>'
         ).join('');
-        m.bindPopup('<div class="city">' + city + '</div>' + items);
-        points.push(data.coords);
-    });
+        tooltip.innerHTML = '<div class="city">' + city + '</div>' + items;
+        const svgRect = svg.node().getBoundingClientRect();
+        const wrapRect = tooltip.parentElement.getBoundingClientRect();
+        const px = (x / W) * svgRect.width + (svgRect.left - wrapRect.left);
+        const py = (y / H) * svgRect.height + (svgRect.top - wrapRect.top);
+        tooltip.style.left = px + 'px';
+        tooltip.style.top = py + 'px';
+        tooltip.classList.add('visible');
+    }
+    function hideTooltip() {
+        if (!tooltipPinned) tooltip.classList.remove('visible');
+    }
+    tooltip.addEventListener('mouseenter', () => { tooltipPinned = true; });
+    tooltip.addEventListener('mouseleave', () => { tooltipPinned = false; tooltip.classList.remove('visible'); });
 
-    if (points.length) {
-        map.fitBounds(L.latLngBounds(points), { padding: [30, 30], maxZoom: 5 });
-    } else {
-        map.setView([49, 8], 4);
+    function escapeHtml(s) {
+        return s.replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
     }
 })();
 </script>
