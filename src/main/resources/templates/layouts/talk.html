@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{page.title} | {site.title}</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f172a; color: #e2e8f0; line-height: 1.6; }
+        header { background: #1e293b; border-bottom: 1px solid #334155; padding: 1rem 2rem; display: flex; align-items: center; gap: 1rem; }
+        header a { color: #94a3b8; text-decoration: none; font-size: 0.875rem; }
+        header a:hover { color: #f8fafc; }
+        header span { color: #64748b; }
+        main { max-width: 800px; margin: 0 auto; padding: 2rem; }
+        .talk-header { padding: 2rem 0 1.5rem; border-bottom: 1px solid #334155; margin-bottom: 2rem; }
+        .conference-badge { color: #6366f1; font-size: 0.875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; }
+        h1 { font-size: 1.75rem; color: #f8fafc; margin-bottom: 1rem; }
+        .meta { display: flex; flex-wrap: wrap; gap: 1.5rem; color: #94a3b8; font-size: 0.9rem; margin-bottom: 1rem; }
+        .links { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; }
+        .btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; font-weight: 500; text-decoration: none; }
+        .btn-primary { background: #6366f1; color: #fff; }
+        .btn-primary:hover { background: #4f46e5; }
+        .btn-secondary { background: #1e293b; color: #94a3b8; border: 1px solid #334155; }
+        .btn-secondary:hover { color: #f8fafc; border-color: #6366f1; }
+        .tag { display: inline-block; background: #1e3a5f; color: #93c5fd; border-radius: 0.25rem; padding: 0.125rem 0.5rem; font-size: 0.75rem; margin-right: 0.25rem; }
+        .tag.workshop { background: #3d1f6b; color: #c4b5fd; }
+        .abstract { background: #1e293b; border: 1px solid #334155; border-radius: 0.75rem; padding: 1.5rem; }
+        .abstract h2 { color: #f8fafc; font-size: 1rem; margin-bottom: 0.75rem; }
+        .abstract p { color: #cbd5e1; }
+        .back { margin-top: 2rem; }
+        .back a { color: #6366f1; text-decoration: none; font-size: 0.875rem; }
+        footer { text-align: center; padding: 2rem; color: #475569; font-size: 0.875rem; border-top: 1px solid #1e293b; margin-top: 3rem; }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/">← Back to all talks</a>
+    </header>
+    <main>
+        {#insert /}
+    </main>
+    <footer>Built with <a href="https://quarkus.io" style="color:#6366f1">Quarkus</a> + <a href="https://github.com/quarkiverse/quarkus-roq" style="color:#6366f1">Roq</a></footer>
+</body>
+</html>

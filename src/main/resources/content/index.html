@@ -1,0 +1,30 @@
+---
+title: Conference Talks
+description: Presentations by Willem Jan Glerum, Principal Software Engineer at Lunatech
+author: Willem Jan Glerum
+layout: main
+---
+<div class="hero">
+    <h2>Conference Talks</h2>
+    <p>Presentations by Willem Jan Glerum — Principal Software Engineer at <a href="https://lunatech.com" style="color:#6366f1">Lunatech</a></p>
+</div>
+
+<div class="stats">
+    <div class="stat"><div class="number">{site.collections.talks.size}</div><div class="label">Total talks</div></div>
+</div>
+
+<div class="talks-grid">
+    {#for talk in site.collections.talks}
+    <a class="talk-card" href="{talk.url}">
+        <div class="conference">{talk.data("conference")}
+            {#if talk.data("type") == 'workshop'} &nbsp;·&nbsp; <span class="tag workshop">Workshop</span>{/if}
+        </div>
+        <h3>{talk.title}</h3>
+        <div class="meta">
+            <span>📅 {talk.date.format('MMMM yyyy')}</span>
+            <span>📍 {talk.data("location")}</span>
+            {#if talk.data("coSpeaker")}<span>👥 with {talk.data("coSpeaker")}</span>{/if}
+        </div>
+    </a>
+    {/for}
+</div>
