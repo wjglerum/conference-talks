@@ -23,6 +23,7 @@
         .btn-secondary { background: #1e293b; color: #94a3b8; border: 1px solid #334155; }
         .btn-secondary:hover { color: #f8fafc; border-color: #6366f1; }
         .tag { display: inline-block; border-radius: 0.25rem; padding: 0.125rem 0.5rem; font-size: 0.75rem; margin-left: 0.5rem; vertical-align: middle; }
+        .tag.talk { background: #1e293b; color: #94a3b8; border: 1px solid #334155; }
         .tag.deepdive { background: #1e3a5f; color: #93c5fd; }
         .tag.workshop { background: #3d1f6b; color: #c4b5fd; }
         .tag.podcast { background: #1a3a2a; color: #6ee7b7; }
@@ -41,7 +42,7 @@
     </header>
     <main>
         <div class="talk-header">
-            <div class="conference-badge">{page.data("conference")}{#if page.data("type") == 'deepdive'} <span class="tag deepdive">Deep Dive</span>{/if}{#if page.data("type") == 'workshop'} <span class="tag workshop">Workshop</span>{/if}{#if page.data("type") == 'podcast'} <span class="tag podcast">Podcast</span>{/if}</div>
+            <div class="conference-badge">{page.data("conference")}{#if page.data("type") == 'talk'}<span class="tag talk">Talk</span>{/if}{#if page.data("type") == 'deepdive'}<span class="tag deepdive">Deep Dive</span>{/if}{#if page.data("type") == 'workshop'}<span class="tag workshop">Workshop</span>{/if}{#if page.data("type") == 'podcast'}<span class="tag podcast">Podcast</span>{/if}{#if page.data("type") == 'techtalk'}<span class="tag techtalk">Tech Talk</span>{/if}</div>
             <h1>{page.title}</h1>
             <div class="meta">
                 <span>📅 {page.date.format('MMMM d, yyyy')}</span>
