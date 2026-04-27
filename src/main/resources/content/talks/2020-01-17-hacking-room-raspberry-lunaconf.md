@@ -3,6 +3,7 @@ title: "Hacking the room with Raspberry PI's"
 date: 2020-01-17
 layout: talk
 conference: LunaConf 2020
+conferenceUrl: https://lunatech.com
 location: Rotterdam, The Netherlands
 type: talk
 slides:

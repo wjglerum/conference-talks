@@ -3,6 +3,7 @@ title: SSO made easy with Quarkus OIDC
 date: 2024-10-04
 layout: talk
 conference: LunaConf 2024
+conferenceUrl: https://lunatech.com
 location: Rotterdam, The Netherlands
 type: talk
 slides:

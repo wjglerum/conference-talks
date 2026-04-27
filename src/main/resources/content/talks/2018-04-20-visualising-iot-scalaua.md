@@ -3,6 +3,7 @@ title: "Visualising IoT devices with Akka and Grafana"
 date: 2018-04-20
 layout: talk
 conference: ScalaUA 2018
+conferenceUrl: https://scalaua.com/2018/
 location: Kyiv, Ukraine
 type: talk
 slides:

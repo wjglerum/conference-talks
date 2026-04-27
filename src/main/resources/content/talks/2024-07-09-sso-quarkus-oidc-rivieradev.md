@@ -3,6 +3,7 @@ title: SSO made easy with Quarkus OIDC
 date: 2024-07-09
 layout: talk
 conference: Riviera DEV 2024
+conferenceUrl: https://2024.rivieradev.fr/
 location: Sophia Antipolis, France
 type: talk
 slides:

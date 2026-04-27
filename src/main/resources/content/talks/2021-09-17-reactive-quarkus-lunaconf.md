@@ -3,6 +3,7 @@ title: Reactive Quarkus
 date: 2021-09-17
 layout: talk
 conference: LunaConf 2021
+conferenceUrl: https://lunatech.com
 location: Rotterdam, The Netherlands
 type: talk
 slides:

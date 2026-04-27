@@ -3,6 +3,7 @@ title: SSO made easy with Quarkus OIDC
 date: 2022-03-31
 layout: talk
 conference: Quarkus Meetup 2022
+conferenceUrl: https://www.meetup.com/quarkusio-rotterdam/
 location: Rotterdam, The Netherlands
 type: talk
 slides:

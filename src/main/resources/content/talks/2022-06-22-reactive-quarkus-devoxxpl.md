@@ -3,6 +3,7 @@ title: "Reactive Quarkus: Building Reactive Applications with Java"
 date: 2022-06-22
 layout: talk
 conference: Devoxx Poland 2022
+conferenceUrl: https://devoxx.pl/
 location: Kraków, Poland
 type: talk
 slides:

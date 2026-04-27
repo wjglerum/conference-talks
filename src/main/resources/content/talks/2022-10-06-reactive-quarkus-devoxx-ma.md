@@ -3,6 +3,7 @@ title: Reactive Quarkus
 date: 2022-10-06
 layout: talk
 conference: Devoxx Morocco 2022
+conferenceUrl: https://devoxx.ma/
 location: Agadir, Morocco
 type: talk
 slides:

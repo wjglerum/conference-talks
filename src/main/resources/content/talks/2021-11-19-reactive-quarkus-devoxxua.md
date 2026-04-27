@@ -3,6 +3,7 @@ title: Reactive Quarkus
 date: 2021-11-19
 layout: talk
 conference: Devoxx Ukraine 2021
+conferenceUrl: https://devoxx.com.ua/
 location: Online
 type: talk
 slides:

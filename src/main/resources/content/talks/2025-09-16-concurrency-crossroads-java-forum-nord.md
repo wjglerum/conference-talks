@@ -4,6 +4,7 @@ url: /talks/reactive-vs-virtual-threads-java-forum-nord-2025/
 date: 2025-09-16
 layout: talk
 conference: Java Forum Nord 2025
+conferenceUrl: https://javaforumnord.de/
 location: Hannover, Germany
 type: talk
 slides:

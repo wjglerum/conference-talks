@@ -17,7 +17,7 @@ layout: main
     {#for talk in site.collections.talks}
     <a class="talk-card" href="{talk.url}">
         <div class="conference">{talk.data("conference")}
-            {#if talk.data("type") == 'talk'}<span class="tag talk">Talk</span>{/if}
+            {#if talk.data("type") == 'talk'}<span class="tag talk">Conference</span>{/if}
             {#if talk.data("type") == 'deepdive'}<span class="tag deepdive">Deep Dive</span>{/if}
             {#if talk.data("type") == 'workshop'}<span class="tag workshop">Workshop</span>{/if}
             {#if talk.data("type") == 'podcast'}<span class="tag podcast">Podcast</span>{/if}

@@ -3,6 +3,7 @@ title: Local AI Agents
 date: 2025-04-11
 layout: talk
 conference: Lunatech 2025
+conferenceUrl: https://lunatech.com
 location: Rotterdam, The Netherlands
 type: techtalk
 slides:

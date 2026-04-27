@@ -3,9 +3,11 @@ title: SSO made easy with Quarkus OIDC
 date: 2025-05-14
 layout: talk
 conference: jPrime 2025
+conferenceUrl: https://jprime.io/
 location: Sofia, Bulgaria
 type: talk
 slides:
+video: https://www.youtube.com/watch?v=YGDe2Vk4Ixw
 link: /talks/2025-05-14-sso-quarkus-oidc-jprime/
 
 ---

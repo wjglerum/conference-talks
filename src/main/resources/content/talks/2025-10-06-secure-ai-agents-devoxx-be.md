@@ -3,6 +3,7 @@ title: "Building secure AI agents with Quarkus LangChain4j"
 date: 2025-10-06
 layout: talk
 conference: Devoxx Belgium 2025
+conferenceUrl: https://devoxx.be/
 location: Antwerp, Belgium
 type: workshop
 coSpeaker: Radek Kargul

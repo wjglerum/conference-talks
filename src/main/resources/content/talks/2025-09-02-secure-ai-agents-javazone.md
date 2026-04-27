@@ -3,6 +3,7 @@ title: "Building Secure AI Agents with Quarkus LangChain4j"
 date: 2025-09-02
 layout: talk
 conference: JavaZone 2025
+conferenceUrl: https://2025.javazone.no/
 location: Oslo, Norway
 type: workshop
 slides:

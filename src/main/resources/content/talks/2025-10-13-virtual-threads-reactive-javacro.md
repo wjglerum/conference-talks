@@ -3,6 +3,7 @@ title: "Virtual Threads vs Reactive Programming in Quarkus"
 date: 2025-10-13
 layout: talk
 conference: JavaCro 2025
+conferenceUrl: https://2025.javacro.hr/
 location: Rovinj, Croatia
 type: talk
 slides:

@@ -3,6 +3,7 @@ title: "Concurrency Crossroads: Choosing between Reactive Programming and Virtua
 date: 2026-06-03
 layout: talk
 conference: jPrime 2026
+conferenceUrl: https://jprime.io/
 location: Sofia, Bulgaria
 type: deepdive
 slides:

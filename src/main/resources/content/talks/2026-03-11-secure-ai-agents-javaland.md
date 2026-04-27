@@ -3,6 +3,7 @@ title: "Secure AI agents with Quarkus LangChain4j"
 date: 2026-03-11
 layout: talk
 conference: JavaLand 2026
+conferenceUrl: https://www.javaland.eu/
 location: Rust, Germany
 type: talk
 slides:

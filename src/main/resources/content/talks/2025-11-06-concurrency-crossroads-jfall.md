@@ -3,9 +3,11 @@ title: "Concurrency Crossroads: Choosing between Reactive Programming and Virtua
 date: 2025-11-06
 layout: talk
 conference: J-Fall 2025
+conferenceUrl: https://jfall.nl/
 location: Ede, The Netherlands
 type: talk
 slides:
+video: https://www.youtube.com/watch?v=j4DaWL64gz0
 link: /talks/2025-11-06-concurrency-crossroads-jfall/
 
 ---

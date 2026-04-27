@@ -3,6 +3,7 @@ title: SSO made easy with Quarkus OIDC
 date: 2024-10-23
 layout: talk
 conference: OCX 2024
+conferenceUrl: https://2024.ocx.cologne/
 location: Mainz, Germany
 type: talk
 slides:

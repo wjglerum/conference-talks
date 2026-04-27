@@ -3,6 +3,7 @@ title: SSO made easy with Quarkus OIDC
 date: 2022-09-08
 layout: talk
 conference: JavaZone 2022
+conferenceUrl: https://2022.javazone.no/
 location: Oslo, Norway
 type: talk
 slides:

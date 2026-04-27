@@ -3,6 +3,7 @@ title: Essential Linux
 date: 2018-02-09
 layout: talk
 conference: Lunatech 2018
+conferenceUrl: https://lunatech.com
 location: Rotterdam, The Netherlands
 type: workshop
 slides:

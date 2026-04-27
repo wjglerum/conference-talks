@@ -3,6 +3,7 @@ title: "Concurrency Crossroads: Choosing between Reactive Programming and Virtua
 date: 2025-11-14
 layout: talk
 conference: Devoxx Morocco 2025
+conferenceUrl: https://devoxx.ma/
 location: Marrakesh, Morocco
 type: deepdive
 slides:

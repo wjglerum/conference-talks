@@ -3,10 +3,10 @@ title: SSO made easy with Quarkus OIDC
 date: 2025-11-13
 layout: talk
 conference: Devoxx Morocco 2025
+conferenceUrl: https://devoxx.ma/
 location: Marrakesh, Morocco
 type: talk
 slides:
-video: https://www.youtube.com/watch?v=YGDe2Vk4Ixw
 link: /talks/2025-11-13-sso-quarkus-oidc-devoxx-ma/
 ---
 

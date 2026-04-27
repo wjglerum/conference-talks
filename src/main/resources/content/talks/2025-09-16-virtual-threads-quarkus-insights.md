@@ -3,6 +3,7 @@ title: "Virtual Threads vs Reactive Programming in Quarkus"
 date: 2025-09-16
 layout: talk
 conference: Quarkus Insights 2025
+conferenceUrl: https://quarkus.io/insights/
 location: Online
 type: podcast
 slides:

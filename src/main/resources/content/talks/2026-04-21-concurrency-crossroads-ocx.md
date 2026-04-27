@@ -3,6 +3,7 @@ title: "Concurrency Crossroads: Choosing between Reactive Programming & Virtual 
 date: 2026-04-21
 layout: talk
 conference: OCX 2026
+conferenceUrl: https://ocx.cologne/
 location: Brussels, Belgium
 type: talk
 slides:

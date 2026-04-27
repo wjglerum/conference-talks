@@ -3,6 +3,7 @@ title: "Practical MCP Security in Action"
 date: 2026-06-03
 layout: talk
 conference: jPrime 2026
+conferenceUrl: https://jprime.io/
 location: Sofia, Bulgaria
 type: talk
 slides:

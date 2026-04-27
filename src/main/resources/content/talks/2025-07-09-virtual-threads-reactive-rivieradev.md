@@ -3,6 +3,7 @@ title: "Virtual Threads vs Reactive Programming in Quarkus"
 date: 2025-07-09
 layout: talk
 conference: Riviera DEV 2025
+conferenceUrl: https://2025.rivieradev.fr/
 location: Sophia Antipolis, France
 type: talk
 slides:

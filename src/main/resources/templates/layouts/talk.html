@@ -14,6 +14,8 @@
         main { max-width: 800px; margin: 0 auto; padding: 2rem; }
         .talk-header { padding: 2rem 0 1.5rem; border-bottom: 1px solid #334155; margin-bottom: 2rem; }
         .conference-badge { color: #6366f1; font-size: 0.875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; }
+        .conference-badge a { color: inherit; text-decoration: none; }
+        .conference-badge a:hover { text-decoration: underline; }
         h1 { font-size: 1.75rem; color: #f8fafc; margin-bottom: 1rem; }
         .meta { display: flex; flex-wrap: wrap; gap: 1.5rem; color: #94a3b8; font-size: 0.9rem; margin-bottom: 1rem; }
         .links { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; }
@@ -42,7 +44,7 @@
     </header>
     <main>
         <div class="talk-header">
-            <div class="conference-badge">{page.data("conference")}{#if page.data("type") == 'talk'}<span class="tag talk">Talk</span>{/if}{#if page.data("type") == 'deepdive'}<span class="tag deepdive">Deep Dive</span>{/if}{#if page.data("type") == 'workshop'}<span class="tag workshop">Workshop</span>{/if}{#if page.data("type") == 'podcast'}<span class="tag podcast">Podcast</span>{/if}{#if page.data("type") == 'techtalk'}<span class="tag techtalk">Tech Talk</span>{/if}</div>
+            <div class="conference-badge">{#if page.data("conferenceUrl")}<a href="{page.data("conferenceUrl")}" target="_blank" rel="noopener">{page.data("conference")}</a>{#else}{page.data("conference")}{/if}{#if page.data("type") == 'talk'}<span class="tag talk">Conference</span>{/if}{#if page.data("type") == 'deepdive'}<span class="tag deepdive">Deep Dive</span>{/if}{#if page.data("type") == 'workshop'}<span class="tag workshop">Workshop</span>{/if}{#if page.data("type") == 'podcast'}<span class="tag podcast">Podcast</span>{/if}{#if page.data("type") == 'techtalk'}<span class="tag techtalk">Tech Talk</span>{/if}</div>
             <h1>{page.title}</h1>
             <div class="meta">
                 <span>📅 {page.date.format('MMMM d, yyyy')}</span>

@@ -3,6 +3,7 @@ title: "Quarkus on Java 21"
 date: 2023-10-19
 layout: talk
 conference: Quarkus Meetup 2023
+conferenceUrl: https://www.meetup.com/quarkusio-rotterdam/
 location: Rotterdam, Netherlands
 type: talk
 slides:

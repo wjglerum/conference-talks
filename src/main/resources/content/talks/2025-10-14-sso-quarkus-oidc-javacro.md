@@ -3,6 +3,7 @@ title: SSO made easy with Quarkus OIDC
 date: 2025-10-14
 layout: talk
 conference: JavaCro 2025
+conferenceUrl: https://2025.javacro.hr/
 location: Rovinj, Croatia
 type: talk
 slides:

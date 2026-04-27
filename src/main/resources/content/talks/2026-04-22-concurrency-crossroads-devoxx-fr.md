@@ -3,6 +3,7 @@ title: "Concurrency Crossroads: Choosing between Reactive Programming & Virtual 
 date: 2026-04-22
 layout: talk
 conference: Devoxx France 2026
+conferenceUrl: https://devoxx.fr/
 location: Paris, France
 type: deepdive
 slides:
