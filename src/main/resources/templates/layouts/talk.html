@@ -4,55 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{page.title} — {site.title}</title>
-    <style>
-        :root {
-            --bg: #f4ede0;
-            --paper: #fbf6ec;
-            --ink: #1a1614;
-            --muted: #6b5e51;
-            --rule: #d8cdb6;
-            --accent: #b04510;
-            --recording: #c0392b;
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        html, body { background: var(--bg); }
-        body { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif; color: var(--ink); line-height: 1.65; -webkit-font-smoothing: antialiased; }
-        .serif { font-family: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif; }
-        a { color: var(--accent); }
-        header.site { padding: 1.75rem 2rem 1rem; max-width: 760px; margin: 0 auto; border-bottom: 1px solid var(--rule); }
-        header.site a { color: var(--muted); text-decoration: none; font-size: 0.85rem; letter-spacing: 0.02em; }
-        header.site a:hover { color: var(--accent); }
-        main { max-width: 760px; margin: 0 auto; padding: 2.5rem 2rem 4rem; }
-        .talk-header { padding-bottom: 2rem; border-bottom: 1px solid var(--rule); margin-bottom: 2rem; }
-        .conference-badge { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; display: flex; align-items: center; flex-wrap: wrap; gap: 0.6rem; }
-        .conference-badge a { color: var(--accent); font-weight: 600; text-decoration: none; }
-        .conference-badge a:hover { text-decoration: underline; }
-        .conference-badge .name { color: var(--accent); font-weight: 600; }
-        h1 { font-family: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif; font-size: clamp(1.8rem, 4vw, 2.4rem); line-height: 1.15; letter-spacing: -0.01em; font-weight: 500; margin-bottom: 1.25rem; }
-        .meta { display: flex; flex-wrap: wrap; gap: 1.5rem; color: var(--muted); font-size: 0.85rem; margin-bottom: 1.5rem; }
-        .meta .label { display: block; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.15rem; }
-        .meta .value { color: var(--ink); }
-        .links { display: flex; gap: 0.75rem; flex-wrap: wrap; }
-        .btn { display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.55rem 1.1rem; font-size: 0.85rem; font-weight: 600; text-decoration: none; border: 1px solid var(--ink); }
-        .btn-primary { background: var(--ink); color: var(--bg); }
-        .btn-primary:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
-        .btn-secondary { background: transparent; color: var(--ink); }
-        .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
-        .tag { display: inline-block; font-size: 0.65rem; letter-spacing: 0.08em; padding: 0.1rem 0.45rem; border: 1px solid currentColor; }
-        .tag.talk { color: var(--muted); }
-        .tag.deepdive { color: #1d4ed8; }
-        .tag.workshop { color: #6d28d9; }
-        .tag.podcast { color: #047857; }
-        .tag.techtalk { color: #b45309; }
-        .abstract { color: var(--ink); }
-        .abstract h2 { font-family: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin-bottom: 1rem; }
-        .abstract p { font-size: 1.05rem; line-height: 1.7; max-width: 65ch; }
-        .abstract p + p { margin-top: 1rem; }
-        footer.site { text-align: center; padding: 2.5rem 2rem; color: var(--muted); font-size: 0.8rem; border-top: 1px solid var(--rule); max-width: 760px; margin: 0 auto; }
-        footer.site a { color: var(--accent); text-decoration: none; }
-    </style>
+    <meta name="description" content="{#if page.data('description')}{page.data('description')}{#else}{site.description}{/if}">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="{page.title}">
+    <meta property="og:description" content="{#if page.data('description')}{page.data('description')}{#else}{site.description}{/if}">
+    <meta property="og:url" content="{page.url.absolute}">
+    <meta property="og:site_name" content="{site.title}">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="{page.title}">
+    <meta name="twitter:description" content="{#if page.data('description')}{page.data('description')}{#else}{site.description}{/if}">
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/site.css">
 </head>
-<body>
+<body class="talk-layout">
     <header class="site">
         <a href="/">← All talks</a>
     </header>

@@ -5,67 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{#if page.title}{page.title} — {/if}{site.title}</title>
     <meta name="description" content="{site.description}">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
-    <style>
-        :root {
-            --bg: #f4ede0;
-            --paper: #fbf6ec;
-            --ink: #1a1614;
-            --muted: #6b5e51;
-            --rule: #d8cdb6;
-            --accent: #b04510;
-            --accent-soft: #f3e2d2;
-            --recording: #c0392b;
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        html, body { background: var(--bg); }
-        body { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif; color: var(--ink); line-height: 1.6; -webkit-font-smoothing: antialiased; }
-        a { color: var(--accent); }
-        a:hover { color: var(--ink); }
-        .serif { font-family: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif; font-weight: 500; letter-spacing: -0.01em; }
-        .mono { font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace; }
-        header.site { display: flex; align-items: baseline; justify-content: space-between; gap: 2rem; padding: 1.75rem 2rem 1rem; max-width: 1100px; margin: 0 auto; border-bottom: 1px solid var(--rule); }
-        header.site .name { font-size: 1.05rem; font-weight: 600; letter-spacing: -0.01em; }
-        header.site .name a { color: var(--ink); text-decoration: none; }
-        header.site .name a:hover { color: var(--accent); }
-        header.site .role { font-size: 0.85rem; color: var(--muted); }
-        main { max-width: 1100px; margin: 0 auto; padding: 2.5rem 2rem 4rem; }
-        .hero { display: grid; gap: 2rem; align-items: end; margin-bottom: 2.5rem; }
-        @media (min-width: 800px) { .hero { grid-template-columns: 1.1fr 1fr; gap: 3rem; } }
-        .hero h1 { font-size: clamp(2.4rem, 5vw, 3.4rem); line-height: 1.05; margin-bottom: 1rem; }
-        .hero p { font-size: 1.05rem; color: var(--muted); max-width: 38ch; }
-        .hero .count { display: inline-block; margin-top: 1rem; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 0.6rem; }
-        .hero .count strong { color: var(--ink); font-weight: 600; }
-        #map { height: 320px; border: 1px solid var(--rule); background: var(--paper); }
-        #map .leaflet-control-attribution { background: rgba(251,246,236,0.8); }
-        #map .leaflet-popup-content { font-family: inherit; font-size: 0.85rem; line-height: 1.5; margin: 0.6rem 0.75rem; }
-        #map .leaflet-popup-content .city { font-weight: 600; margin-bottom: 0.35rem; }
-        #map .leaflet-popup-content a { display: block; color: var(--ink); text-decoration: none; padding: 0.15rem 0; }
-        #map .leaflet-popup-content a:hover { color: var(--accent); }
-        #map .leaflet-popup-content .yr { color: var(--muted); margin-right: 0.4rem; }
-        .talks-section h2 { font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.25rem; padding-bottom: 0.6rem; border-bottom: 1px solid var(--rule); }
-        .talks-grid { display: grid; gap: 0; grid-template-columns: 1fr; }
-        @media (min-width: 720px) { .talks-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (min-width: 1000px) { .talks-grid { grid-template-columns: repeat(3, 1fr); } }
-        .talk-card { display: flex; flex-direction: column; padding: 1.25rem 1.25rem 1.5rem; text-decoration: none; color: inherit; border-bottom: 1px solid var(--rule); border-right: 1px solid var(--rule); transition: background 0.15s; }
-        .talk-card:hover { background: var(--paper); }
-        .talks-grid .talk-card:nth-child(3n) { border-right: none; }
-        @media (max-width: 999px) and (min-width: 720px) { .talks-grid .talk-card:nth-child(3n) { border-right: 1px solid var(--rule); } .talks-grid .talk-card:nth-child(2n) { border-right: none; } }
-        @media (max-width: 719px) { .talks-grid .talk-card { border-right: none; } }
-        .talk-card .conference { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
-        .talk-card .conference .name { color: var(--accent); font-weight: 600; }
-        .talk-card h3 { font-size: 1.15rem; line-height: 1.3; margin-bottom: 0.85rem; flex-grow: 1; }
-        .talk-card .meta { display: flex; gap: 1.25rem; flex-wrap: wrap; font-size: 0.78rem; color: var(--muted); }
-        .talk-card .meta .recording { color: var(--recording); font-weight: 600; letter-spacing: 0.02em; }
-        .tag { display: inline-block; font-size: 0.65rem; letter-spacing: 0.08em; padding: 0.1rem 0.45rem; border: 1px solid currentColor; }
-        .tag.talk { color: var(--muted); }
-        .tag.deepdive { color: #1d4ed8; }
-        .tag.workshop { color: #6d28d9; }
-        .tag.podcast { color: #047857; }
-        .tag.techtalk { color: #b45309; }
-        footer.site { text-align: center; padding: 2.5rem 2rem; color: var(--muted); font-size: 0.8rem; border-top: 1px solid var(--rule); max-width: 1100px; margin: 0 auto; }
-        footer.site a { color: var(--accent); text-decoration: none; }
-    </style>
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{#if page.title}{page.title}{#else}{site.title}{/if}">
+    <meta property="og:description" content="{site.description}">
+    <meta property="og:url" content="{page.url.absolute}">
+    <meta property="og:site_name" content="{site.title}">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="{#if page.title}{page.title}{#else}{site.title}{/if}">
+    <meta name="twitter:description" content="{site.description}">
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/site.css">
 </head>
 <body>
     <header class="site">
