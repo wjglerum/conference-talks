@@ -5,7 +5,8 @@ layout: talk
 conference: ScalaUA 2018
 location: Kyiv, Ukraine
 type: talk
-slides:
+slides: https://wjglerum.github.io/scalaua-2018/
+demo: https://github.com/wjglerum/IoT-collector
 video: https://www.youtube.com/watch?v=uVzvDH3LYsE
 link: /talks/2018-04-20-visualising-iot-scalaua/
 ---

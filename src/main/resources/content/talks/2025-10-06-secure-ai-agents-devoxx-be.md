@@ -8,6 +8,7 @@ location: Antwerp, Belgium
 type: workshop
 coSpeaker: Radek Kargul
 slides: https://docs.google.com/presentation/d/1sOyyHeVabX11tO2Qga-kD2r0WArf71u-Ms1KYRb0ACk/edit?usp=sharing
+demo: https://github.com/wjglerum/quarkus-ai-agent-workshop
 link: /talks/2025-10-06-secure-ai-agents-devoxx-be/
 
 ---

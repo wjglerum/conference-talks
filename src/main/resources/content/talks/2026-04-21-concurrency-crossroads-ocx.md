@@ -7,6 +7,7 @@ conferenceUrl: https://www.ocxconf.org/event/2026/summary
 location: Brussels, Belgium
 type: talk
 slides: https://docs.google.com/presentation/d/1M9PW1u1JLqfgT8LIi3afLfKUfPCrQcrdRMkpB8GtJVE/edit?usp=sharing
+demo: https://github.com/wjglerum/quarkus-virtual-threads
 link: /talks/2026-04-21-concurrency-crossroads-ocx/
 
 ---

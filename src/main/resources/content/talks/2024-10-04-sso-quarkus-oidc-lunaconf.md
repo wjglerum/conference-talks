@@ -7,6 +7,7 @@ conferenceUrl: https://lunatech.com
 location: Rotterdam, The Netherlands
 type: talk
 slides: https://docs.google.com/presentation/d/1y9TRvoI8CO6A8-pkjPTyGbwpCP73hb1pbl5srKjWC5o/edit?usp=sharing
+demo: https://github.com/wjglerum/quarkus-sso
 link: /talks/2024-10-04-sso-quarkus-oidc-lunaconf/
 
 ---

@@ -7,6 +7,7 @@ conferenceUrl: https://2024.rivieradev.fr/
 location: Sophia Antipolis, France
 type: talk
 slides: https://docs.google.com/presentation/d/1HhnpE3gY_tETxAy4pB_MBIYImbergQ0kMJNrFejGlxc/edit?usp=sharing
+demo: https://github.com/wjglerum/quarkus-sso
 link: /talks/2024-07-09-sso-quarkus-oidc-rivieradev/
 
 ---

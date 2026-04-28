@@ -7,6 +7,7 @@ conferenceUrl: https://www.javaland.eu/
 location: Rust, Germany
 type: talk
 slides: https://docs.google.com/presentation/d/1MT898x9-zQZsTLv_1pKHg9av6wIsnPgtm22XKqTMuDU/edit?usp=sharing
+demo: https://github.com/wjglerum/quarkus-ai-agent-javaland-2026
 link: /talks/2026-03-11-secure-ai-agents-javaland/
 
 ---

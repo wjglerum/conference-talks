@@ -8,6 +8,7 @@ conferenceUrl: https://javaforumnord.de/
 location: Hannover, Germany
 type: talk
 slides: https://docs.google.com/presentation/d/1jtczLrMo5iGPo5uvvkWfoee7mih935AAGF58TqzGcbg/edit?usp=sharing
+demo: https://github.com/wjglerum/quarkus-virtual-threads
 link: /talks/2025-09-16-concurrency-crossroads-java-forum-nord/
 
 ---

@@ -7,6 +7,7 @@ conferenceUrl: https://devoxx.ma/
 location: Marrakesh, Morocco
 type: deepdive
 slides: https://docs.google.com/presentation/d/1_VgLhmpfDH64v1KpdMaheDpwSs803C5J_c7R6nsPA-o/edit?usp=sharing
+demo: https://github.com/wjglerum/quarkus-virtual-threads
 link: /talks/2025-11-14-concurrency-crossroads-devoxx-ma/
 
 ---

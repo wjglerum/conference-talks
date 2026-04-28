@@ -7,6 +7,7 @@ conferenceUrl: https://jprime.io/
 location: Sofia, Bulgaria
 type: talk
 slides: https://docs.google.com/presentation/d/1M5MFpCO9-b3Yk7psi-x3Rin34exkQ7L7w2aDpJRR0ow/edit?usp=sharing
+demo: https://github.com/wjglerum/quarkus-oidc-sso
 video: https://www.youtube.com/watch?v=YGDe2Vk4Ixw
 link: /talks/2025-05-14-sso-quarkus-oidc-jprime/
 

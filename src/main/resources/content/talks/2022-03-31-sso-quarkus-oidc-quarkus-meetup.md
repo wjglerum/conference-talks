@@ -7,6 +7,7 @@ conferenceUrl: https://www.meetup.com/quarkus-benelux/
 location: Rotterdam, The Netherlands
 type: talk
 slides: https://docs.google.com/presentation/d/1y8FH-VqwIHI5J93voxGns29ylUyzkjCABmzPLvxVKzk/edit?usp=sharing
+demo: https://github.com/wjglerum/quarkus-sso
 link: /talks/2022-03-31-sso-quarkus-oidc-quarkus-meetup/
 
 ---

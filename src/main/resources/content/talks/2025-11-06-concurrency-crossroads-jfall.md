@@ -7,6 +7,7 @@ conferenceUrl: https://jfall.nl/
 location: Ede, The Netherlands
 type: talk
 slides: https://docs.google.com/presentation/d/1sHUrR3aAYrA7NK3vQPFOR7eSWXkon_KdMmvMtCtu0ss/edit?usp=sharing
+demo: https://github.com/wjglerum/quarkus-virtual-threads
 video: https://www.youtube.com/watch?v=j4DaWL64gz0
 link: /talks/2025-11-06-concurrency-crossroads-jfall/
 

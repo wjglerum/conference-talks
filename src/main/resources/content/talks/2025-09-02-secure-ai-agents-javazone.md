@@ -7,6 +7,7 @@ conferenceUrl: https://2025.javazone.no/
 location: Oslo, Norway
 type: workshop
 slides: https://docs.google.com/presentation/d/1qkbl4g5p40rZMGKwb2YdA_TIh4tqaf5KYXmFZDyBb00/edit?usp=sharing
+demo: https://github.com/wjglerum/quarkus-ai-agent-workshop
 link: /talks/2025-09-02-secure-ai-agents-javazone/
 
 ---

@@ -7,6 +7,7 @@ conferenceUrl: https://devoxx.pl/
 location: Kraków, Poland
 type: talk
 slides: https://docs.google.com/presentation/d/1cbCqTrEj_i6vfvwR3mV-QoMdxKaalH9lTzFK-sSbtlk/edit?usp=sharing
+demo: https://github.com/wjglerum/quarkus-reactive-examples
 video: https://www.youtube.com/watch?v=NVO5YntUBlU
 link: /talks/2022-06-22-reactive-quarkus-devoxxpl/
 ---

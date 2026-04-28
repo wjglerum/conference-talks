@@ -37,7 +37,7 @@
                 <div><span class="label">Date</span><span class="value">{page.date.format('d MMMM yyyy')}</span></div>
                 <div><span class="label">Location</span><span class="value">{page.data("location")}</span></div>
             </div>
-            <div class="links">{#if page.data("video")}<a class="btn btn-primary" href="{page.data("video")}" target="_blank">Watch recording</a>{/if}{#if page.data("slides")}<a class="btn btn-secondary" href="{page.data("slides")}" target="_blank">Slides</a>{/if}</div>
+            <div class="links">{#if page.data("video")}<a class="btn btn-primary" href="{page.data("video")}" target="_blank">Watch recording</a>{/if}{#if page.data("slides")}<a class="btn btn-secondary" href="{page.data("slides")}" target="_blank">Slides</a>{/if}{#if page.data("demo")}<a class="btn btn-secondary" href="{page.data("demo")}" target="_blank">Demo</a>{/if}</div>
         </div>
         {#insert /}
     </main>

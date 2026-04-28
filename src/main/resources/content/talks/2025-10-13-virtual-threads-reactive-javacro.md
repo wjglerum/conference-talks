@@ -7,6 +7,7 @@ conferenceUrl: https://2025.javacro.hr/
 location: Rovinj, Croatia
 type: talk
 slides: https://docs.google.com/presentation/d/1H-KvI1Z-YdFo0Xi2dRBls0EyQttsX-svsgkjtA5hWu8/edit?usp=sharing
+demo: https://github.com/wjglerum/quarkus-virtual-threads
 link: /talks/2025-10-13-virtual-threads-reactive-javacro/
 
 ---

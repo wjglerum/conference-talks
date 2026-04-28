@@ -7,6 +7,7 @@ conferenceUrl: https://2025.rivieradev.fr/
 location: Sophia Antipolis, France
 type: talk
 slides: https://docs.google.com/presentation/d/1NFh2j9-OtIoZYDaysBFkH_MLTJg3H2TO7gN7Y6E6oyA/edit?usp=sharing
+demo: https://github.com/wjglerum/quarkus-virtual-threads
 link: /talks/2025-07-09-virtual-threads-reactive-rivieradev/
 
 ---

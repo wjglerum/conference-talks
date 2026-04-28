@@ -7,6 +7,7 @@ conferenceUrl: https://devoxx.ma/
 location: Marrakesh, Morocco
 type: talk
 slides: https://docs.google.com/presentation/d/1byDadZL8xtx7jeF9CGjEcxMIfdFAm6_iBud5_VCI-is/edit?usp=sharing
+demo: https://github.com/wjglerum/quarkus-oidc-sso
 link: /talks/2025-11-13-sso-quarkus-oidc-devoxx-ma/
 ---
 

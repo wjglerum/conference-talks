@@ -7,6 +7,7 @@ conferenceUrl: https://lunatech.com
 location: Rotterdam, The Netherlands
 type: talk
 slides: https://docs.google.com/presentation/d/1ERHxDCH7QQNCG9LAbqu6DjN4Y6nx4dECV7IrleDZbVM/edit?usp=sharing
+demo: https://github.com/wjglerum/quarkus-reactive-examples
 link: /talks/2021-09-17-reactive-quarkus-lunaconf/
 
 ---
