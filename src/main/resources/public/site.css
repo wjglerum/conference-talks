@@ -26,6 +26,8 @@ header.site .name a:hover { color: var(--accent); }
 header.site .role { font-size: 0.85rem; color: var(--muted); }
 header.site a { color: var(--muted); text-decoration: none; font-size: 0.85rem; letter-spacing: 0.02em; }
 header.site a:hover { color: var(--accent); }
+header.site .nav { display: flex; gap: 1.5rem; }
+header.site .nav a { font-weight: 500; }
 
 main { max-width: 1100px; margin: 0 auto; padding: 2.5rem 2rem 4rem; }
 
@@ -91,6 +93,16 @@ h1 { font-family: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Palati
 .talk-card h3 { font-size: 1.15rem; line-height: 1.3; margin-bottom: 0.85rem; flex-grow: 1; }
 .talk-card .meta { display: flex; gap: 1.25rem; flex-wrap: wrap; font-size: 0.78rem; color: var(--muted); }
 .talk-card .meta .recording { color: var(--recording); font-weight: 600; letter-spacing: 0.02em; }
+
+/* About page */
+.about { max-width: 60ch; }
+.about h1 { font-size: clamp(2rem, 4vw, 2.6rem); line-height: 1.1; margin-bottom: 1.5rem; }
+.about h2 { font-family: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin: 2.5rem 0 1rem; }
+.about p { font-size: 1.05rem; line-height: 1.7; margin-bottom: 1.1rem; }
+.about p.muted { color: var(--muted); font-size: 0.95rem; }
+.about .links-list { list-style: none; padding: 0; margin: 0 0 1.5rem; }
+.about .links-list li { padding: 0.45rem 0; border-bottom: 1px solid var(--rule); color: var(--muted); font-size: 0.95rem; }
+.about .links-list li a { font-weight: 600; margin-right: 0.4rem; }
 
 /* Tags (shared) */
 .tag { display: inline-block; font-size: 0.65rem; letter-spacing: 0.08em; padding: 0.1rem 0.45rem; border: 1px solid currentColor; }
