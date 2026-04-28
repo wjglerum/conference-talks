@@ -1,58 +1,59 @@
 # conference-talks
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+The source for [wjglerum.nl](https://wjglerum.nl/), my running list of conference talks, podcasts and workshops since 2018. Built as a static site with [Quarkus Roq](https://iamroq.dev/), deployed to GitHub Pages.
 
-If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
+## Run locally
 
-## Running the application in dev mode
-
-You can run your application in dev mode that enables live coding using:
-
-```shell script
+```sh
 ./mvnw quarkus:dev
 ```
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at <http://localhost:8080/q/dev/>.
+Open http://localhost:8080/. Hot reload picks up changes to talks, templates and styles.
 
-## Packaging and running the application
+## Add a talk
 
-The application can be packaged using:
+Drop a new markdown file under `src/main/resources/content/talks/` named `YYYY-MM-DD-slug.md` and fill in the front matter:
 
-```shell script
-./mvnw package
+```yaml
+---
+title: Your talk title
+date: 2026-09-01
+layout: talk
+conference: Some Conference 2026
+conferenceUrl: https://example.com/
+location: Berlin, Germany
+type: talk           # talk | deepdive | workshop | podcast | techtalk
+slides: https://...  # Google Slides, reveal.js, etc. (optional)
+video: https://...   # YouTube link (optional)
+demo: https://...    # GitHub repo with the code (optional)
+link: /talks/2026-09-01-your-talk-slug/
+---
+
+<div class="abstract">
+    <h2>Abstract</h2>
+    <p>One short paragraph.</p>
+</div>
 ```
 
-It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
+If the location is new, add its coordinates to `src/main/resources/data/cities.yml`. The map only shows pins for cities listed there; otherwise the marker silently drops out.
 
-The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
+## Layout
 
-If you want to build an _über-jar_, execute the following command:
-
-```shell script
-./mvnw package -Dquarkus.package.jar.type=uber-jar
+```
+src/main/
+  java/com/wjglerum/Cities.java       # @DataMapping record exposing cities.yml as a CDI bean
+  resources/
+    application.properties             # site.url, talks collection config
+    content/index.html                 # landing page (hero + Leaflet map + grid)
+    content/talks/*.md                 # one file per talk
+    data/cities.yml                    # location -> { lat, lng }
+    public/site.css                    # shared stylesheet
+    public/favicon.svg                 # cream paper, terracotta dot
+    templates/layouts/main.html        # listing layout
+    templates/layouts/talk.html        # talk detail layout
+.github/workflows/deploy.yml           # build + push to gh-pages
 ```
 
-The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
+## Deploy
 
-## Creating a native executable
-
-You can create a native executable using:
-
-```shell script
-./mvnw package -Dnative
-```
-
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using:
-
-```shell script
-./mvnw package -Dnative -Dquarkus.native.container-build=true
-```
-
-You can then execute your native executable with: `./target/conference-talks-1.0.0-SNAPSHOT-runner`
-
-If you want to learn more about building native executables, please consult <https://quarkus.io/guides/maven-tooling>.
-
-## Related Guides
-
-- Roq ([guide](https://iamroq.dev/docs/)): Hello, world! I’m Roq — a fun little SSG (Static Site Generator) with a Java soul and Quarkus energy.
+Pushing to `main` triggers `.github/workflows/deploy.yml`, which runs `quarkiverse/quarkus-roq@v1` to generate `target/roq/` and uploads it to GitHub Pages. The custom domain `wjglerum.nl` is set in repo settings, served from the `gh-pages` environment.
