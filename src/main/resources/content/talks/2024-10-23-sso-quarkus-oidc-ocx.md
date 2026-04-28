@@ -5,6 +5,7 @@ layout: talk
 conference: OCX 2024
 conferenceUrl: https://www.ocxconf.org/event/2024/summary
 location: Mainz, Germany
+coordinates: [49.9929, 8.2473]
 type: talk
 slides:
 video: https://www.youtube.com/watch?v=osuWAyPNaUg

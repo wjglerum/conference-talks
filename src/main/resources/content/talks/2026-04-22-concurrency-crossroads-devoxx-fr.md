@@ -5,6 +5,7 @@ layout: talk
 conference: Devoxx France 2026
 conferenceUrl: https://devoxx.fr/
 location: Paris, France
+coordinates: [48.8566, 2.3522]
 type: deepdive
 slides:
 link: /talks/2026-04-22-concurrency-crossroads-devoxx-fr/

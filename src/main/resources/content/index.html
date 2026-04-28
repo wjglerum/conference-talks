@@ -39,7 +39,7 @@ layout: main
 
 <script id="talks-data" type="application/json">[
 {#for talk in site.collections.talks}
-  \{"title":"{talk.title.replace('\"','\\\"')}","url":"{talk.url}","date":"{talk.date.format('MMM yyyy')}","location":"{talk.data('location')}","video":{#if talk.data('video')}true{#else}false{/if}\}{#if !talk_isLast},{/if}
+  \{"title":"{talk.title.replace('\"','\\\"')}","url":"{talk.url}","date":"{talk.date.format('MMM yyyy')}","location":"{talk.data('location')}","video":{#if talk.data('video')}true{#else}false{/if},"coordinates":{#if talk.data('coordinates')}[{talk.data('coordinates').get(0)},{talk.data('coordinates').get(1)}]{#else}null{/if}\}{#if !talk_isLast},{/if}
 {/for}
 ]</script>
 
@@ -48,33 +48,11 @@ layout: main
 {|
 <script>
 (function() {
-    const cities = {
-        "Rotterdam, The Netherlands": [51.9244, 4.4777],
-        "Rotterdam, Netherlands":     [51.9244, 4.4777],
-        "Kyiv, Ukraine":              [50.4501, 30.5234],
-        "Kraków, Poland":             [50.0647, 19.945],
-        "Oslo, Norway":               [59.9139, 10.7522],
-        "Marrakesh, Morocco":         [31.6295, -7.9811],
-        "Agadir, Morocco":            [30.4278, -9.5981],
-        "Mainz, Germany":             [49.9929, 8.2473],
-        "Sophia Antipolis, France":   [43.6155, 7.0682],
-        "Sofia, Bulgaria":            [42.6977, 23.3219],
-        "Rovinj, Croatia":            [45.0815, 13.6386],
-        "Ede, The Netherlands":       [52.0334, 5.671],
-        "Hannover, Germany":          [52.3759, 9.732],
-        "Rust, Germany":              [48.2684, 7.7224],
-        "Brussels, Belgium":          [50.8503, 4.3517],
-        "Antwerp, Belgium":           [51.2194, 4.4025],
-        "Paris, France":              [48.8566, 2.3522]
-    };
-
     const talks = JSON.parse(document.getElementById('talks-data').textContent);
     const grouped = {};
     talks.forEach(t => {
-        const c = cities[t.location];
-        if (!c) return;
-        const key = t.location;
-        (grouped[key] = grouped[key] || { coords: c, talks: [] }).talks.push(t);
+        if (!t.coordinates) return;
+        (grouped[t.location] = grouped[t.location] || { coords: t.coordinates, talks: [] }).talks.push(t);
     });
 
     const map = L.map('map', { scrollWheelZoom: false, zoomControl: true, attributionControl: true });
