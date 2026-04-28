@@ -47,5 +47,5 @@ nb-configuration.xml
 # Node
 node_modules/
 
-# Quarkus generated config docs
-META-INF/
+# Quarkus generated config docs (emitted at project root during build)
+/META-INF/
