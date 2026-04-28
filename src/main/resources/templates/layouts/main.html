@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{#if page.title}{page.title} — {/if}{site.title}</title>
     <meta name="description" content="{site.description}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
     <style>
         :root {
             --bg: #f4ede0;
@@ -35,18 +36,13 @@
         .hero p { font-size: 1.05rem; color: var(--muted); max-width: 38ch; }
         .hero .count { display: inline-block; margin-top: 1rem; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 0.6rem; }
         .hero .count strong { color: var(--ink); font-weight: 600; }
-        .map-wrap { position: relative; }
-        #map { display: block; width: 100%; height: auto; background: var(--paper); border: 1px solid var(--rule); }
-        #map .country { fill: #e8dec7; stroke: #cbbf9f; stroke-width: 0.5; stroke-linejoin: round; }
-        #map .country.home { fill: #ddd0b3; }
-        #map .marker-hit { fill: transparent; cursor: pointer; }
-        #map .marker { fill: var(--accent); stroke: var(--paper); stroke-width: 1.5; pointer-events: none; }
-        .map-tooltip { position: absolute; background: var(--paper); border: 1px solid var(--rule); padding: 0.6rem 0.8rem; font-size: 0.82rem; line-height: 1.5; box-shadow: 0 2px 6px rgba(0,0,0,0.08); pointer-events: auto; max-width: 280px; transform: translate(-50%, calc(-100% - 14px)); display: none; }
-        .map-tooltip.visible { display: block; }
-        .map-tooltip .city { font-weight: 600; margin-bottom: 0.3rem; }
-        .map-tooltip a { display: block; color: var(--ink); text-decoration: none; padding: 0.1rem 0; }
-        .map-tooltip a:hover { color: var(--accent); }
-        .map-tooltip .yr { color: var(--muted); margin-right: 0.4rem; font-variant-numeric: tabular-nums; }
+        #map { height: 320px; border: 1px solid var(--rule); background: var(--paper); }
+        #map .leaflet-control-attribution { background: rgba(251,246,236,0.8); }
+        #map .leaflet-popup-content { font-family: inherit; font-size: 0.85rem; line-height: 1.5; margin: 0.6rem 0.75rem; }
+        #map .leaflet-popup-content .city { font-weight: 600; margin-bottom: 0.35rem; }
+        #map .leaflet-popup-content a { display: block; color: var(--ink); text-decoration: none; padding: 0.15rem 0; }
+        #map .leaflet-popup-content a:hover { color: var(--accent); }
+        #map .leaflet-popup-content .yr { color: var(--muted); margin-right: 0.4rem; }
         .talks-section h2 { font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.25rem; padding-bottom: 0.6rem; border-bottom: 1px solid var(--rule); }
         .talks-grid { display: grid; gap: 0; grid-template-columns: 1fr; }
         @media (min-width: 720px) { .talks-grid { grid-template-columns: repeat(2, 1fr); } }
