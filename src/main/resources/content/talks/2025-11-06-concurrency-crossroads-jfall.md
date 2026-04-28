@@ -5,6 +5,7 @@ layout: talk
 conference: J-Fall 2025
 conferenceUrl: https://jfall.nl/
 location: Ede, The Netherlands
+coordinates: [52.0334, 5.671]
 type: talk
 slides:
 video: https://www.youtube.com/watch?v=j4DaWL64gz0

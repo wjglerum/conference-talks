@@ -5,6 +5,7 @@ layout: talk
 conference: jPrime 2026
 conferenceUrl: https://jprime.io/
 location: Sofia, Bulgaria
+coordinates: [42.6977, 23.3219]
 type: deepdive
 slides:
 link: /talks/2026-06-03-concurrency-crossroads-jprime/

@@ -5,6 +5,7 @@ layout: talk
 conference: Devoxx Morocco 2022
 conferenceUrl: https://devoxx.ma/
 location: Agadir, Morocco
+coordinates: [30.4278, -9.5981]
 type: talk
 slides:
 link: /talks/2022-10-06-reactive-quarkus-devoxx-ma/
