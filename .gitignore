@@ -47,6 +47,5 @@ nb-configuration.xml
 # Node
 node_modules/
 
-# Quarkus generated config docs (allow src META-INF for static resources)
+# Quarkus generated config docs
 META-INF/
-!src/main/resources/META-INF/
