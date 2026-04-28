@@ -5,8 +5,6 @@ layout: talk
 conference: Devoxx Poland 2022
 conferenceUrl: https://devoxx.pl/
 location: Kraków, Poland
-lat: 50.0647
-lng: 19.945
 type: talk
 slides:
 video: https://www.youtube.com/watch?v=NVO5YntUBlU

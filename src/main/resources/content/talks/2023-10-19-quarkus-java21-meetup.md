@@ -4,9 +4,7 @@ date: 2023-10-19
 layout: talk
 conference: Quarkus Meetup 2023
 conferenceUrl: https://www.meetup.com/quarkus-benelux/
-location: Rotterdam, Netherlands
-lat: 51.9244
-lng: 4.4777
+location: Rotterdam, The Netherlands
 type: talk
 slides:
 link: /talks/2023-10-19-quarkus-java21-meetup/

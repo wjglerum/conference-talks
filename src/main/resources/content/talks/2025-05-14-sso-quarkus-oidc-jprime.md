@@ -5,8 +5,6 @@ layout: talk
 conference: jPrime 2025
 conferenceUrl: https://jprime.io/
 location: Sofia, Bulgaria
-lat: 42.6977
-lng: 23.3219
 type: talk
 slides:
 video: https://www.youtube.com/watch?v=YGDe2Vk4Ixw

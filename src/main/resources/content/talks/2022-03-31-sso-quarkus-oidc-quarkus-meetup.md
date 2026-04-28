@@ -5,8 +5,6 @@ layout: talk
 conference: Quarkus Meetup 2022
 conferenceUrl: https://www.meetup.com/quarkus-benelux/
 location: Rotterdam, The Netherlands
-lat: 51.9244
-lng: 4.4777
 type: talk
 slides:
 link: /talks/2022-03-31-sso-quarkus-oidc-quarkus-meetup/

@@ -5,8 +5,6 @@ layout: talk
 conference: Lunatech 2018
 conferenceUrl: https://lunatech.com
 location: Rotterdam, The Netherlands
-lat: 51.9244
-lng: 4.4777
 type: workshop
 slides:
 link: /talks/2018-02-09-essential-linux-lunatech/

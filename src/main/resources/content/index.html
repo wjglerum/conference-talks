@@ -39,7 +39,7 @@ layout: main
 
 <script id="talks-data" type="application/json">[
 {#for talk in site.collections.talks}
-  \{"title":"{talk.title.replace('\"','\\\"')}","url":"{talk.url}","date":"{talk.date.format('MMM yyyy')}","location":"{talk.data('location')}","video":{#if talk.data('video')}true{#else}false{/if},"coordinates":{#if talk.data('lat')}[{talk.data('lat')},{talk.data('lng')}]{#else}null{/if}\}{#if !talk_isLast},{/if}
+  \{"title":"{talk.title.replace('\"','\\\"')}","url":"{talk.url}","date":"{talk.date.format('MMM yyyy')}","location":"{talk.data('location')}","video":{#if talk.data('video')}true{#else}false{/if},"coordinates":{#let coords=cdi:cities.list.get(talk.data('location'))}{#if coords}[{coords.lat},{coords.lng}]{#else}null{/if}{/let}\}{#if !talk_isLast},{/if}
 {/for}
 ]</script>
 

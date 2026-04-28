@@ -5,8 +5,6 @@ layout: talk
 conference: OCX 2026
 conferenceUrl: https://www.ocxconf.org/event/2026/summary
 location: Brussels, Belgium
-lat: 50.8503
-lng: 4.3517
 type: talk
 slides:
 link: /talks/2026-04-21-concurrency-crossroads-ocx/

@@ -1,0 +1,17 @@
+list:
+  "Agadir, Morocco":            { lat: 30.4278, lng: -9.5981 }
+  "Antwerp, Belgium":           { lat: 51.2194, lng:  4.4025 }
+  "Brussels, Belgium":          { lat: 50.8503, lng:  4.3517 }
+  "Ede, The Netherlands":       { lat: 52.0334, lng:  5.6710 }
+  "Hannover, Germany":          { lat: 52.3759, lng:  9.7320 }
+  "Kraków, Poland":             { lat: 50.0647, lng: 19.9450 }
+  "Kyiv, Ukraine":              { lat: 50.4501, lng: 30.5234 }
+  "Mainz, Germany":             { lat: 49.9929, lng:  8.2473 }
+  "Marrakesh, Morocco":         { lat: 31.6295, lng: -7.9811 }
+  "Oslo, Norway":               { lat: 59.9139, lng: 10.7522 }
+  "Paris, France":              { lat: 48.8566, lng:  2.3522 }
+  "Rotterdam, The Netherlands": { lat: 51.9244, lng:  4.4777 }
+  "Rovinj, Croatia":            { lat: 45.0815, lng: 13.6386 }
+  "Rust, Germany":              { lat: 48.2684, lng:  7.7224 }
+  "Sofia, Bulgaria":            { lat: 42.6977, lng: 23.3219 }
+  "Sophia Antipolis, France":   { lat: 43.6155, lng:  7.0682 }

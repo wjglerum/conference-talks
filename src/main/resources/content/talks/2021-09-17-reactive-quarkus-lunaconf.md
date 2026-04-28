@@ -5,8 +5,6 @@ layout: talk
 conference: LunaConf 2021
 conferenceUrl: https://lunatech.com
 location: Rotterdam, The Netherlands
-lat: 51.9244
-lng: 4.4777
 type: talk
 slides:
 link: /talks/2021-09-17-reactive-quarkus-lunaconf/
