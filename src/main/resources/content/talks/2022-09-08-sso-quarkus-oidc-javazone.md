@@ -6,7 +6,7 @@ conference: JavaZone 2022
 conferenceUrl: https://2022.javazone.no/
 location: Oslo, Norway
 type: talk
-slides:
+slides: https://docs.google.com/presentation/d/1HCybnYH3PHx3c_3-0N610912p9qcaPUqwDB8PNcageY/edit?usp=sharing
 link: /talks/2022-09-08-sso-quarkus-oidc-javazone/
 
 ---

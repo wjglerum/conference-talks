@@ -6,7 +6,7 @@ conference: OCX 2024
 conferenceUrl: https://www.ocxconf.org/event/2024/summary
 location: Mainz, Germany
 type: talk
-slides:
+slides: https://docs.google.com/presentation/d/1Z6w9ZgnXrlEOnbO-bfbCZx4AnGTQ2SdHIaNTcHrKiVA/edit?usp=sharing
 video: https://www.youtube.com/watch?v=osuWAyPNaUg
 link: /talks/2024-10-23-sso-quarkus-oidc-ocx/
 ---

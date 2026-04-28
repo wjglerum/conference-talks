@@ -6,7 +6,7 @@ conference: LunaConf 2021
 conferenceUrl: https://lunatech.com
 location: Rotterdam, The Netherlands
 type: talk
-slides:
+slides: https://docs.google.com/presentation/d/1ERHxDCH7QQNCG9LAbqu6DjN4Y6nx4dECV7IrleDZbVM/edit?usp=sharing
 link: /talks/2021-09-17-reactive-quarkus-lunaconf/
 
 ---

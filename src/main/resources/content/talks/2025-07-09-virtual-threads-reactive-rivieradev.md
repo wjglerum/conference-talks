@@ -6,7 +6,7 @@ conference: Riviera DEV 2025
 conferenceUrl: https://2025.rivieradev.fr/
 location: Sophia Antipolis, France
 type: talk
-slides:
+slides: https://docs.google.com/presentation/d/1NFh2j9-OtIoZYDaysBFkH_MLTJg3H2TO7gN7Y6E6oyA/edit?usp=sharing
 link: /talks/2025-07-09-virtual-threads-reactive-rivieradev/
 
 ---

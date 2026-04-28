@@ -6,7 +6,7 @@ conference: Riviera DEV 2024
 conferenceUrl: https://2024.rivieradev.fr/
 location: Sophia Antipolis, France
 type: talk
-slides:
+slides: https://docs.google.com/presentation/d/1HhnpE3gY_tETxAy4pB_MBIYImbergQ0kMJNrFejGlxc/edit?usp=sharing
 link: /talks/2024-07-09-sso-quarkus-oidc-rivieradev/
 
 ---

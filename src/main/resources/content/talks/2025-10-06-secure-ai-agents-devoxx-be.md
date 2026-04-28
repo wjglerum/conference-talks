@@ -7,7 +7,7 @@ conferenceUrl: https://devoxx.be/
 location: Antwerp, Belgium
 type: workshop
 coSpeaker: Radek Kargul
-slides:
+slides: https://docs.google.com/presentation/d/1sOyyHeVabX11tO2Qga-kD2r0WArf71u-Ms1KYRb0ACk/edit?usp=sharing
 link: /talks/2025-10-06-secure-ai-agents-devoxx-be/
 
 ---

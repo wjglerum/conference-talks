@@ -6,7 +6,7 @@ conference: Quarkus Insights 2025
 conferenceUrl: https://quarkus.io/insights/
 location: Online
 type: podcast
-slides:
+slides: https://docs.google.com/presentation/d/1mAm3GoEcXqIQwyKRgBbcXzZkOYri6MEMzdVVadR8eRE/edit?usp=sharing
 video: https://www.youtube.com/watch?v=YX7NJxOUMWU
 link: /talks/2025-09-16-virtual-threads-quarkus-insights/
 ---

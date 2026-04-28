@@ -6,7 +6,7 @@ conference: Devoxx Poland 2022
 conferenceUrl: https://devoxx.pl/
 location: Kraków, Poland
 type: talk
-slides:
+slides: https://docs.google.com/presentation/d/1cbCqTrEj_i6vfvwR3mV-QoMdxKaalH9lTzFK-sSbtlk/edit?usp=sharing
 video: https://www.youtube.com/watch?v=NVO5YntUBlU
 link: /talks/2022-06-22-reactive-quarkus-devoxxpl/
 ---

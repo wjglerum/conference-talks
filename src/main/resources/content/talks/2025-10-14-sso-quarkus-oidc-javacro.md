@@ -6,7 +6,7 @@ conference: JavaCro 2025
 conferenceUrl: https://2025.javacro.hr/
 location: Rovinj, Croatia
 type: talk
-slides:
+slides: https://docs.google.com/presentation/d/1k0iUavvE9k34t1Vs9-tMQERYtpbbsJ7PvPRfnoW5HY4/edit?usp=sharing
 link: /talks/2025-10-14-sso-quarkus-oidc-javacro/
 
 ---

@@ -7,7 +7,7 @@ conference: Java Forum Nord 2025
 conferenceUrl: https://javaforumnord.de/
 location: Hannover, Germany
 type: talk
-slides:
+slides: https://docs.google.com/presentation/d/1jtczLrMo5iGPo5uvvkWfoee7mih935AAGF58TqzGcbg/edit?usp=sharing
 link: /talks/2025-09-16-concurrency-crossroads-java-forum-nord/
 
 ---

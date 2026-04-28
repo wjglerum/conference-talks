@@ -5,7 +5,7 @@ layout: talk
 conference: Devoxx Ukraine 2021
 location: Online
 type: talk
-slides:
+slides: https://docs.google.com/presentation/d/1UFYQxFn0OcyUgDUEaMy3XOBCElviw-79h6KKw0AtaxE/edit?usp=sharing
 video: https://www.youtube.com/watch?v=kd08So0H_ks
 link: /talks/2021-11-19-reactive-quarkus-devoxxua/
 ---

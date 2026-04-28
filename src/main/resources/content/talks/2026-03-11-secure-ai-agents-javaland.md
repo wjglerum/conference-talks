@@ -6,7 +6,7 @@ conference: JavaLand 2026
 conferenceUrl: https://www.javaland.eu/
 location: Rust, Germany
 type: talk
-slides:
+slides: https://docs.google.com/presentation/d/1MT898x9-zQZsTLv_1pKHg9av6wIsnPgtm22XKqTMuDU/edit?usp=sharing
 link: /talks/2026-03-11-secure-ai-agents-javaland/
 
 ---

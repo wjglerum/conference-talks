@@ -6,7 +6,7 @@ conference: Lunatech 2025
 conferenceUrl: https://lunatech.com
 location: Rotterdam, The Netherlands
 type: techtalk
-slides:
+slides: https://docs.google.com/presentation/d/10xpJBRgNHzue28qnWpaVK2uoGsyfYSbxxFz9uDzS540/edit?usp=sharing
 link: /talks/2025-04-11-local-ai-agents-lunatech/
 
 ---

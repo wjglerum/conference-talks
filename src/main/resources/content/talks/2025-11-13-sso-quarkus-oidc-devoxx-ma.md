@@ -6,7 +6,7 @@ conference: Devoxx Morocco 2025
 conferenceUrl: https://devoxx.ma/
 location: Marrakesh, Morocco
 type: talk
-slides:
+slides: https://docs.google.com/presentation/d/1byDadZL8xtx7jeF9CGjEcxMIfdFAm6_iBud5_VCI-is/edit?usp=sharing
 link: /talks/2025-11-13-sso-quarkus-oidc-devoxx-ma/
 ---
 

@@ -6,7 +6,7 @@ conference: Lunatech 2018
 conferenceUrl: https://lunatech.com
 location: Rotterdam, The Netherlands
 type: workshop
-slides:
+slides: https://docs.google.com/presentation/d/1ndj1CkV3y0L0aS7U6jNEjayEnD6HA-dpRl1bRQhao6U/edit?usp=sharing
 link: /talks/2018-02-09-essential-linux-lunatech/
 
 ---

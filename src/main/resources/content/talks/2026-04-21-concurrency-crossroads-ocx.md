@@ -6,7 +6,7 @@ conference: OCX 2026
 conferenceUrl: https://www.ocxconf.org/event/2026/summary
 location: Brussels, Belgium
 type: talk
-slides:
+slides: https://docs.google.com/presentation/d/1M9PW1u1JLqfgT8LIi3afLfKUfPCrQcrdRMkpB8GtJVE/edit?usp=sharing
 link: /talks/2026-04-21-concurrency-crossroads-ocx/
 
 ---

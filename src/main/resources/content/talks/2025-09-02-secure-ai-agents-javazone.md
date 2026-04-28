@@ -6,7 +6,7 @@ conference: JavaZone 2025
 conferenceUrl: https://2025.javazone.no/
 location: Oslo, Norway
 type: workshop
-slides:
+slides: https://docs.google.com/presentation/d/1qkbl4g5p40rZMGKwb2YdA_TIh4tqaf5KYXmFZDyBb00/edit?usp=sharing
 link: /talks/2025-09-02-secure-ai-agents-javazone/
 
 ---
