@@ -5,7 +5,8 @@ layout: talk
 conference: Lunatech 2025
 conferenceUrl: https://lunatech.com
 location: Rotterdam, The Netherlands
-coordinates: [51.9244, 4.4777]
+lat: 51.9244
+lng: 4.4777
 type: techtalk
 slides:
 link: /talks/2025-04-11-local-ai-agents-lunatech/

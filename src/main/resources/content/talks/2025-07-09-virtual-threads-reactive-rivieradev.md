@@ -5,7 +5,8 @@ layout: talk
 conference: Riviera DEV 2025
 conferenceUrl: https://2025.rivieradev.fr/
 location: Sophia Antipolis, France
-coordinates: [43.6155, 7.0682]
+lat: 43.6155
+lng: 7.0682
 type: talk
 slides:
 link: /talks/2025-07-09-virtual-threads-reactive-rivieradev/

@@ -5,7 +5,8 @@ layout: talk
 conference: Devoxx Belgium 2025
 conferenceUrl: https://devoxx.be/
 location: Antwerp, Belgium
-coordinates: [51.2194, 4.4025]
+lat: 51.2194
+lng: 4.4025
 type: workshop
 coSpeaker: Radek Kargul
 slides:

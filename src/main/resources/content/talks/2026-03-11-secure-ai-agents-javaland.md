@@ -5,7 +5,8 @@ layout: talk
 conference: JavaLand 2026
 conferenceUrl: https://www.javaland.eu/
 location: Rust, Germany
-coordinates: [48.2684, 7.7224]
+lat: 48.2684
+lng: 7.7224
 type: talk
 slides:
 link: /talks/2026-03-11-secure-ai-agents-javaland/

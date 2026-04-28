@@ -5,7 +5,8 @@ layout: talk
 conference: JavaZone 2025
 conferenceUrl: https://2025.javazone.no/
 location: Oslo, Norway
-coordinates: [59.9139, 10.7522]
+lat: 59.9139
+lng: 10.7522
 type: workshop
 slides:
 link: /talks/2025-09-02-secure-ai-agents-javazone/

@@ -5,7 +5,8 @@ layout: talk
 conference: LunaConf 2024
 conferenceUrl: https://lunatech.com
 location: Rotterdam, The Netherlands
-coordinates: [51.9244, 4.4777]
+lat: 51.9244
+lng: 4.4777
 type: talk
 slides:
 link: /talks/2024-10-04-sso-quarkus-oidc-lunaconf/

@@ -5,7 +5,8 @@ layout: talk
 conference: LunaConf 2020
 conferenceUrl: https://lunatech.com
 location: Rotterdam, The Netherlands
-coordinates: [51.9244, 4.4777]
+lat: 51.9244
+lng: 4.4777
 type: talk
 slides:
 link: /talks/2020-01-17-hacking-room-raspberry-lunaconf/

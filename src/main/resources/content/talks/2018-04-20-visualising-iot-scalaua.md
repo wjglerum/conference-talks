@@ -4,7 +4,8 @@ date: 2018-04-20
 layout: talk
 conference: ScalaUA 2018
 location: Kyiv, Ukraine
-coordinates: [50.4501, 30.5234]
+lat: 50.4501
+lng: 30.5234
 type: talk
 slides:
 video: https://www.youtube.com/watch?v=uVzvDH3LYsE

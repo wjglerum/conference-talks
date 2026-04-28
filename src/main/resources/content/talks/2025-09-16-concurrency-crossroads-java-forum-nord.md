@@ -6,7 +6,8 @@ layout: talk
 conference: Java Forum Nord 2025
 conferenceUrl: https://javaforumnord.de/
 location: Hannover, Germany
-coordinates: [52.3759, 9.732]
+lat: 52.3759
+lng: 9.732
 type: talk
 slides:
 link: /talks/2025-09-16-concurrency-crossroads-java-forum-nord/

@@ -5,7 +5,8 @@ layout: talk
 conference: Devoxx Morocco 2025
 conferenceUrl: https://devoxx.ma/
 location: Marrakesh, Morocco
-coordinates: [31.6295, -7.9811]
+lat: 31.6295
+lng: -7.9811
 type: talk
 slides:
 link: /talks/2025-11-13-sso-quarkus-oidc-devoxx-ma/
