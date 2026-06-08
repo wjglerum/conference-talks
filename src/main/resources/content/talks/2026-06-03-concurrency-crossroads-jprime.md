@@ -6,7 +6,8 @@ conference: jPrime 2026
 conferenceUrl: https://jprime.io/
 location: Sofia, Bulgaria
 type: deepdive
-slides:
+slides: https://docs.google.com/presentation/d/1kpc64akFxIe1_Kq1ON6vULEoJ4BdHusPyiEB0ymGnOM/edit?usp=sharing
+demo: https://github.com/wjglerum/quarkus-virtual-threads-jprime-2026
 link: /talks/2026-06-03-concurrency-crossroads-jprime/
 
 ---

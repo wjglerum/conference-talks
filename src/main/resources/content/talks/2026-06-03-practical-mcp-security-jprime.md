@@ -6,7 +6,8 @@ conference: jPrime 2026
 conferenceUrl: https://jprime.io/
 location: Sofia, Bulgaria
 type: talk
-slides:
+slides: https://docs.google.com/presentation/d/1lLDmmdQ0aQYxKcaig6vDQ2Y4XJFYR_27NQ19siLNkmQ/edit?usp=sharing
+demo: https://github.com/wjglerum/quarkus-mcp-jprime-2026
 link: /talks/2026-06-03-practical-mcp-security-jprime/
 
 ---
