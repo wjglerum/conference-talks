@@ -22,7 +22,7 @@ layout: talk
 conference: Some Conference 2026
 conferenceUrl: https://example.com/
 location: Berlin, Germany
-type: talk           # talk | deepdive | workshop | podcast | techtalk
+type: talk           # talk | meetup | deepdive | workshop | podcast | techtalk
 slides: https://...  # Google Slides, reveal.js, etc. (optional)
 video: https://...   # YouTube link (optional)
 demo: https://...    # GitHub repo with the code (optional)

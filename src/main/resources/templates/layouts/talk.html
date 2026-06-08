@@ -27,6 +27,7 @@
             <div class="conference-badge">
                 {#if page.data("conferenceUrl")}<a href="{page.data("conferenceUrl")}" target="_blank" rel="noopener">{page.data("conference")}</a>{#else}<span class="name">{page.data("conference")}</span>{/if}
                 {#if page.data("type") == 'talk'}<span class="tag talk">Conference</span>{/if}
+                {#if page.data("type") == 'meetup'}<span class="tag meetup">Meetup</span>{/if}
                 {#if page.data("type") == 'deepdive'}<span class="tag deepdive">Deep Dive</span>{/if}
                 {#if page.data("type") == 'workshop'}<span class="tag workshop">Workshop</span>{/if}
                 {#if page.data("type") == 'podcast'}<span class="tag podcast">Podcast</span>{/if}

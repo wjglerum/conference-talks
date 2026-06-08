@@ -5,7 +5,7 @@ layout: talk
 conference: Quarkus Meetup 2023
 conferenceUrl: https://www.meetup.com/quarkus-benelux/
 location: Rotterdam, The Netherlands
-type: talk
+type: meetup
 slides: https://docs.google.com/presentation/d/1dXnBlFoPPH-CYVeYhcpGt5jAb_3GVbdoLorrrH96Xk0/edit?usp=sharing
 link: /talks/2023-10-19-quarkus-java21-meetup/
 

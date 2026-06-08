@@ -21,6 +21,7 @@ layout: main
             <div class="conference">
                 <span class="name">{talk.data("conference")}</span>
                 {#if talk.data("type") == 'talk'}<span class="tag talk">Conference</span>{/if}
+                {#if talk.data("type") == 'meetup'}<span class="tag meetup">Meetup</span>{/if}
                 {#if talk.data("type") == 'deepdive'}<span class="tag deepdive">Deep Dive</span>{/if}
                 {#if talk.data("type") == 'workshop'}<span class="tag workshop">Workshop</span>{/if}
                 {#if talk.data("type") == 'podcast'}<span class="tag podcast">Podcast</span>{/if}
