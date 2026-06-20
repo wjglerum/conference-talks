@@ -104,7 +104,14 @@ layout: main
 
     // Move each card into a per-year grid so the column border rules stay correct.
     const panels = {};
+    const headings = {};
     years.forEach(y => {
+        const heading = document.createElement('h3');
+        heading.className = 'year-heading';
+        heading.textContent = y;
+        grid.parentNode.insertBefore(heading, grid);
+        headings[y] = heading;
+
         const panel = document.createElement('div');
         panel.className = 'talks-grid year-panel';
         panel.dataset.year = y;
@@ -115,7 +122,12 @@ layout: main
     grid.remove();
 
     function show(year) {
-        years.forEach(y => { panels[y].style.display = y === year ? '' : 'none'; });
+        years.forEach(y => {
+            const visible = year === 'all' || y === year;
+            panels[y].style.display = visible ? '' : 'none';
+            // Year separators only make sense in the combined "All" view.
+            headings[y].style.display = year === 'all' ? '' : 'none';
+        });
         tabsEl.querySelectorAll('.year-tab').forEach(b => {
             const active = b.dataset.year === year;
             b.classList.toggle('active', active);
@@ -123,18 +135,18 @@ layout: main
         });
     }
 
-    years.forEach(y => {
+    ['all'].concat(years).forEach(y => {
         const btn = document.createElement('button');
         btn.className = 'year-tab';
         btn.type = 'button';
-        btn.textContent = y;
+        btn.textContent = y === 'all' ? 'All' : y;
         btn.dataset.year = y;
         btn.setAttribute('role', 'tab');
         btn.addEventListener('click', () => show(y));
         tabsEl.appendChild(btn);
     });
 
-    show(years[0]);
+    show('all');
 })();
 </script>
 |}

@@ -85,6 +85,8 @@ h1 { font-family: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Palati
 .year-tab { font-family: inherit; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.04em; padding: 0.35rem 0.85rem; background: transparent; color: var(--muted); border: 1px solid var(--rule); cursor: pointer; transition: background 0.15s, color 0.15s, border-color 0.15s; }
 .year-tab:hover { color: var(--accent); border-color: var(--accent); }
 .year-tab.active { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.year-heading { font-family: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif; font-size: 1.4rem; font-weight: 500; color: var(--ink); margin: 2rem 0 1rem; padding-top: 1rem; border-top: 1px solid var(--rule); display: flex; align-items: baseline; gap: 0.75rem; }
+.year-heading:first-of-type { margin-top: 0.5rem; }
 .talks-grid { display: grid; gap: 0; grid-template-columns: 1fr; }
 @media (min-width: 720px) { .talks-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 1000px) { .talks-grid { grid-template-columns: repeat(3, 1fr); } }
