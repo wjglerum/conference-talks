@@ -7,6 +7,7 @@ list:
   "Kraków, Poland":             { lat: 50.0647, lng: 19.9450 }
   "Kyiv, Ukraine":              { lat: 50.4501, lng: 30.5234 }
   "Mainz, Germany":             { lat: 49.9929, lng:  8.2473 }
+  "Malmö, Sweden":              { lat: 55.6050, lng: 13.0038 }
   "Marrakesh, Morocco":         { lat: 31.6295, lng: -7.9811 }
   "Oslo, Norway":               { lat: 59.9139, lng: 10.7522 }
   "Paris, France":              { lat: 48.8566, lng:  2.3522 }
