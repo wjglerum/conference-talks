@@ -80,6 +80,11 @@ h1 { font-family: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Palati
 
 /* Talks grid (home) */
 .talks-section h2 { font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.25rem; padding-bottom: 0.6rem; border-bottom: 1px solid var(--rule); }
+.year-tabs { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
+.year-tabs:empty { display: none; }
+.year-tab { font-family: inherit; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.04em; padding: 0.35rem 0.85rem; background: transparent; color: var(--muted); border: 1px solid var(--rule); cursor: pointer; transition: background 0.15s, color 0.15s, border-color 0.15s; }
+.year-tab:hover { color: var(--accent); border-color: var(--accent); }
+.year-tab.active { background: var(--ink); color: var(--bg); border-color: var(--ink); }
 .talks-grid { display: grid; gap: 0; grid-template-columns: 1fr; }
 @media (min-width: 720px) { .talks-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 1000px) { .talks-grid { grid-template-columns: repeat(3, 1fr); } }

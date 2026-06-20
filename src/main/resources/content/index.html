@@ -15,9 +15,10 @@ layout: main
 
 <section class="talks-section">
     <h2>All sessions</h2>
-    <div class="talks-grid">
+    <div class="year-tabs" role="tablist" aria-label="Filter sessions by year"></div>
+    <div class="talks-grid" id="talks-grid">
         {#for talk in site.collections.talks}
-        <a class="talk-card" href="{talk.url}">
+        <a class="talk-card" data-year="{talk.date.format('yyyy')}" href="{talk.url}">
             <div class="conference">
                 <span class="name">{talk.data("conference")}</span>
                 {#if talk.data("type") == 'talk'}<span class="tag talk">Conference</span>{/if}
@@ -89,6 +90,51 @@ layout: main
     } else {
         map.setView([49, 8], 4);
     }
+})();
+</script>
+<script>
+(function() {
+    const grid = document.getElementById('talks-grid');
+    const tabsEl = document.querySelector('.year-tabs');
+    if (!grid || !tabsEl) return;
+
+    const cards = Array.from(grid.querySelectorAll('.talk-card'));
+    const years = Array.from(new Set(cards.map(c => c.dataset.year))).sort((a, b) => b.localeCompare(a));
+    if (years.length < 2) return;
+
+    // Move each card into a per-year grid so the column border rules stay correct.
+    const panels = {};
+    years.forEach(y => {
+        const panel = document.createElement('div');
+        panel.className = 'talks-grid year-panel';
+        panel.dataset.year = y;
+        grid.parentNode.insertBefore(panel, grid);
+        panels[y] = panel;
+    });
+    cards.forEach(c => panels[c.dataset.year].appendChild(c));
+    grid.remove();
+
+    function show(year) {
+        years.forEach(y => { panels[y].style.display = y === year ? '' : 'none'; });
+        tabsEl.querySelectorAll('.year-tab').forEach(b => {
+            const active = b.dataset.year === year;
+            b.classList.toggle('active', active);
+            b.setAttribute('aria-selected', active);
+        });
+    }
+
+    years.forEach(y => {
+        const btn = document.createElement('button');
+        btn.className = 'year-tab';
+        btn.type = 'button';
+        btn.textContent = y;
+        btn.dataset.year = y;
+        btn.setAttribute('role', 'tab');
+        btn.addEventListener('click', () => show(y));
+        tabsEl.appendChild(btn);
+    });
+
+    show(years[0]);
 })();
 </script>
 |}
