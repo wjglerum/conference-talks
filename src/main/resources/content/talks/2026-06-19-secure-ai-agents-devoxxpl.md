@@ -7,6 +7,8 @@ conferenceUrl: https://devoxx.pl/
 location: Kraków, Poland
 type: workshop
 coSpeaker: Radek Kargul
+slides: https://docs.google.com/presentation/d/1Oepr58CHetCuuS1CZyT-pHNmzFfHwOtQm15pXkbg3p4/edit?usp=sharing
+demo: https://github.com/wjglerum/quarkus-ai-agent-workshop-devoxx-poland-2026
 link: /talks/2026-06-19-secure-ai-agents-devoxxpl/
 ---
 
