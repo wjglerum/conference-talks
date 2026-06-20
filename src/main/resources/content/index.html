@@ -27,6 +27,7 @@ layout: main
                 {#if talk.data("type") == 'workshop'}<span class="tag workshop">Workshop</span>{/if}
                 {#if talk.data("type") == 'podcast'}<span class="tag podcast">Podcast</span>{/if}
                 {#if talk.data("type") == 'techtalk'}<span class="tag techtalk">Tech Talk</span>{/if}
+                {#if talk.data("type") == 'booth'}<span class="tag booth">Booth Demo</span>{/if}
             </div>
             <h3 class="serif">{talk.title}</h3>
             <div class="meta">

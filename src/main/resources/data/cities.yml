@@ -1,7 +1,9 @@
 list:
   "Agadir, Morocco":            { lat: 30.4278, lng: -9.5981 }
   "Antwerp, Belgium":           { lat: 51.2194, lng:  4.4025 }
+  "Berlin, Germany":            { lat: 52.5200, lng: 13.4050 }
   "Brussels, Belgium":          { lat: 50.8503, lng:  4.3517 }
+  "Copenhagen, Denmark":        { lat: 55.6761, lng: 12.5683 }
   "Ede, The Netherlands":       { lat: 52.0334, lng:  5.6710 }
   "Hannover, Germany":          { lat: 52.3759, lng:  9.7320 }
   "Kraków, Poland":             { lat: 50.0647, lng: 19.9450 }
