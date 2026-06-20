@@ -8,6 +8,7 @@ location: Paris, France
 type: deepdive
 slides: https://docs.google.com/presentation/d/1jZxAV70sos4KzcA58eJHtFSjsql5PxkT8BhxAr6Bkfs/edit?usp=sharing
 demo: https://github.com/wjglerum/quarkus-virtual-threads-devoxx-fr-2026
+video: https://www.youtube.com/watch?v=igA4UyZb3z4
 link: /talks/2026-04-22-concurrency-crossroads-devoxx-fr/
 
 ---
