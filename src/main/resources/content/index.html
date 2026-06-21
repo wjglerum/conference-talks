@@ -27,14 +27,14 @@ layout: main
 <section class="tours" aria-labelledby="now-playing">
     <h2 id="now-playing">Now Playing</h2>
     {#for tour in cdi:setlist.nowPlaying(site.collections.talks)}
-    {#include tour-block /}
+    {#include partials/tour-block /}
     {/for}
 </section>
 
 <section class="tours past" aria-labelledby="past-tours">
     <h2 id="past-tours">Past Tours</h2>
     {#for tour in cdi:setlist.pastTours(site.collections.talks)}
-    {#include tour-block /}
+    {#include partials/tour-block /}
     {/for}
 </section>
 

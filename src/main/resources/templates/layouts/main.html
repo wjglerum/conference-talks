@@ -3,19 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {#include theme-head /}
-    <title>{#if page.title}{page.title} · {/if}{site.title}</title>
-    <meta name="description" content="{site.description}">
-
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="{#if page.title}{page.title}{#else}{site.title}{/if}">
-    <meta property="og:description" content="{site.description}">
-    <meta property="og:url" content="{page.url.absolute}">
-    <meta property="og:site_name" content="{site.title}">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="{#if page.title}{page.title}{#else}{site.title}{/if}">
-    <meta name="twitter:description" content="{site.description}">
-
+    {#include partials/theme-head /}
+    {#include partials/seo ogType='website' /}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="stylesheet" href="/site.css">
 </head>
@@ -25,7 +14,7 @@
         <nav class="nav">
             <a href="/">Talks</a>
             <a href="/about/">About</a>
-            {#include theme-toggle /}
+            {#include partials/theme-toggle /}
         </nav>
     </header>
     <main>

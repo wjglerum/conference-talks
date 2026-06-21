@@ -109,6 +109,23 @@ class SiteRenderTest {
     }
 
     @Test
+    void homepageTitleIsNotDuplicated() {
+        // page.title equals site.title on the landing page, so the title must read "On Tour"
+        // once, not "On Tour · On Tour".
+        given().when().get("/").then()
+            .statusCode(200)
+            .body(containsString("<title>On Tour</title>"));
+    }
+
+    @Test
+    void sitemapListsTalks() {
+        given().when().get("/sitemap.xml").then()
+            .statusCode(200)
+            .body(containsString("<urlset"))
+            .body(containsString("/talks/2025-11-06-concurrency-crossroads-jfall/"));
+    }
+
+    @Test
     void talkPageShowsTourContextAndSiblings() {
         given().when().get("/talks/2025-11-06-concurrency-crossroads-jfall/").then()
             .statusCode(200)

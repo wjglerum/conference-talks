@@ -1,0 +1,13 @@
+{@io.quarkiverse.roq.frontmatter.runtime.model.Page page}
+{@java.lang.String ogType}
+<title>{#if page.title && page.title != site.title}{page.title} · {/if}{site.title}</title>
+<meta name="description" content="{page.data('description') ?: site.description}">
+
+<meta property="og:type" content="{ogType}">
+<meta property="og:title" content="{page.title ?: site.title}">
+<meta property="og:description" content="{page.data('description') ?: site.description}">
+<meta property="og:url" content="{page.url.absolute}">
+<meta property="og:site_name" content="{site.title}">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="{page.title ?: site.title}">
+<meta name="twitter:description" content="{page.data('description') ?: site.description}">
