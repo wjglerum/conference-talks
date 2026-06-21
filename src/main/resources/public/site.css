@@ -166,3 +166,53 @@ h1 { font-family: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Palati
 [data-theme-mode="system"] .theme-toggle .ico-system { display: inline; }
 [data-theme-mode="light"] .theme-toggle .ico-light { display: inline; }
 [data-theme-mode="dark"] .theme-toggle .ico-dark { display: inline; }
+
+/* Homepage: hero and stats */
+.display { font-family: ui-sans-serif, system-ui, sans-serif; text-transform: uppercase; letter-spacing: -0.02em; font-weight: 800; font-size: clamp(2.5rem, 8vw, 5rem); line-height: 0.95; color: var(--text); }
+.hero-copy .lede { color: var(--dim); max-width: 48ch; margin-top: 1rem; font-size: 1.05rem; }
+.stats { list-style: none; display: flex; flex-wrap: wrap; gap: 2rem; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); }
+.stats li { display: flex; flex-direction: column; }
+.stats .num { font-size: 2rem; font-weight: 800; color: var(--gold); line-height: 1; }
+.stats .lbl { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); margin-top: 0.35rem; }
+
+/* Map */
+.map-section { margin: 2.5rem 0; }
+#map { height: 360px; width: 100%; border: 1px solid var(--rule); background: var(--panel); }
+
+/* Tour sections */
+.tours { margin-top: 3rem; }
+.tours h2, .singles h2 { text-transform: uppercase; letter-spacing: 0.06em; font-size: 1rem; color: var(--dim); border-bottom: 1px solid var(--rule); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+.tour { background: var(--panel); border: 1px solid var(--rule); padding: 1.5rem; margin-bottom: 1.25rem; }
+.tours.past .tour { padding: 1rem 1.5rem; }
+.tour-status { display: flex; gap: 0.5rem; margin-bottom: 0.5rem; min-height: 1.4rem; }
+.pill { font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.2rem 0.6rem; border-radius: 999px; display: inline-flex; align-items: center; gap: 0.4rem; }
+.pill.touring { background: var(--accent); color: var(--ground); }
+.pill.new { background: transparent; border: 1px solid var(--gold); color: var(--gold); }
+.pill .dot { width: 0.5rem; height: 0.5rem; border-radius: 999px; background: var(--ground); animation: pulse 1.6s ease-in-out infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+@media (prefers-reduced-motion: reduce) { .pill .dot { animation: none; } }
+.tour-title { font-size: 1.5rem; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
+.tour-sub { color: var(--dim); margin-top: 0.2rem; }
+.tour-count { display: inline-block; margin-top: 0.6rem; color: var(--faint); font-size: 0.85rem; }
+.tour-count strong { color: var(--gold); font-size: 1.1rem; }
+.dates { list-style: none; margin-top: 1rem; border-top: 1px solid var(--rule); }
+.dates li { border-bottom: 1px solid var(--rule); }
+.dates li a { display: grid; grid-template-columns: 6rem 1fr auto auto; gap: 1rem; align-items: baseline; padding: 0.6rem 0; color: var(--text); text-decoration: none; }
+.dates li a:hover { color: var(--accent); }
+.dates .d { color: var(--dim); font-size: 0.85rem; }
+.dates .loc { color: var(--faint); font-size: 0.85rem; }
+.dates .rec { color: var(--accent); font-size: 0.8rem; }
+.dates li.upcoming a { color: var(--gold); }
+
+/* Singles */
+.singles { margin-top: 3rem; }
+.single-list { list-style: none; }
+.single-list li { border-bottom: 1px solid var(--rule); }
+.single-list li a { display: grid; grid-template-columns: 6rem 1fr auto auto; gap: 1rem; align-items: baseline; padding: 0.6rem 0; color: var(--text); text-decoration: none; }
+.single-list li a:hover { color: var(--accent); }
+.single-list .d, .single-list .c, .single-list .loc { color: var(--dim); font-size: 0.85rem; }
+.single-list .rec { color: var(--accent); }
+
+@media (max-width: 640px) {
+    .dates li a, .single-list li a { grid-template-columns: 1fr; gap: 0.15rem; }
+}

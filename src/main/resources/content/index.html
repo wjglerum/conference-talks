@@ -1,43 +1,58 @@
 ---
-title: Conference Talks
-description: Conference talks given by Willem Jan Glerum, Principal Software Engineer at Lunatech.
+title: On Tour
+description: Conference talks given by Willem Jan Glerum, Principal Software Engineer at Lunatech, toured across Europe.
 author: Willem Jan Glerum
 layout: main
 ---
+{#let stats=cdi:setlist.statsForPages(site.collections.talks)}
 <section class="hero">
-    <div>
-        <h1 class="serif">Talks I've given,<br>and where I gave them.</h1>
-        <p>A running list of conference talks, podcasts and workshops. Mostly Java, increasingly Quarkus, and lately a lot about virtual threads and AI agents.</p>
-        <span class="count"><strong>{site.collections.talks.size}</strong> sessions · 2018 — 2026</span>
+    <div class="hero-copy">
+        <h1 class="display">On Tour</h1>
+        <p class="lede">A handful of signature talks, toured across Europe. Mostly Java and Quarkus, lately a lot about virtual threads and AI agents.</p>
     </div>
-    <div id="map" aria-label="Map of talk locations"></div>
+    <ul class="stats">
+        <li><span class="num">{stats.shows}</span><span class="lbl">Shows</span></li>
+        <li><span class="num">{stats.signatureTalks}</span><span class="lbl">Signature talks</span></li>
+        <li><span class="num">{stats.cities}</span><span class="lbl">Cities</span></li>
+        <li><span class="num">{stats.countries}</span><span class="lbl">Countries</span></li>
+        <li><span class="num">{stats.sinceYear}</span><span class="lbl">Since</span></li>
+    </ul>
+</section>
+{/let}
+
+<section class="map-section">
+    <div id="map" aria-label="Map of tour locations"></div>
 </section>
 
-<section class="talks-section">
-    <h2>All sessions</h2>
-    <div class="year-tabs" role="tablist" aria-label="Filter sessions by year"></div>
-    <div class="talks-grid" id="talks-grid">
-        {#for talk in site.collections.talks}
-        <a class="talk-card" data-year="{talk.date.format('yyyy')}" href="{talk.url}">
-            <div class="conference">
-                <span class="name">{talk.data("conference")}</span>
-                {#if talk.data("type") == 'talk'}<span class="tag talk">Conference</span>{/if}
-                {#if talk.data("type") == 'meetup'}<span class="tag meetup">Meetup</span>{/if}
-                {#if talk.data("type") == 'deepdive'}<span class="tag deepdive">Deep Dive</span>{/if}
-                {#if talk.data("type") == 'workshop'}<span class="tag workshop">Workshop</span>{/if}
-                {#if talk.data("type") == 'podcast'}<span class="tag podcast">Podcast</span>{/if}
-                {#if talk.data("type") == 'techtalk'}<span class="tag techtalk">Tech Talk</span>{/if}
-                {#if talk.data("type") == 'booth'}<span class="tag booth">Booth Demo</span>{/if}
-            </div>
-            <h3 class="serif">{talk.title}</h3>
-            <div class="meta">
-                <span>{talk.date.format('MMM yyyy')}</span>
-                <span>{talk.data("location")}</span>
-                {#if talk.data("video")}<span class="recording">▸ Recording</span>{/if}
-            </div>
-        </a>
+<section class="tours" aria-labelledby="now-playing">
+    <h2 id="now-playing">Now Playing</h2>
+    {#for tour in cdi:setlist.nowPlaying(site.collections.talks)}
+    {#include tour-block /}
+    {/for}
+</section>
+
+<section class="tours past" aria-labelledby="past-tours">
+    <h2 id="past-tours">Past Tours</h2>
+    {#for tour in cdi:setlist.pastTours(site.collections.talks)}
+    {#include tour-block /}
+    {/for}
+</section>
+
+<section class="singles" aria-labelledby="singles">
+    <h2 id="singles">Singles</h2>
+    <ul class="single-list">
+        {#for talk in cdi:setlist.singles(site.collections.talks)}
+        <li>
+            <a href="{talk.url}">
+                <span class="d">{talk.dateShort}</span>
+                <span class="t">{talk.title}</span>
+                <span class="c">{talk.conference}</span>
+                <span class="loc">{talk.location}</span>
+                {#if talk.hasVideo}<span class="rec">▸ Recording</span>{/if}
+            </a>
+        </li>
         {/for}
-    </div>
+    </ul>
 </section>
 
 <script id="talks-data" type="application/json">[
@@ -50,7 +65,8 @@ layout: main
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 {|
 <script>
-(function() {
+(function () {
+    const root = document.documentElement;
     const talks = JSON.parse(document.getElementById('talks-data').textContent);
     const grouped = {};
     talks.forEach(t => {
@@ -59,95 +75,61 @@ layout: main
     });
 
     const map = L.map('map', { scrollWheelZoom: false, zoomControl: true, attributionControl: true });
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
-        subdomains: 'abcd',
-        maxZoom: 10,
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
-    }).addTo(map);
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png', {
-        subdomains: 'abcd',
-        maxZoom: 10
-    }).addTo(map);
 
-    const icon = L.divIcon({
-        className: 'talk-marker',
-        html: '<svg width="22" height="22" viewBox="0 0 22 22"><circle cx="11" cy="11" r="6" fill="#b04510" stroke="#fbf6ec" stroke-width="2"/></svg>',
-        iconSize: [22, 22],
-        iconAnchor: [11, 11]
-    });
+    let base = null, labels = null;
+    function tiles() {
+        const variant = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+        if (base) map.removeLayer(base);
+        if (labels) map.removeLayer(labels);
+        base = L.tileLayer('https://{s}.basemaps.cartocdn.com/' + variant + '_nolabels/{z}/{x}/{y}{r}.png', {
+            subdomains: 'abcd',
+            maxZoom: 10,
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
+        }).addTo(map);
+        labels = L.tileLayer('https://{s}.basemaps.cartocdn.com/' + variant + '_only_labels/{z}/{x}/{y}{r}.png', {
+            subdomains: 'abcd',
+            maxZoom: 10
+        }).addTo(map);
+    }
 
+    function markerIcon() {
+        const cs = getComputedStyle(root);
+        const accent = cs.getPropertyValue('--accent').trim();
+        const ground = cs.getPropertyValue('--ground').trim();
+        return L.divIcon({
+            className: 'talk-marker',
+            html: '<svg width="22" height="22" viewBox="0 0 22 22"><circle cx="11" cy="11" r="6" fill="' + accent + '" stroke="' + ground + '" stroke-width="2"/></svg>',
+            iconSize: [22, 22],
+            iconAnchor: [11, 11]
+        });
+    }
+
+    let markers = [];
     const points = [];
-    Object.entries(grouped).forEach(([city, data]) => {
-        const m = L.marker(data.coords, { icon }).addTo(map);
-        const items = data.talks.map(t =>
-            '<a href="' + t.url + '"><span class="yr">' + t.date + '</span>' + t.title + '</a>'
-        ).join('');
-        m.bindPopup('<div class="city">' + city + '</div>' + items);
-        points.push(data.coords);
-    });
+    function drawMarkers() {
+        markers.forEach(m => map.removeLayer(m));
+        markers = [];
+        const icon = markerIcon();
+        Object.entries(grouped).forEach(([city, data]) => {
+            const m = L.marker(data.coords, { icon }).addTo(map);
+            const items = data.talks.map(t =>
+                '<a href="' + t.url + '"><span class="yr">' + t.date + '</span>' + t.title + '</a>'
+            ).join('');
+            m.bindPopup('<div class="city">' + city + '</div>' + items);
+            markers.push(m);
+        });
+    }
 
+    Object.values(grouped).forEach(d => points.push(d.coords));
+    tiles();
+    drawMarkers();
     if (points.length) {
         map.fitBounds(L.latLngBounds(points), { padding: [30, 30], maxZoom: 5 });
     } else {
         map.setView([49, 8], 4);
     }
-})();
-</script>
-<script>
-(function() {
-    const grid = document.getElementById('talks-grid');
-    const tabsEl = document.querySelector('.year-tabs');
-    if (!grid || !tabsEl) return;
 
-    const cards = Array.from(grid.querySelectorAll('.talk-card'));
-    const years = Array.from(new Set(cards.map(c => c.dataset.year))).sort((a, b) => b.localeCompare(a));
-    if (years.length < 2) return;
-
-    // Move each card into a per-year grid so the column border rules stay correct.
-    const panels = {};
-    const headings = {};
-    years.forEach(y => {
-        const heading = document.createElement('h3');
-        heading.className = 'year-heading';
-        heading.textContent = y;
-        grid.parentNode.insertBefore(heading, grid);
-        headings[y] = heading;
-
-        const panel = document.createElement('div');
-        panel.className = 'talks-grid year-panel';
-        panel.dataset.year = y;
-        grid.parentNode.insertBefore(panel, grid);
-        panels[y] = panel;
-    });
-    cards.forEach(c => panels[c.dataset.year].appendChild(c));
-    grid.remove();
-
-    function show(year) {
-        years.forEach(y => {
-            const visible = year === 'all' || y === year;
-            panels[y].style.display = visible ? '' : 'none';
-            // Year separators only make sense in the combined "All" view.
-            headings[y].style.display = year === 'all' ? '' : 'none';
-        });
-        tabsEl.querySelectorAll('.year-tab').forEach(b => {
-            const active = b.dataset.year === year;
-            b.classList.toggle('active', active);
-            b.setAttribute('aria-selected', active);
-        });
-    }
-
-    ['all'].concat(years).forEach(y => {
-        const btn = document.createElement('button');
-        btn.className = 'year-tab';
-        btn.type = 'button';
-        btn.textContent = y === 'all' ? 'All' : y;
-        btn.dataset.year = y;
-        btn.setAttribute('role', 'tab');
-        btn.addEventListener('click', () => show(y));
-        tabsEl.appendChild(btn);
-    });
-
-    show('all');
+    document.addEventListener('themechange', function () { tiles(); drawMarkers(); });
 })();
 </script>
 |}

@@ -1,0 +1,23 @@
+<article class="tour" id="tour-{tour.slug}">
+    <header class="tour-head">
+        <div class="tour-status">
+            {#if tour.status == 'now-touring'}<span class="pill touring"><span class="dot"></span>Now touring</span>{/if}
+            {#if tour.recentlyActive && tour.status != 'now-touring'}<span class="pill new">New</span>{/if}
+        </div>
+        <h3 class="tour-title">{tour.title}</h3>
+        <p class="tour-sub">{tour.subtitle}</p>
+        <span class="tour-count"><strong>{tour.dateCount}</strong> {#if tour.dateCount == 1}date{#else}dates{/if}</span>
+    </header>
+    <ol class="dates">
+        {#for show in tour.talks}
+        <li class="{#if show.upcoming}upcoming{/if}">
+            <a href="{show.url}">
+                <span class="d">{show.dateShort}</span>
+                <span class="conf">{show.conference}</span>
+                <span class="loc">{show.location}</span>
+                {#if show.hasVideo}<span class="rec">▸ Recording</span>{/if}
+            </a>
+        </li>
+        {/for}
+    </ol>
+</article>
