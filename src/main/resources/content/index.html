@@ -47,10 +47,10 @@ layout: main
                 <span class="d">{talk.dateShort}</span>
                 <span class="t">{talk.title}</span>
                 <span class="c">{talk.conference}</span>
-                <span class="loc">{talk.location}</span>
                 <span class="flags">
-                    <span class="tag {talk.type.slug}">{talk.type.label}</span>
                     {#if talk.hasVideo}<span class="rec">▸ Recording</span>{/if}
+                    <span class="loc">{talk.location}</span>
+                    <span class="tag {talk.type.slug}">{talk.type.label}</span>
                 </span>
             </a>
         </li>
