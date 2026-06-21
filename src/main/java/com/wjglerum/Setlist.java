@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
@@ -24,16 +25,16 @@ public class Setlist {
     private static final DateTimeFormatter LONG = DateTimeFormatter.ofPattern("d MMMM yyyy", Locale.ENGLISH);
 
     private final Tours tours;
-    private final String todayOverride;
+    private final Optional<String> todayOverride;
 
     public Setlist(Tours tours,
-            @ConfigProperty(name = "setlist.today", defaultValue = "") String todayOverride) {
+            @ConfigProperty(name = "setlist.today") Optional<String> todayOverride) {
         this.tours = tours;
         this.todayOverride = todayOverride;
     }
 
     LocalDate today() {
-        return todayOverride.isBlank() ? LocalDate.now() : LocalDate.parse(todayOverride);
+        return todayOverride.filter(s -> !s.isBlank()).map(LocalDate::parse).orElseGet(LocalDate::now);
     }
 
     // ---- template entry points ----
