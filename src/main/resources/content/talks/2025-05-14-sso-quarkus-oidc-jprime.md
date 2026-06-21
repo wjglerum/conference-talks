@@ -1,4 +1,5 @@
 ---
+tour: sso-quarkus-oidc
 title: SSO made easy with Quarkus OIDC
 date: 2025-05-14
 layout: talk

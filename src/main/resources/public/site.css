@@ -1,12 +1,39 @@
-:root {
-    --bg: #f4ede0;
-    --paper: #fbf6ec;
-    --ink: #1a1614;
-    --muted: #6b5e51;
-    --rule: #d8cdb6;
-    --accent: #b04510;
-    --accent-soft: #f3e2d2;
-    --recording: #c0392b;
+:root,
+[data-theme="dark"] {
+    color-scheme: dark;
+    --ground: #14110D;
+    --panel: #1C1813;
+    --text: #F1ECE1;
+    --dim: #9C9486;
+    --faint: #6E665A;
+    --accent: #F0572B;
+    --gold: #CCA24C;
+    --rule: #2C261D;
+    /* aliases so existing component rules keep working */
+    --bg: var(--ground);
+    --paper: var(--panel);
+    --ink: var(--text);
+    --muted: var(--dim);
+    --accent-soft: #2A1D16;
+    --recording: var(--accent);
+}
+
+[data-theme="light"] {
+    color-scheme: light;
+    --ground: #F7F4EC;
+    --panel: #FFFFFF;
+    --text: #1A1510;
+    --dim: #6E665A;
+    --faint: #9C9486;
+    --accent: #D8441E;
+    --gold: #A9802F;
+    --rule: #E2DACB;
+    --bg: var(--ground);
+    --paper: var(--panel);
+    --ink: var(--text);
+    --muted: var(--dim);
+    --accent-soft: #F3E2D2;
+    --recording: var(--accent);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -131,3 +158,74 @@ h1 { font-family: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Palati
 .tag.podcast { color: #047857; }
 .tag.techtalk { color: #b45309; }
 .tag.booth { color: #0891b2; }
+
+/* Theme toggle */
+.theme-toggle { background: transparent; border: 1px solid var(--rule); color: var(--dim); cursor: pointer; width: 2rem; height: 2rem; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; padding: 0; font-size: 0.95rem; line-height: 1; }
+.theme-toggle:hover { color: var(--accent); border-color: var(--accent); }
+.theme-toggle .ico { display: none; }
+[data-theme-mode="system"] .theme-toggle .ico-system { display: inline; }
+[data-theme-mode="light"] .theme-toggle .ico-light { display: inline; }
+[data-theme-mode="dark"] .theme-toggle .ico-dark { display: inline; }
+
+/* Homepage: hero and stats */
+.display { font-family: ui-sans-serif, system-ui, sans-serif; text-transform: uppercase; letter-spacing: -0.02em; font-weight: 800; font-size: clamp(2.5rem, 8vw, 5rem); line-height: 0.95; color: var(--text); }
+.hero-copy .lede { color: var(--dim); max-width: 48ch; margin-top: 1rem; font-size: 1.05rem; }
+.stats { list-style: none; display: flex; flex-wrap: wrap; gap: 2rem; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); }
+.stats li { display: flex; flex-direction: column; }
+.stats .num { font-size: 2rem; font-weight: 800; color: var(--gold); line-height: 1; }
+.stats .lbl { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); margin-top: 0.35rem; }
+
+/* Map */
+.map-section { margin: 2.5rem 0; }
+#map { height: 360px; width: 100%; border: 1px solid var(--rule); background: var(--panel); }
+
+/* Tour sections */
+.tours { margin-top: 3rem; }
+.tours h2, .singles h2 { text-transform: uppercase; letter-spacing: 0.06em; font-size: 1rem; color: var(--dim); border-bottom: 1px solid var(--rule); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+.tour { background: var(--panel); border: 1px solid var(--rule); padding: 1.5rem; margin-bottom: 1.25rem; }
+.tours.past .tour { padding: 1rem 1.5rem; }
+.tour-status { display: flex; gap: 0.5rem; margin-bottom: 0.5rem; min-height: 1.4rem; }
+.pill { font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.2rem 0.6rem; border-radius: 999px; display: inline-flex; align-items: center; gap: 0.4rem; }
+.pill.touring { background: var(--accent); color: var(--ground); }
+.pill.new { background: transparent; border: 1px solid var(--gold); color: var(--gold); }
+.pill .dot { width: 0.5rem; height: 0.5rem; border-radius: 999px; background: var(--ground); animation: pulse 1.6s ease-in-out infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+@media (prefers-reduced-motion: reduce) { .pill .dot { animation: none; } }
+.tour-title { font-size: 1.5rem; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
+.tour-sub { color: var(--dim); margin-top: 0.2rem; }
+.tour-count { display: inline-block; margin-top: 0.6rem; color: var(--faint); font-size: 0.85rem; }
+.tour-count strong { color: var(--gold); font-size: 1.1rem; }
+.dates { list-style: none; margin-top: 1rem; border-top: 1px solid var(--rule); }
+.dates li { border-bottom: 1px solid var(--rule); }
+.dates li a { display: grid; grid-template-columns: 6rem 1fr auto; gap: 1rem; align-items: baseline; padding: 0.6rem 0; color: var(--text); text-decoration: none; }
+.dates li a:hover { color: var(--accent); }
+.dates .d { color: var(--dim); font-size: 0.85rem; }
+.dates .loc { color: var(--faint); font-size: 0.85rem; }
+.dates .rec { color: var(--accent); font-size: 0.8rem; }
+.dates li.upcoming a { color: var(--gold); }
+.flags { display: inline-flex; align-items: baseline; gap: 0.55rem; justify-content: flex-end; }
+
+/* Singles */
+.singles { margin-top: 3rem; }
+.single-list { list-style: none; }
+.single-list li { border-bottom: 1px solid var(--rule); }
+.single-list li a { display: grid; grid-template-columns: 6rem 1fr auto auto; gap: 1rem; align-items: baseline; padding: 0.6rem 0; color: var(--text); text-decoration: none; }
+.single-list li a:hover { color: var(--accent); }
+.single-list .d, .single-list .c, .single-list .loc { color: var(--dim); font-size: 0.85rem; }
+.single-list .rec { color: var(--accent); }
+
+@media (max-width: 640px) {
+    .dates li a, .single-list li a { grid-template-columns: 1fr; gap: 0.15rem; }
+}
+
+/* Talk page: tour context */
+.tour-context { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); }
+.part-of { color: var(--dim); }
+.part-of a { color: var(--accent); text-decoration: none; }
+.part-of a:hover { text-decoration: underline; }
+.also { font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); margin: 1.25rem 0 0.5rem; }
+.sibling-list { list-style: none; }
+.sibling-list li { border-bottom: 1px solid var(--rule); }
+.sibling-list li a { display: grid; grid-template-columns: 6rem 1fr auto; gap: 1rem; align-items: baseline; padding: 0.5rem 0; color: var(--text); text-decoration: none; }
+.sibling-list li a:hover { color: var(--accent); }
+.sibling-list .d, .sibling-list .c { color: var(--dim); font-size: 0.85rem; }

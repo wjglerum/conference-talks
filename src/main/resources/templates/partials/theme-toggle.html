@@ -1,0 +1,36 @@
+<button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle color theme" title="Theme">
+    <span class="ico ico-system" aria-hidden="true">◐</span>
+    <span class="ico ico-light" aria-hidden="true">☀</span>
+    <span class="ico ico-dark" aria-hidden="true">☾</span>
+</button>
+<script>
+(function () {
+    var root = document.documentElement;
+    var btn = document.getElementById('theme-toggle');
+    if (!btn) return;
+    var mql = window.matchMedia('(prefers-color-scheme: dark)');
+
+    function stored() { try { return localStorage.getItem('wjg-theme'); } catch (e) { return null; } }
+    function mode() { var s = stored(); return (s === 'light' || s === 'dark') ? s : 'system'; }
+    function resolved() { var m = mode(); return m === 'system' ? (mql.matches ? 'dark' : 'light') : m; }
+
+    function apply() {
+        root.setAttribute('data-theme', resolved());
+        root.setAttribute('data-theme-mode', mode());
+        document.dispatchEvent(new CustomEvent('themechange'));
+    }
+
+    btn.addEventListener('click', function () {
+        var next = { system: 'light', light: 'dark', dark: 'system' }[mode()];
+        try {
+            if (next === 'system') localStorage.removeItem('wjg-theme');
+            else localStorage.setItem('wjg-theme', next);
+        } catch (e) {}
+        apply();
+    });
+
+    mql.addEventListener('change', function () { if (mode() === 'system') apply(); });
+
+    root.setAttribute('data-theme-mode', mode());
+})();
+</script>

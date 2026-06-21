@@ -1,4 +1,5 @@
 ---
+tour: scala-iot
 title: "Visualising IoT devices with Akka and Grafana"
 date: 2018-04-20
 layout: talk

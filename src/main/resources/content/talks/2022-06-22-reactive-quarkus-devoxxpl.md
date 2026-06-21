@@ -1,4 +1,5 @@
 ---
+tour: reactive-quarkus
 title: "Reactive Quarkus: Building Reactive Applications with Java"
 date: 2022-06-22
 layout: talk

@@ -1,4 +1,5 @@
 ---
+tour: scala-iot
 title: "IoT meets Scala on a Raspberry Pi"
 date: 2016-06-15
 layout: talk

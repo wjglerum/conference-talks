@@ -1,4 +1,5 @@
 ---
+tour: practical-mcp-security
 title: "Practical MCP Security in Action"
 date: 2026-06-03
 layout: talk

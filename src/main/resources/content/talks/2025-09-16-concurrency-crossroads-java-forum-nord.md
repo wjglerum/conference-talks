@@ -1,4 +1,5 @@
 ---
+tour: concurrency-crossroads
 title: "Virtual Threads vs Reactive Programming in Quarkus"
 url: /talks/reactive-vs-virtual-threads-java-forum-nord-2025/
 date: 2025-09-16

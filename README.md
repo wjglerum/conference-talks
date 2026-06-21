@@ -46,11 +46,17 @@ src/main/
     application.properties             # site.url, talks collection config
     content/index.html                 # landing page (hero + Leaflet map + grid)
     content/talks/*.md                 # one file per talk
+    content/sitemap.xml                # includes the sitemap plugin template (fm/sitemap.xml)
     data/cities.yml                    # location -> { lat, lng }
     public/site.css                    # shared stylesheet
     public/favicon.svg                 # cream paper, terracotta dot
+    public/robots.txt                  # allow all, points at the sitemap
     templates/layouts/main.html        # listing layout
     templates/layouts/talk.html        # talk detail layout
+    templates/partials/seo.html        # shared title + og/twitter meta
+    templates/partials/theme-head.html # no-FOUC theme bootstrap
+    templates/partials/theme-toggle.html
+    templates/partials/tour-block.html # one tour card on the overview
 .github/workflows/deploy.yml           # build + push to gh-pages
 ```
 
