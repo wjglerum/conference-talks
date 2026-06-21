@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {#include theme-head /}
     <title>{#if page.title}{page.title} — {/if}{site.title}</title>
     <meta name="description" content="{site.description}">
 
@@ -24,6 +25,7 @@
         <nav class="nav">
             <a href="/">Talks</a>
             <a href="/about/">About</a>
+            {#include theme-toggle /}
         </nav>
     </header>
     <main>

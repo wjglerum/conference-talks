@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {#include theme-head /}
     <title>{page.title} — {site.title}</title>
     <meta name="description" content="{#if page.data('description')}{page.data('description')}{#else}{site.description}{/if}">
 
@@ -21,6 +22,7 @@
 <body class="talk-layout">
     <header class="site">
         <a href="/">← All talks</a>
+        {#include theme-toggle /}
     </header>
     <main>
         <div class="talk-header">

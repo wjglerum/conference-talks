@@ -16,4 +16,20 @@ class SiteRenderTest {
             .statusCode(200)
             .body(containsString("Willem Jan Glerum"));
     }
+
+    @Test
+    void aboutPageHasNoFoucScriptAndToggle() {
+        given().when().get("/about/").then()
+            .statusCode(200)
+            .body(containsString("wjg-theme"))
+            .body(containsString("data-theme"))
+            .body(containsString("id=\"theme-toggle\""));
+    }
+
+    @Test
+    void talkPageHasThemeToggle() {
+        given().when().get("/talks/2025-11-06-concurrency-crossroads-jfall/").then()
+            .statusCode(200)
+            .body(containsString("id=\"theme-toggle\""));
+    }
 }

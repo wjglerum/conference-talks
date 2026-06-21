@@ -1,12 +1,39 @@
-:root {
-    --bg: #f4ede0;
-    --paper: #fbf6ec;
-    --ink: #1a1614;
-    --muted: #6b5e51;
-    --rule: #d8cdb6;
-    --accent: #b04510;
-    --accent-soft: #f3e2d2;
-    --recording: #c0392b;
+:root,
+[data-theme="dark"] {
+    color-scheme: dark;
+    --ground: #14110D;
+    --panel: #1C1813;
+    --text: #F1ECE1;
+    --dim: #9C9486;
+    --faint: #6E665A;
+    --accent: #F0572B;
+    --gold: #CCA24C;
+    --rule: #2C261D;
+    /* aliases so existing component rules keep working */
+    --bg: var(--ground);
+    --paper: var(--panel);
+    --ink: var(--text);
+    --muted: var(--dim);
+    --accent-soft: #2A1D16;
+    --recording: var(--accent);
+}
+
+[data-theme="light"] {
+    color-scheme: light;
+    --ground: #F7F4EC;
+    --panel: #FFFFFF;
+    --text: #1A1510;
+    --dim: #6E665A;
+    --faint: #9C9486;
+    --accent: #D8441E;
+    --gold: #A9802F;
+    --rule: #E2DACB;
+    --bg: var(--ground);
+    --paper: var(--panel);
+    --ink: var(--text);
+    --muted: var(--dim);
+    --accent-soft: #F3E2D2;
+    --recording: var(--accent);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -131,3 +158,11 @@ h1 { font-family: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Palati
 .tag.podcast { color: #047857; }
 .tag.techtalk { color: #b45309; }
 .tag.booth { color: #0891b2; }
+
+/* Theme toggle */
+.theme-toggle { background: transparent; border: 1px solid var(--rule); color: var(--dim); cursor: pointer; width: 2rem; height: 2rem; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; padding: 0; font-size: 0.95rem; line-height: 1; }
+.theme-toggle:hover { color: var(--accent); border-color: var(--accent); }
+.theme-toggle .ico { display: none; }
+[data-theme-mode="system"] .theme-toggle .ico-system { display: inline; }
+[data-theme-mode="light"] .theme-toggle .ico-light { display: inline; }
+[data-theme-mode="dark"] .theme-toggle .ico-dark { display: inline; }
