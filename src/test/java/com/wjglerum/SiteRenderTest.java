@@ -64,7 +64,7 @@ class SiteRenderTest {
 
     @Test
     void recentlyActiveTourListsUnderNowPlaying() {
-        // practical-mcp-security wrapped (single past date) but is within twelve months,
+        // practical-mcp-security wrapped (single past date) but is within the recent window,
         // so it must appear in the Now Playing region, before the Past Tours heading.
         String body = given().when().get("/").then().statusCode(200).extract().asString();
         int mcp = body.indexOf("id=\"tour-practical-mcp-security\"");
@@ -72,6 +72,18 @@ class SiteRenderTest {
         org.junit.jupiter.api.Assertions.assertTrue(mcp >= 0, "practical-mcp-security should render");
         org.junit.jupiter.api.Assertions.assertTrue(mcp < past,
             "recently active tour should appear before the Past Tours heading");
+    }
+
+    @Test
+    void tourLastRunMonthsAgoIsNotNewAndUnderPastTours() {
+        // SSO last ran about seven months ago: outside the recent window, so it must drop to
+        // Past Tours rather than linger in Now Playing as "new".
+        String body = given().when().get("/").then().statusCode(200).extract().asString();
+        int sso = body.indexOf("id=\"tour-sso-quarkus-oidc\"");
+        int past = body.indexOf("id=\"past-tours\"");
+        org.junit.jupiter.api.Assertions.assertTrue(sso >= 0, "sso-quarkus-oidc should render");
+        org.junit.jupiter.api.Assertions.assertTrue(sso > past,
+            "a tour last run months ago should appear after the Past Tours heading");
     }
 
     @Test

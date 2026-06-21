@@ -165,12 +165,12 @@ replaced by a clean split plus an orthogonal badge:
 - **Wrapped**: every date is in the past.
 
 Independently of status, a tour carries a boolean `recentlyActive`: its most recent date falls
-within the last twelve months. This rule is identical for single and multi-date tours. It
+within the last three months. This rule is identical for single and multi-date tours. It
 drives a small "New" badge on the tour block and also governs placement: a recently active tour
 is surfaced under "Now Playing" even after it has wrapped, because a tour toured within the last
 year is still current in spirit. A recently-finished tour therefore appears under Now Playing
 with a "New" badge (not a "Now touring" pill, which is reserved for tours with an upcoming
-date). Only tours whose most recent date is older than twelve months drop to "Past Tours".
+date). Only tours whose most recent date is older than three months drop to "Past Tours".
 
 #### Build-time evaluation needs a scheduled rebuild
 
@@ -187,7 +187,7 @@ directly.
 - "Now Playing" holds both genuinely active tours and recently active (wrapped within twelve
   months) tours. Active tours come first, ordered by soonest upcoming date; the recently active
   tours follow, ordered by most recent date, newest first.
-- "Past Tours" holds tours whose most recent date is older than twelve months, by most recent
+- "Past Tours" holds tours whose most recent date is older than three months, by most recent
   date, newest first.
 - One-offs (talks with no `tour`) are collected into a "Singles" group (see Homepage).
 
@@ -207,7 +207,7 @@ All existing talk files get a `tour` slug as part of this work:
   (Lunatech 2025, JavaZone 2025, Devoxx Belgium 2025, JavaLand 2026, Devoxx Poland 2026,
   JavaZone 2026) - 6 dates
 - `practical-mcp-security`: Practical MCP Security (jPrime 2026) - 1 date, wrapped (its date is
-  in the past), carries the "New" badge while within twelve months of that date
+  in the past), carries the "New" badge while within three months of that date
 - `sso-quarkus-oidc`: SSO made easy with Quarkus OIDC (Quarkus Meetup 2022, JavaZone 2022,
   Riviera DEV 2024, LunaConf 2024, OCX 2024, jPrime 2025, JavaCro 2025, Devoxx Morocco 2025)
   - 8 dates
@@ -234,7 +234,7 @@ Rewritten to the setlist layout:
    upcoming highlighted). Each tour block carries an `id` of `tour-<slug>` so talk pages can
    link to it.
 5. "Past Tours": wrapped tours, same structure, more compact. A "New" badge marks tours active
-   within the last twelve months.
+   within the last three months.
 6. "Singles": the one-off sessions, rendered as a compact but visible section (not a buried
    footer line), each a single row with date, title, conference, city, and recording flag.
    These are real talks (Essential Linux, Hacking the Room with Raspberry Pis, Quarkus on
@@ -306,7 +306,7 @@ date:
 - the homepage renders the "Now Playing", "Past Tours", and "Singles" sections
 - a tour with a date at or after the injected date appears under Now Playing with its date count
 - a tour with all dates before the injected date appears under Past Tours
-- the "New" badge appears on a tour whose most recent date is within twelve months of the
+- the "New" badge appears on a tour whose most recent date is within three months of the
   injected date, and is absent otherwise
 - a slug referenced in front matter but missing from `tours.yml` fails the build (negative test)
 - the three-state theme toggle and the no-FOUC inline script are present in the rendered head

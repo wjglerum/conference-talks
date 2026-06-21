@@ -24,6 +24,11 @@ public class Setlist {
     private static final DateTimeFormatter SHORT = DateTimeFormatter.ofPattern("MMM yyyy", Locale.ENGLISH);
     private static final DateTimeFormatter LONG = DateTimeFormatter.ofPattern("d MMMM yyyy", Locale.ENGLISH);
 
+    // A wrapped tour counts as recently active (still on tour in spirit) when its most recent
+    // date is within this many months. Kept short so a tour last performed long ago does not
+    // linger in Now Playing: a single recent show is "new", a tour months past is "wrapped".
+    private static final int RECENT_MONTHS = 3;
+
     private final Tours tours;
     private final Optional<String> todayOverride;
 
@@ -174,7 +179,7 @@ public class Setlist {
     }
 
     static boolean recentlyActive(List<Talk> group, LocalDate today) {
-        LocalDate cutoff = today.minusMonths(12);
+        LocalDate cutoff = today.minusMonths(RECENT_MONTHS);
         return group.stream().map(Talk::date).max(Comparator.naturalOrder())
                 .map(d -> !d.isBefore(cutoff)).orElse(false);
     }

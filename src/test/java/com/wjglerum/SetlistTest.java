@@ -43,14 +43,16 @@ class SetlistTest {
     }
 
     @Test
-    void recentlyActiveWhenMostRecentWithinTwelveMonths() {
+    void recentlyActiveWhenMostRecentWithinWindow() {
+        // 18 days before TODAY, well within the three-month window.
         var group = List.of(talk("practical-mcp-security", LocalDate.of(2026, 6, 3), "Sofia, Bulgaria"));
         assertTrue(Setlist.recentlyActive(group, TODAY));
     }
 
     @Test
-    void notRecentlyActiveWhenOlderThanTwelveMonths() {
-        var group = List.of(talk("sso-quarkus-oidc", LocalDate.of(2024, 10, 23), "Marrakesh, Morocco"));
+    void notRecentlyActiveWhenLastDateSeveralMonthsAgo() {
+        // SSO last ran about seven months before TODAY: outside the window, so not "new".
+        var group = List.of(talk("sso-quarkus-oidc", LocalDate.of(2025, 11, 13), "Marrakesh, Morocco"));
         assertFalse(Setlist.recentlyActive(group, TODAY));
     }
 
