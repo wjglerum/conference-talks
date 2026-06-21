@@ -41,15 +41,25 @@ public class Setlist {
 
     public List<TourGroup> nowPlaying(List<DocumentPage> pages) {
         LocalDate today = today();
-        return group(toTalks(pages), tours.list(), today).stream()
+        List<TourGroup> all = group(toTalks(pages), tours.list(), today);
+        // Genuinely active tours first (soonest upcoming date), then recently active
+        // ("New") tours that have wrapped but whose last date is within twelve months.
+        List<TourGroup> touring = all.stream()
                 .filter(g -> g.status().equals("now-touring"))
                 .sorted(Comparator.comparing(g -> nextOrLastDate(g, today)))
                 .toList();
+        List<TourGroup> recent = all.stream()
+                .filter(g -> !g.status().equals("now-touring") && g.recentlyActive())
+                .sorted(Comparator.comparing(Setlist::mostRecent).reversed())
+                .toList();
+        List<TourGroup> playing = new ArrayList<>(touring);
+        playing.addAll(recent);
+        return playing;
     }
 
     public List<TourGroup> pastTours(List<DocumentPage> pages) {
         return group(toTalks(pages), tours.list(), today()).stream()
-                .filter(g -> g.status().equals("wrapped"))
+                .filter(g -> g.status().equals("wrapped") && !g.recentlyActive())
                 .sorted(Comparator.comparing(Setlist::mostRecent).reversed())
                 .toList();
     }
@@ -113,7 +123,7 @@ public class Setlist {
                     location,
                     country(location),
                     str(p.data("conference")),
-                    str(p.data("type")),
+                    TalkType.from(str(p.data("type"))),
                     p.data("video") != null,
                     !date.isBefore(today)));
         }

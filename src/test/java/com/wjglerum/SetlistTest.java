@@ -25,7 +25,7 @@ class SetlistTest {
             date.toString(), date.toString(), date.getYear(),
             location, location == null || location.equals("Online") ? null
                 : location.substring(location.lastIndexOf(',') + 1).trim(),
-            "Conf", "talk", false, false);
+            "Conf", TalkType.TALK, false, false);
     }
 
     @Test

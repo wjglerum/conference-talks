@@ -13,7 +13,7 @@ public record Talk(
         String location,
         String country,
         String conference,
-        String type,
+        TalkType type,
         boolean hasVideo,
         boolean upcoming) {
 }

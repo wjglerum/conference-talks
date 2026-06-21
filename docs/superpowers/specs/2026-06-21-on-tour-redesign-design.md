@@ -166,10 +166,11 @@ replaced by a clean split plus an orthogonal badge:
 
 Independently of status, a tour carries a boolean `recentlyActive`: its most recent date falls
 within the last twelve months. This rule is identical for single and multi-date tours. It
-drives a small "New" badge on the tour block. A now-touring tour is already prominent, so in
-practice the badge marks the freshest entries at the top of Past Tours. A recently-finished
-one-off therefore stays in Past Tours with a "New" badge rather than being mislabelled as
-active.
+drives a small "New" badge on the tour block and also governs placement: a recently active tour
+is surfaced under "Now Playing" even after it has wrapped, because a tour toured within the last
+year is still current in spirit. A recently-finished tour therefore appears under Now Playing
+with a "New" badge (not a "Now touring" pill, which is reserved for tours with an upcoming
+date). Only tours whose most recent date is older than twelve months drop to "Past Tours".
 
 #### Build-time evaluation needs a scheduled rebuild
 
@@ -183,11 +184,17 @@ directly.
 
 #### Ordering on the homepage
 
-- "Now touring" tours render under "Now Playing", ordered by their next or most recent date,
-  soonest upcoming first.
-- "Wrapped" tours render under "Past Tours" by most recent date, newest first, so any
-  "New"-badged tours naturally sit at the top.
+- "Now Playing" holds both genuinely active tours and recently active (wrapped within twelve
+  months) tours. Active tours come first, ordered by soonest upcoming date; the recently active
+  tours follow, ordered by most recent date, newest first.
+- "Past Tours" holds tours whose most recent date is older than twelve months, by most recent
+  date, newest first.
 - One-offs (talks with no `tour`) are collected into a "Singles" group (see Homepage).
+
+Each date row shows the date, conference, city, the talk type badge (Conference, Meetup, Deep
+Dive, Workshop, Podcast, Tech Talk, Booth Demo), and a recording flag when a video exists. The
+type is modelled as a `TalkType` enum that pairs the front matter `type` slug with its display
+label, so the slug-to-label mapping lives in one place and a typo fails the build.
 
 ### Tour assignment for existing content
 

@@ -15,7 +15,10 @@
                 <span class="d">{show.dateShort}</span>
                 <span class="conf">{show.conference}</span>
                 <span class="loc">{show.location}</span>
-                {#if show.hasVideo}<span class="rec">▸ Recording</span>{/if}
+                <span class="flags">
+                    <span class="tag {show.type.slug}">{show.type.label}</span>
+                    {#if show.hasVideo}<span class="rec">▸ Recording</span>{/if}
+                </span>
             </a>
         </li>
         {/for}

@@ -52,11 +52,35 @@ class SiteRenderTest {
     }
 
     @Test
-    void homepageShowsWrappedTour() {
+    void homepageShowsOldTourUnderPastTours() {
+        // reactive-quarkus last ran in 2022, well outside the twelve-month window,
+        // so it is wrapped and not recently active: it belongs under Past Tours.
+        String body = given().when().get("/").then().statusCode(200).extract().asString();
+        org.junit.jupiter.api.Assertions.assertTrue(body.contains("id=\"tour-reactive-quarkus\""));
+        org.junit.jupiter.api.Assertions.assertTrue(
+            body.indexOf("id=\"tour-reactive-quarkus\"") > body.indexOf("id=\"past-tours\""),
+            "reactive-quarkus should render after the Past Tours heading");
+    }
+
+    @Test
+    void recentlyActiveTourListsUnderNowPlaying() {
+        // practical-mcp-security wrapped (single past date) but is within twelve months,
+        // so it must appear in the Now Playing region, before the Past Tours heading.
+        String body = given().when().get("/").then().statusCode(200).extract().asString();
+        int mcp = body.indexOf("id=\"tour-practical-mcp-security\"");
+        int past = body.indexOf("id=\"past-tours\"");
+        org.junit.jupiter.api.Assertions.assertTrue(mcp >= 0, "practical-mcp-security should render");
+        org.junit.jupiter.api.Assertions.assertTrue(mcp < past,
+            "recently active tour should appear before the Past Tours heading");
+    }
+
+    @Test
+    void homepageShowsTalkTypeLabels() {
+        // The scala-iot tour includes booth demos; its type badge must render on the overview.
         given().when().get("/").then()
             .statusCode(200)
-            .body(containsString("id=\"tour-sso-quarkus-oidc\""))
-            .body(containsString("SSO made easy with Quarkus OIDC"));
+            .body(containsString("class=\"tag booth\""))
+            .body(containsString("Booth Demo"));
     }
 
     @Test

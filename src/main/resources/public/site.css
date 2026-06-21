@@ -203,12 +203,13 @@ h1 { font-family: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Palati
 .dates .loc { color: var(--faint); font-size: 0.85rem; }
 .dates .rec { color: var(--accent); font-size: 0.8rem; }
 .dates li.upcoming a { color: var(--gold); }
+.flags { display: inline-flex; align-items: baseline; gap: 0.55rem; justify-content: flex-end; }
 
 /* Singles */
 .singles { margin-top: 3rem; }
 .single-list { list-style: none; }
 .single-list li { border-bottom: 1px solid var(--rule); }
-.single-list li a { display: grid; grid-template-columns: 6rem 1fr auto auto; gap: 1rem; align-items: baseline; padding: 0.6rem 0; color: var(--text); text-decoration: none; }
+.single-list li a { display: grid; grid-template-columns: 6rem 1fr auto auto auto; gap: 1rem; align-items: baseline; padding: 0.6rem 0; color: var(--text); text-decoration: none; }
 .single-list li a:hover { color: var(--accent); }
 .single-list .d, .single-list .c, .single-list .loc { color: var(--dim); font-size: 0.85rem; }
 .single-list .rec { color: var(--accent); }
