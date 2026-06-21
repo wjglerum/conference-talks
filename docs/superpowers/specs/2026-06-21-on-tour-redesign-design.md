@@ -213,12 +213,11 @@ All existing talk files get a `tour` slug as part of this work:
   - 8 dates
 - `reactive-quarkus`: Reactive Quarkus (LunaConf 2021, Devoxx Ukraine 2021, Devoxx Poland 2022,
   Devoxx Morocco 2022) - 4 dates
-- `scala-iot`: the Scala era (Scala Days 2016, Scala Days 2017, ScalaUA 2018, Scala Days 2018)
-  - 4 dates
-- singles (no `tour`): Essential Linux (2018), Hacking the Room with Raspberry Pis (2020),
-  Quarkus on Java 21 (2023)
+- `scala-iot`: the Scala era (Scala Days 2016, Scala Days 2017, ScalaUA 2018, Scala Days 2018,
+  Hacking the Room with Raspberry Pis at LunaConf 2020) - 5 dates
+- singles (no `tour`): Essential Linux (2018), Quarkus on Java 21 (2023)
 
-This totals 36 shows across 6 signature tours plus 3 one-offs.
+This totals 36 shows across 6 signature tours plus 2 one-offs.
 
 ## Pages and templates
 

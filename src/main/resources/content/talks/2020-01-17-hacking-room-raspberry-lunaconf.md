@@ -1,4 +1,5 @@
 ---
+tour: scala-iot
 title: "Hacking the room with Raspberry PI's"
 date: 2020-01-17
 layout: talk
