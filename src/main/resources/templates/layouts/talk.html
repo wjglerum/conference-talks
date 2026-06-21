@@ -45,6 +45,31 @@
             <div class="links">{#if page.data("video")}<a class="btn btn-primary" href="{page.data("video")}" target="_blank">Watch recording</a>{/if}{#if page.data("slides")}<a class="btn btn-secondary" href="{page.data("slides")}" target="_blank">Slides</a>{/if}{#if page.data("demo")}<a class="btn btn-secondary" href="{page.data("demo")}" target="_blank">Demo</a>{/if}</div>
         </div>
         {#insert /}
+        {#let slug=page.data('tour')}
+        {#if slug}
+        {#let tour=cdi:setlist.tour(site.collections.talks, slug)}
+        <aside class="tour-context">
+            <p class="part-of">Part of the <a href="/#tour-{slug}"><em>{tour.title}</em></a> tour.</p>
+            {#let sibs=cdi:setlist.siblings(site.collections.talks, slug, page.url.path)}
+            {#if sibs.size > 0}
+            <h2 class="also">Also played at</h2>
+            <ul class="sibling-list">
+                {#for s in sibs}
+                <li>
+                    <a href="{s.url}">
+                        <span class="d">{s.dateShort}</span>
+                        <span class="t">{s.title}</span>
+                        <span class="c">{s.conference}</span>
+                    </a>
+                </li>
+                {/for}
+            </ul>
+            {/if}
+            {/let}
+        </aside>
+        {/let}
+        {/if}
+        {/let}
     </main>
     <footer class="site">Built with <a href="https://quarkus.io">Quarkus</a> &amp; <a href="https://github.com/quarkiverse/quarkus-roq">Roq</a>. Source on <a href="https://github.com/wjglerum/conference-talks">GitHub</a>.</footer>
 </body>

@@ -73,6 +73,10 @@ public class Setlist {
                 .findFirst().orElse(null);
     }
 
+    public TourGroup tour(List<DocumentPage> pages, Object slug) {
+        return tour(pages, slug == null ? null : slug.toString());
+    }
+
     public List<Talk> siblings(List<DocumentPage> pages, String slug, String currentUrl) {
         if (slug == null) {
             return List.of();
@@ -81,6 +85,12 @@ public class Setlist {
                 .filter(t -> slug.equals(t.tour()) && !t.url().equals(currentUrl))
                 .sorted(Comparator.comparing(Talk::date).reversed())
                 .toList();
+    }
+
+    public List<Talk> siblings(List<DocumentPage> pages, Object slug, Object currentUrl) {
+        return siblings(pages,
+                slug == null ? null : slug.toString(),
+                currentUrl == null ? null : currentUrl.toString());
     }
 
     // ---- adaptation from Roq pages to Talk ----

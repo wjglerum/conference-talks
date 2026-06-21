@@ -66,4 +66,22 @@ class SiteRenderTest {
             .body(containsString("<span class=\"num\">36</span>"))
             .body(containsString("Shows"));
     }
+
+    @Test
+    void talkPageShowsTourContextAndSiblings() {
+        given().when().get("/talks/2025-11-06-concurrency-crossroads-jfall/").then()
+            .statusCode(200)
+            .body(containsString("Part of the"))
+            .body(containsString("Concurrency Crossroads"))
+            .body(containsString("href=\"/#tour-concurrency-crossroads\""))
+            .body(containsString("Also played at"));
+    }
+
+    @Test
+    void singleDateTourShowsContextWithoutSiblingList() {
+        given().when().get("/talks/2026-06-03-practical-mcp-security-jprime/").then()
+            .statusCode(200)
+            .body(containsString("Part of the"))
+            .body(org.hamcrest.Matchers.not(containsString("Also played at")));
+    }
 }
