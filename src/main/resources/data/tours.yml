@@ -7,7 +7,7 @@ list:
     subtitle: "Building secure AI agents with Quarkus LangChain4j"
   practical-mcp-security:
     title: "Practical MCP Security"
-    subtitle: "Securing the Model Context Protocol in practice"
+    subtitle: "Securing the Model Context Protocol with Quarkus"
   sso-quarkus-oidc:
     title: "SSO made easy with Quarkus OIDC"
     subtitle: "Single sign-on for Quarkus apps with OpenID Connect"

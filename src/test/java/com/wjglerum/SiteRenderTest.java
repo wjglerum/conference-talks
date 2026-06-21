@@ -53,7 +53,7 @@ class SiteRenderTest {
 
     @Test
     void homepageShowsOldTourUnderPastTours() {
-        // reactive-quarkus last ran in 2022, well outside the twelve-month window,
+        // reactive-quarkus last ran in 2022, well outside the three-month window,
         // so it is wrapped and not recently active: it belongs under Past Tours.
         String body = given().when().get("/").then().statusCode(200).extract().asString();
         org.junit.jupiter.api.Assertions.assertTrue(body.contains("id=\"tour-reactive-quarkus\""));

@@ -48,7 +48,7 @@ public class Setlist {
         LocalDate today = today();
         List<TourGroup> all = group(toTalks(pages), tours.list(), today);
         // Genuinely active tours first (soonest upcoming date), then recently active
-        // ("New") tours that have wrapped but whose last date is within twelve months.
+        // ("New") tours that have wrapped but whose last date is within three months.
         List<TourGroup> touring = all.stream()
                 .filter(g -> g.status().equals("now-touring"))
                 .sorted(Comparator.comparing(g -> nextOrLastDate(g, today)))
