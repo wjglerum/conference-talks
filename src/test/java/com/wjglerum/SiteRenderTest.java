@@ -97,10 +97,15 @@ class SiteRenderTest {
 
     @Test
     void homepageRendersComputedStats() {
-        given().when().get("/").then()
-            .statusCode(200)
-            .body(containsString("<span class=\"num\">36</span>"))
-            .body(containsString("Shows"));
+        // Assert the stats are computed and rendered without coupling to the exact talk count,
+        // which changes as talks are added or removed.
+        String body = given().when().get("/").then().statusCode(200).extract().asString();
+        for (String label : new String[] {"Shows", "Signature talks", "Cities", "Countries", "Since"}) {
+            org.junit.jupiter.api.Assertions.assertTrue(
+                body.contains("<span class=\"lbl\">" + label + "</span>"), "missing stat label: " + label);
+        }
+        org.junit.jupiter.api.Assertions.assertTrue(
+            body.matches("(?s).*<span class=\"num\">\\d+</span>.*"), "no computed stat number rendered");
     }
 
     @Test

@@ -168,7 +168,7 @@ Independently of status, a tour carries a boolean `recentlyActive`: its most rec
 within the last three months. This rule is identical for single and multi-date tours. It
 drives a small "New" badge on the tour block and also governs placement: a recently active tour
 is surfaced under "Now Playing" even after it has wrapped, because a tour toured within the last
-year is still current in spirit. A recently-finished tour therefore appears under Now Playing
+three months is still current in spirit. A recently-finished tour therefore appears under Now Playing
 with a "New" badge (not a "Now touring" pill, which is reserved for tours with an upcoming
 date). Only tours whose most recent date is older than three months drop to "Past Tours".
 
@@ -184,7 +184,7 @@ directly.
 
 #### Ordering on the homepage
 
-- "Now Playing" holds both genuinely active tours and recently active (wrapped within twelve
+- "Now Playing" holds both genuinely active tours and recently active (wrapped within three
   months) tours. Active tours come first, ordered by soonest upcoming date; the recently active
   tours follow, ordered by most recent date, newest first.
 - "Past Tours" holds tours whose most recent date is older than three months, by most recent
