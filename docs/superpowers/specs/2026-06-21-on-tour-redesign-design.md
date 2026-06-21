@@ -19,9 +19,11 @@ defaulting to the visitor's system preference with a manual override.
 ## Goals
 
 - Group talks into tours and present them as the primary unit, not individual sessions.
-- Compute tour status (now touring vs wrapped) from dates so the page needs no manual upkeep.
+- Compute tour status (now touring vs wrapped) from dates so the page needs no manual upkeep,
+  kept honest by a scheduled CI rebuild.
 - Keep a geographic map of where talks were given.
-- Support light and dark color themes, default to system preference, with a persisted toggle.
+- Support light and dark color themes, defaulting to system preference, with a three-state
+  toggle (light, dark, system) that persists an explicit override.
 - Keep the content-as-data model: a talk is still one markdown file with front matter.
 
 ## Non-goals
@@ -42,10 +44,35 @@ and acid-green-on-black looks.
 ### Theming
 
 Two themes driven entirely by CSS custom properties on `:root`. Defaults follow
-`prefers-color-scheme`. A toggle button in the header overrides the system choice and persists
-it in `localStorage` under a key such as `wjg-theme`. To avoid a flash of the wrong theme, a
-tiny inline script in `<head>` reads the stored preference and sets a `data-theme` attribute on
-`<html>` before first paint. `prefers-reduced-motion` continues to be respected.
+`prefers-color-scheme`. `prefers-reduced-motion` continues to be respected.
+
+#### Theme state machine
+
+The toggle is three-state: light, dark, and system. This matters because the moment a binary
+toggle writes `localStorage` it stops following the operating system, and a binary control
+gives the visitor no way back to "follow my OS." The three states are:
+
+- **system** (the default, and the value when no override is stored): no `localStorage` key is
+  set, and the page follows `prefers-color-scheme`. A `matchMedia` change listener re-applies
+  the theme live if the OS switches between light and dark.
+- **light** / **dark**: an explicit override, stored in `localStorage` under `wjg-theme`.
+
+Clicking the toggle cycles system to light to dark and back to system. Choosing system removes
+the stored key so the page resumes following the OS.
+
+#### Single source of theme state and FOUC avoidance
+
+The resolved theme ("light" or "dark") lives in exactly one place: a `data-theme` attribute on
+`<html>`. To avoid a flash of the wrong theme, a tiny inline script in `<head>` runs before
+first paint: it reads `wjg-theme` from `localStorage` (or falls back to `prefers-color-scheme`)
+and sets `data-theme` accordingly.
+
+The toggle button, the `matchMedia` listener, and the map all read and react to that one
+attribute rather than each re-deriving the theme. When the resolved theme changes, the code
+that changes it sets `data-theme` and dispatches a `themechange` CustomEvent on `document`.
+Any component that needs to react (notably the map) listens for that event. This keeps the
+three scripts that touch theme state (FOUC script, toggle, OS listener) from drifting out of
+sync.
 
 Dark palette (primary):
 
@@ -96,6 +123,27 @@ list:
 A `Tours.java` record exposes this as a CDI bean via `@DataMapping("tours")`, exactly as
 `Cities.java` does for cities.
 
+#### Tour title vs talk title
+
+The tour title in `tours.yml` is a deliberate umbrella, not a copy of any one talk's title.
+Individual talks keep their own front-matter `title` and may differ from the tour title by
+design: "Concurrency Crossroads" covers talks titled "Virtual Threads vs Reactive Programming
+in Quarkus", and "Secure AI Agents" covers a "Local AI Agents" session. The rule is:
+
+- The tour display title (and subtitle) is used for the tour block heading on the homepage and
+  for the "Part of the *<tour>* tour" line on talk pages.
+- Each individual talk keeps its own title in the date rows and on its own detail page.
+- The "also played at" sibling list shows each sibling's own talk title and date, not the tour
+  title.
+
+#### Missing or mistyped slug fails the build
+
+Unlike a location missing from `cities.yml` (which silently drops a marker off the map), the
+tour is the primary structural unit, so a `tour:` slug with no entry in `tours.yml` is a build
+error. `TourExtensions` validates every referenced slug against `tours.yml` and fails fast with
+the offending slug and file name. This prevents a typo from silently producing an untitled
+tour.
+
 ### Tour grouping and status
 
 A Qute template extension (for example `TourExtensions`) provides the grouping and ordering
@@ -104,18 +152,42 @@ logic the template calls. Given `site.collections.talks` it returns tour groups,
 - the tour slug, title, and subtitle from `tours.yml`
 - its talks, sorted newest date first, upcoming dates flagged
 - a count of dates
-- a computed status
+- a computed status and a "recently active" flag
 
-Status is derived at build time from `LocalDate.now()`:
+#### Status is two states, not three
 
-- "Now touring" if the tour has any talk dated today or later
-- "New" if the tour has a single date and that date falls within the last twelve months
-- "Wrapped" otherwise
+The earlier draft had a third "New" status that only ever applied to a single past date and
+then promoted a finished one-off into the active section. That conflated "happened recently"
+with "currently touring" and behaved differently for single vs multi-date tours. It is
+replaced by a clean split plus an orthogonal badge:
 
-Tour ordering on the homepage: "Now touring" and "New" tours render together under "Now
-Playing" (ordered by their next or most recent date, soonest upcoming first), then "Wrapped"
-tours render under "Past Tours" by most recent date. One-offs are collected into a separate
-"singles" group rendered as the footer line.
+- **Now touring**: the tour has any talk dated today or later.
+- **Wrapped**: every date is in the past.
+
+Independently of status, a tour carries a boolean `recentlyActive`: its most recent date falls
+within the last twelve months. This rule is identical for single and multi-date tours. It
+drives a small "New" badge on the tour block. A now-touring tour is already prominent, so in
+practice the badge marks the freshest entries at the top of Past Tours. A recently-finished
+one-off therefore stays in Past Tours with a "New" badge rather than being mislabelled as
+active.
+
+#### Build-time evaluation needs a scheduled rebuild
+
+Status is computed at build time. Because the site is static and normally only rebuilds on a
+content push, a tour would otherwise keep showing "Now touring" for months after its last date
+passed. To keep status honest without manual upkeep, CI gains a scheduled rebuild (a daily
+GitHub Actions `schedule` cron that runs the same Roq build and deploy). Status then lags
+reality by at most a day. The "current date" used for evaluation is supplied by an injectable
+time source (see Testing) so it is deterministic in tests rather than reading the wall clock
+directly.
+
+#### Ordering on the homepage
+
+- "Now touring" tours render under "Now Playing", ordered by their next or most recent date,
+  soonest upcoming first.
+- "Wrapped" tours render under "Past Tours" by most recent date, newest first, so any
+  "New"-badged tours naturally sit at the top.
+- One-offs (talks with no `tour`) are collected into a "Singles" group (see Homepage).
 
 ### Tour assignment for existing content
 
@@ -127,7 +199,8 @@ All existing talk files get a `tour` slug as part of this work:
 - `secure-ai-agents`: Local AI Agents and the Building Secure AI Agents workshops and talk
   (Lunatech 2025, JavaZone 2025, Devoxx Belgium 2025, JavaLand 2026, Devoxx Poland 2026,
   JavaZone 2026) - 6 dates
-- `practical-mcp-security`: Practical MCP Security (jPrime 2026) - 1 date, "New"
+- `practical-mcp-security`: Practical MCP Security (jPrime 2026) - 1 date, wrapped (its date is
+  in the past), carries the "New" badge while within twelve months of that date
 - `sso-quarkus-oidc`: SSO made easy with Quarkus OIDC (Quarkus Meetup 2022, JavaZone 2022,
   Riviera DEV 2024, LunaConf 2024, OCX 2024, jPrime 2025, JavaCro 2025, Devoxx Morocco 2025)
   - 8 dates
@@ -151,15 +224,25 @@ Rewritten to the setlist layout:
 3. Themed geographic map of the route (see Map).
 4. "Now Playing": active tours, each a block with status pill, title, subtitle, a gold date
    count, and the tour's dates as rows (date, conference, city, type and recording flags,
-   upcoming highlighted).
-5. "Past Tours": wrapped tours, same structure, more compact.
-6. Footer line listing the one-off sessions.
+   upcoming highlighted). Each tour block carries an `id` of `tour-<slug>` so talk pages can
+   link to it.
+5. "Past Tours": wrapped tours, same structure, more compact. A "New" badge marks tours active
+   within the last twelve months.
+6. "Singles": the one-off sessions, rendered as a compact but visible section (not a buried
+   footer line), each a single row with date, title, conference, city, and recording flag.
+   These are real talks (Essential Linux, Hacking the Room with Raspberry Pis, Quarkus on
+   Java 21) and should remain scannable rather than hidden.
 
 ### Talk detail (`talk.html`)
 
 Restyled to the themed palette. Adds tour context: a "Part of the *Concurrency Crossroads*
 tour" line and an "also played at" list linking the sibling talks in the same tour, built from
 the collection by matching `tour` slug.
+
+Because this iteration has no per-tour page (see Non-goals), the "Part of the *<tour>* tour"
+text links back to the homepage tour block anchor (`/#tour-<slug>`) rather than to a dead or
+missing destination. A single-date tour shows the "Part of" line with no "also played at"
+list. A talk with no `tour` shows neither.
 
 ### About (`about.html`) and shared chrome (`layouts/main.html`)
 
@@ -173,31 +256,56 @@ A geographic Leaflet map as on the current site, themed to match:
 - Dark theme uses CARTO `dark_nolabels` plus `dark_only_labels` tiles; light theme uses
   `light_nolabels` plus `light_only_labels`.
 - Markers use the accent color with a stroke in the ground color.
-- The map re-themes when the visitor toggles light/dark.
+- The map re-themes when the resolved theme changes. It does not re-derive the theme itself:
+  on init it reads `data-theme` from `<html>`, and it listens for the `themechange` CustomEvent
+  (see Theming) to swap the tile layers and re-color markers. This keeps the map a consumer of
+  the single source of theme state rather than a fourth place that computes it.
 - `cities.yml` and `Cities.java` continue to supply coordinates. A talk whose location is not
   in `cities.yml` drops off the map, so new locations must be added there (unchanged behavior).
 - The Qute raw block and escaped-brace JSON technique in `index.html` is preserved; edits to
-  that region stay careful per the existing CLAUDE.md note.
+  that region stay careful per the existing CLAUDE.md note. The added theme logic should be
+  kept small and confined to the existing script block: read `data-theme`, build the two tile
+  layers, and swap them on `themechange`. No new templated braces are introduced inside the raw
+  block.
 
 ## Computed statistics
 
-All hero stats come from the talks collection at build time, no hand-maintained numbers:
+All hero stats come from the talks collection at build time, no hand-maintained numbers. The
+counts below are what the current content produces; they are examples, not values to maintain
+by hand. If a count looks wrong after implementation, the data or the extension is wrong, not
+this prose.
 
-- Shows: collection size (36)
-- Signature talks: distinct `tour` slugs (6)
-- Cities: distinct physical locations, excluding "Online" (19)
-- Countries: distinct country component of each location, excluding "Online" (12)
-- Since: earliest talk year (2016)
+- Shows: collection size (currently 36)
+- Signature talks: distinct `tour` slugs (currently 6)
+- Cities: distinct `location` strings excluding "Online" (currently 19). Note this is computed
+  from the collection's `location` values, which is a different source from `cities.yml`; a
+  location present in the collection but absent from `cities.yml` still counts here while
+  dropping off the map. Keep the two in step.
+- Countries: distinct country component (the part after the comma) of each `location`,
+  excluding "Online" (currently 12)
+- Since: earliest talk year (currently 2016)
 
 ## Testing
 
-Extend the existing `@QuarkusTest` plus REST Assured suite to assert:
+Status is time-dependent, so tests must not read the wall clock. The "current date" used by
+`TourExtensions` comes from an injectable time source (a CDI `Clock` bean, or a configurable
+date that defaults to the system clock). Tests inject a fixed date so assertions about active
+vs wrapped do not rot as real time passes. Without this, "Concurrency Crossroads is active"
+would start failing the day its last date goes by.
 
-- the homepage renders the "Now Playing" and "Past Tours" sections
-- a known active tour (Concurrency Crossroads) appears with its date count
-- a known wrapped tour (SSO made easy) appears under Past Tours
+Extend the existing `@QuarkusTest` plus REST Assured suite to assert, with a fixed injected
+date:
+
+- the homepage renders the "Now Playing", "Past Tours", and "Singles" sections
+- a tour with a date at or after the injected date appears under Now Playing with its date count
+- a tour with all dates before the injected date appears under Past Tours
+- the "New" badge appears on a tour whose most recent date is within twelve months of the
+  injected date, and is absent otherwise
+- a slug referenced in front matter but missing from `tours.yml` fails the build (negative test)
+- the three-state theme toggle and the no-FOUC inline script are present in the rendered head
 - computed stats render (for example the shows count)
-- a talk detail page renders its tour context and sibling links
+- a talk detail page renders its tour context, the `/#tour-<slug>` link, and sibling links, and
+  a single-date tour renders the "Part of" line with no sibling list
 
 ## Future work (out of scope)
 
