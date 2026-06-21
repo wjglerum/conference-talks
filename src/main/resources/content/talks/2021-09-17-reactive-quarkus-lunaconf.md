@@ -1,4 +1,5 @@
 ---
+tour: reactive-quarkus
 title: Reactive Quarkus
 date: 2021-09-17
 layout: talk

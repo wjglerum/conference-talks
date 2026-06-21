@@ -1,4 +1,5 @@
 ---
+tour: secure-ai-agents
 title: Local AI Agents
 date: 2025-04-11
 layout: talk

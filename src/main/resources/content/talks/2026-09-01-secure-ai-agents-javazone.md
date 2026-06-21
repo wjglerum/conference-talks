@@ -1,4 +1,5 @@
 ---
+tour: secure-ai-agents
 title: "Building secure AI agents with Quarkus LangChain4j"
 date: 2026-09-01
 layout: talk

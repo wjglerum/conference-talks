@@ -1,4 +1,5 @@
 ---
+tour: concurrency-crossroads
 title: "Concurrency Crossroads: Choosing between Reactive Programming & Virtual Threads"
 date: 2026-04-21
 layout: talk

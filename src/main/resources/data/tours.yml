@@ -1,0 +1,19 @@
+list:
+  concurrency-crossroads:
+    title: "Concurrency Crossroads"
+    subtitle: "Reactive Programming vs. Virtual Threads in Quarkus"
+  secure-ai-agents:
+    title: "Secure AI Agents"
+    subtitle: "Building secure AI agents with Quarkus LangChain4j"
+  practical-mcp-security:
+    title: "Practical MCP Security"
+    subtitle: "Securing the Model Context Protocol in practice"
+  sso-quarkus-oidc:
+    title: "SSO made easy with Quarkus OIDC"
+    subtitle: "Single sign-on for Quarkus apps with OpenID Connect"
+  reactive-quarkus:
+    title: "Reactive Quarkus"
+    subtitle: "Building reactive applications on Quarkus"
+  scala-iot:
+    title: "The Scala era"
+    subtitle: "Akka, clustering and IoT demos from the Scala years"

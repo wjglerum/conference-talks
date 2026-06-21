@@ -1,4 +1,5 @@
 ---
+tour: concurrency-crossroads
 title: "Concurrency Crossroads: Choosing between Reactive Programming and Virtual Threads in Quarkus"
 date: 2025-11-14
 layout: talk

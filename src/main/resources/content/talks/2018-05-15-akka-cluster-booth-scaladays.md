@@ -1,4 +1,5 @@
 ---
+tour: scala-iot
 title: "Running an Akka cluster live at the booth"
 date: 2018-05-15
 layout: talk
