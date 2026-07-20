@@ -31,6 +31,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           java-version: '25'
           site-future: 'true'
+          site-url: 'https://wjglerum.nl'
 
   deploy:
     needs: build
