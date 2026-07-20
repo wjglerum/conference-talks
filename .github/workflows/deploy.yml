@@ -21,6 +21,7 @@ concurrency:
 
 jobs:
   build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -35,6 +36,7 @@ jobs:
           site-url: 'https://wjglerum.nl'
 
   deploy:
+    name: Deploy
     needs: build
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
