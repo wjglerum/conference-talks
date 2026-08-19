@@ -17,3 +17,6 @@ list:
   scala-iot:
     title: "The Scala era"
     subtitle: "Akka, clustering and IoT demos from the Scala years"
+  legacy-modernization:
+    title: "Legacy JVM Modernization"
+    subtitle: "Migrating a legacy Scala app to Java 25 live, with an AI agent"

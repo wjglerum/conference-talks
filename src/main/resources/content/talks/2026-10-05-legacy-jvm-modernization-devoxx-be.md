@@ -1,4 +1,5 @@
 ---
+tour: legacy-modernization
 title: "Legacy JVM modernization with agentic AI: Quarkus vs Spring Boot"
 date: 2026-10-05
 layout: talk
