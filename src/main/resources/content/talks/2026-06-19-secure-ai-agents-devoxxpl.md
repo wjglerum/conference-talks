@@ -13,7 +13,4 @@ demo: https://github.com/wjglerum/quarkus-ai-agent-workshop-devoxx-poland-2026
 link: /talks/2026-06-19-secure-ai-agents-devoxxpl/
 ---
 
-<div class="abstract">
-    <h2>Abstract</h2>
-    <p>A hands-on workshop where participants build and secure AI agents using Quarkus and LangChain4j. You'll set up a Quarkus project with the LangChain4j extension, implement AI-powered features, and add robust security measures to prevent prompt injection, data leakage, and other AI-specific vulnerabilities.</p>
-</div>
+A hands-on workshop where participants build and secure AI agents using Quarkus and LangChain4j. You'll set up a Quarkus project with the LangChain4j extension, implement AI-powered features, and add robust security measures to prevent prompt injection, data leakage, and other AI-specific vulnerabilities.

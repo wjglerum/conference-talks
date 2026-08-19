@@ -13,7 +13,4 @@ link: /talks/2026-04-21-concurrency-crossroads-ocx/
 
 ---
 
-<div class="abstract">
-    <h2>Abstract</h2>
-    <p>This talk compares Reactive Programming and Java Virtual Threads (Project Loom) for high-performance, non-blocking applications. Using real Quarkus examples and live coding, it explores advantages, drawbacks, and future trends, helping developers understand both paradigms and choose the optimal approach for their next Java project.</p>
-</div>
+This talk compares Reactive Programming and Java Virtual Threads (Project Loom) for high-performance, non-blocking applications. Using real Quarkus examples and live coding, it explores advantages, drawbacks, and future trends, helping developers understand both paradigms and choose the optimal approach for their next Java project.
