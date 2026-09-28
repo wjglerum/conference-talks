@@ -21,7 +21,7 @@ layout: main
 {/let}
 
 <section class="map-section">
-    <div id="map" aria-label="Map of tour locations"></div>
+    <div id="map" aria-label="Map of tour locations" data-carto-key="{config:['carto.basemap-key'] ?: ''}"></div>
 </section>
 
 <section class="tours" aria-labelledby="now-playing">
@@ -79,17 +79,18 @@ layout: main
 
     const map = L.map('map', { scrollWheelZoom: false, zoomControl: true, attributionControl: true });
 
+    const cartoKey = document.getElementById('map').dataset.cartoKey;
     let base = null, labels = null;
     function tiles() {
         const variant = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
         if (base) map.removeLayer(base);
         if (labels) map.removeLayer(labels);
-        base = L.tileLayer('https://{s}.basemaps.cartocdn.com/' + variant + '_nolabels/{z}/{x}/{y}{r}.png', {
+        base = L.tileLayer('https://{s}.basemaps.cartocdn.com/' + variant + '_nolabels/{z}/{x}/{y}{r}.png?key=' + cartoKey, {
             subdomains: 'abcd',
             maxZoom: 10,
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
         }).addTo(map);
-        labels = L.tileLayer('https://{s}.basemaps.cartocdn.com/' + variant + '_only_labels/{z}/{x}/{y}{r}.png', {
+        labels = L.tileLayer('https://{s}.basemaps.cartocdn.com/' + variant + '_only_labels/{z}/{x}/{y}{r}.png?key=' + cartoKey, {
             subdomains: 'abcd',
             maxZoom: 10
         }).addTo(map);

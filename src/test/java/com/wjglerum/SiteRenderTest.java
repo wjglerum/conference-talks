@@ -34,6 +34,13 @@ class SiteRenderTest {
     }
 
     @Test
+    void homepageMapCarriesCartoKey() {
+        given().when().get("/").then()
+            .statusCode(200)
+            .body(containsString("data-carto-key=\"test-key\""));
+    }
+
+    @Test
     void homepageShowsTourSections() {
         given().when().get("/").then()
             .statusCode(200)
