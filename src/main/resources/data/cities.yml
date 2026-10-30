@@ -13,6 +13,7 @@ list:
   "Marrakesh, Morocco":         { lat: 31.6295, lng: -7.9811 }
   "Oslo, Norway":               { lat: 59.9139, lng: 10.7522 }
   "Paris, France":              { lat: 48.8566, lng:  2.3522 }
+  "Porto, Portugal":            { lat: 41.1579, lng: -8.6291 }
   "Rotterdam, The Netherlands": { lat: 51.9244, lng:  4.4777 }
   "Rovinj, Croatia":            { lat: 45.0815, lng: 13.6386 }
   "Rust, Germany":              { lat: 48.2684, lng:  7.7224 }
