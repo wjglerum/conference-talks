@@ -7,6 +7,7 @@ conference: Porto Tech Hub 2026
 conferenceUrl: https://portotechhub.com/conference-2026/
 location: Porto, Portugal
 type: talk
+demo: https://github.com/wjglerum/quarkus-mcp-porto-tech-hub-2026
 link: /talks/2026-11-10-practical-mcp-security-porto-tech-hub/
 ---
 

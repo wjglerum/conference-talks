@@ -143,10 +143,13 @@ class SiteRenderTest {
     }
 
     @Test
-    void singleDateTourShowsContextWithoutSiblingList() {
-        given().when().get("/talks/2026-06-03-practical-mcp-security-jprime/").then()
+    void secondDateOfATourListsTheFirstAsSibling() {
+        // practical-mcp-security went from one date (jPrime) to two (plus Porto Tech Hub);
+        // no tour has a single date any more, so this covers the smallest sibling list.
+        given().when().get("/talks/2026-11-10-practical-mcp-security-porto-tech-hub/").then()
             .statusCode(200)
             .body(containsString("Part of the"))
-            .body(org.hamcrest.Matchers.not(containsString("Also played at")));
+            .body(containsString("Also played at"))
+            .body(containsString("jPrime 2026"));
     }
 }
