@@ -107,7 +107,7 @@ class SiteRenderTest {
         // Assert the stats are computed and rendered without coupling to the exact talk count,
         // which changes as talks are added or removed.
         String body = given().when().get("/").then().statusCode(200).extract().asString();
-        for (String label : new String[] {"Shows", "Signature talks", "Cities", "Countries", "Since"}) {
+        for (String label : new String[] {"Shows", "Talks", "Cities", "Countries", "Since"}) {
             org.junit.jupiter.api.Assertions.assertTrue(
                 body.contains("<span class=\"lbl\">" + label + "</span>"), "missing stat label: " + label);
         }
