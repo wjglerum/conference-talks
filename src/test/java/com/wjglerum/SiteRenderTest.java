@@ -44,9 +44,9 @@ class SiteRenderTest {
     void homepageShowsTourSections() {
         given().when().get("/").then()
             .statusCode(200)
-            .body(containsString("Now Playing"))
-            .body(containsString("Past Tours"))
-            .body(containsString("Singles"));
+            .body(containsString("Current talks"))
+            .body(containsString("Earlier talks"))
+            .body(containsString("One-off talks"));
     }
 
     @Test
@@ -55,7 +55,7 @@ class SiteRenderTest {
             .statusCode(200)
             .body(containsString("id=\"tour-concurrency-crossroads\""))
             .body(containsString("Concurrency Crossroads"))
-            .body(containsString("Now touring"));
+            .body(containsString("Upcoming"));
     }
 
     @Test
@@ -107,7 +107,7 @@ class SiteRenderTest {
         // Assert the stats are computed and rendered without coupling to the exact talk count,
         // which changes as talks are added or removed.
         String body = given().when().get("/").then().statusCode(200).extract().asString();
-        for (String label : new String[] {"Shows", "Talks", "Cities", "Countries", "Since"}) {
+        for (String label : new String[] {"Talks given", "Topics", "Cities", "Countries", "Since"}) {
             org.junit.jupiter.api.Assertions.assertTrue(
                 body.contains("<span class=\"lbl\">" + label + "</span>"), "missing stat label: " + label);
         }
@@ -117,11 +117,11 @@ class SiteRenderTest {
 
     @Test
     void homepageTitleIsNotDuplicated() {
-        // page.title equals site.title on the landing page, so the title must read "On Tour"
-        // once, not "On Tour · On Tour".
+        // page.title equals site.title on the landing page, so the title must read "Willem Jan Glerum"
+        // once, not "Willem Jan Glerum · Willem Jan Glerum".
         given().when().get("/").then()
             .statusCode(200)
-            .body(containsString("<title>On Tour</title>"));
+            .body(containsString("<title>Willem Jan Glerum</title>"));
     }
 
     @Test
