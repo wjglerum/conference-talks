@@ -7,6 +7,7 @@ conference: Øredev 2026
 conferenceUrl: https://oredev.org/
 location: Malmö, Sweden
 type: talk
+demo: https://github.com/wjglerum/quarkus-virtual-threads-oredev-2026
 link: /talks/2026-11-04-concurrency-crossroads-oredev/
 ---
 
