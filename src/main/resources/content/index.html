@@ -1,18 +1,18 @@
 ---
-title: On Tour
-description: Conference talks given by Willem Jan Glerum, Principal Software Engineer at Lunatech, toured across Europe.
+title: Willem Jan Glerum
+description: Conference talks, workshops and podcasts by Willem Jan Glerum, Principal Software Engineer at Lunatech.
 author: Willem Jan Glerum
 layout: main
 ---
 {#let stats=cdi:setlist.statsForPages(site.collections.talks)}
 <section class="hero">
     <div class="hero-copy">
-        <h1 class="display">On Tour</h1>
-        <p class="lede">A handful of signature talks, toured across Europe. Mostly Java and Quarkus, lately a lot about virtual threads and AI agents.</p>
+        <h1 class="display">Talks</h1>
+        <p class="lede">Talks I have given at conferences and meetups, mostly about Java and Quarkus. Lately: virtual threads and AI agents.</p>
     </div>
     <ul class="stats">
-        <li><span class="num">{stats.shows}</span><span class="lbl">Shows</span></li>
-        <li><span class="num">{stats.signatureTalks}</span><span class="lbl">Signature talks</span></li>
+        <li><span class="num">{stats.shows}</span><span class="lbl">Talks given</span></li>
+        <li><span class="num">{stats.signatureTalks}</span><span class="lbl">Topics</span></li>
         <li><span class="num">{stats.cities}</span><span class="lbl">Cities</span></li>
         <li><span class="num">{stats.countries}</span><span class="lbl">Countries</span></li>
         <li><span class="num">{stats.sinceYear}</span><span class="lbl">Since</span></li>
@@ -21,25 +21,25 @@ layout: main
 {/let}
 
 <section class="map-section">
-    <div id="map" aria-label="Map of tour locations" data-carto-key="{config:['carto.basemap-key'] ?: ''}"></div>
+    <div id="map" aria-label="Map of talk locations" data-carto-key="{config:['carto.basemap-key'] ?: ''}"></div>
 </section>
 
 <section class="tours" aria-labelledby="now-playing">
-    <h2 id="now-playing">Now Playing</h2>
+    <h2 id="now-playing">Current talks</h2>
     {#for tour in cdi:setlist.nowPlaying(site.collections.talks)}
     {#include partials/tour-block /}
     {/for}
 </section>
 
 <section class="tours past" aria-labelledby="past-tours">
-    <h2 id="past-tours">Past Tours</h2>
+    <h2 id="past-tours">Earlier talks</h2>
     {#for tour in cdi:setlist.pastTours(site.collections.talks)}
     {#include partials/tour-block /}
     {/for}
 </section>
 
 <section class="singles" aria-labelledby="singles">
-    <h2 id="singles">Singles</h2>
+    <h2 id="singles">One-off talks</h2>
     <ul class="single-list">
         {#for talk in cdi:setlist.singles(site.collections.talks)}
         <li>

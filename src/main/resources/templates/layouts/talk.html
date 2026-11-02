@@ -41,7 +41,7 @@
         {#if slug}
         {#let tour=cdi:setlist.tour(site.collections.talks, slug)}
         <aside class="tour-context">
-            <p class="part-of">Part of the <a href="/#tour-{slug}"><em>{tour.title}</em></a> tour.</p>
+            <p class="part-of">Part of the <a href="/#tour-{slug}"><em>{tour.title}</em></a> series.</p>
             {#let sibs=cdi:setlist.siblings(site.collections.talks, slug, page.url.path)}
             {#if sibs.size > 0}
             <h2 class="also">Also played at</h2>

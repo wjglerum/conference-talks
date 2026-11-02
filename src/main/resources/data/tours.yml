@@ -16,4 +16,4 @@ list:
     subtitle: "Building reactive applications on Quarkus"
   scala-iot:
     title: "The Scala era"
-    subtitle: "Akka, clustering and IoT demos from the Scala years"
+    subtitle: "Akka, clustering and IoT demos in Scala"
