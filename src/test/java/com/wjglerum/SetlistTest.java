@@ -57,6 +57,30 @@ class SetlistTest {
     }
 
     @Test
+    void newWhenFirstDateWithinWindow() {
+        // First and only date 18 days before TODAY: a fresh tour.
+        var group = List.of(talk("practical-mcp-security", LocalDate.of(2026, 6, 3), "Sofia, Bulgaria"));
+        assertTrue(Setlist.isNew(group, TODAY));
+    }
+
+    @Test
+    void notNewWhenFirstDateLongAgoEvenIfRecentlyActive() {
+        // Concurrency Crossroads ran recently but started in 2025: recently active, not new.
+        var group = List.of(
+            talk("concurrency-crossroads", LocalDate.of(2025, 7, 9), "Paris, France"),
+            talk("concurrency-crossroads", LocalDate.of(2026, 6, 3), "Sofia, Bulgaria"));
+        assertTrue(Setlist.recentlyActive(group, TODAY));
+        assertFalse(Setlist.isNew(group, TODAY));
+    }
+
+    @Test
+    void notNewWhenOnlyFutureDates() {
+        // A tour that has not debuted yet is "Upcoming", not "New".
+        var group = List.of(talk("practical-mcp-security", LocalDate.of(2026, 11, 10), "Porto, Portugal"));
+        assertFalse(Setlist.isNew(group, TODAY));
+    }
+
+    @Test
     void groupSortsTalksNewestFirstAndCounts() {
         var talks = List.of(
             talk("concurrency-crossroads", LocalDate.of(2025, 11, 6), "Ede, The Netherlands"),

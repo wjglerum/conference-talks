@@ -21,12 +21,12 @@ import jakarta.inject.Named;
 @ApplicationScoped
 public class Setlist {
 
-    private static final DateTimeFormatter SHORT = DateTimeFormatter.ofPattern("MMM yyyy", Locale.ENGLISH);
+    private static final DateTimeFormatter SHORT = DateTimeFormatter.ofPattern("d MMM yyyy", Locale.ENGLISH);
     private static final DateTimeFormatter LONG = DateTimeFormatter.ofPattern("d MMMM yyyy", Locale.ENGLISH);
 
-    // A wrapped tour counts as recently active (still on tour in spirit) when its most recent
-    // date is within this many months. Kept short so a tour last performed long ago does not
-    // linger in Now Playing: a single recent show is "new", a tour months past is "wrapped".
+    // A wrapped tour counts as recently active (still listed under Current talks) when its most
+    // recent date is within this many months. A tour is only marked "New" when its FIRST date
+    // falls within this window, so a long-running tour with a recent show is not "new".
     private static final int RECENT_MONTHS = 3;
 
     private final Tours tours;
@@ -168,7 +168,8 @@ public class Setlist {
                     .toList();
             Tours.TourMeta m = meta.get(e.getKey());
             groups.add(new TourGroup(e.getKey(), m.title(), m.subtitle(),
-                    sorted, sorted.size(), statusOf(sorted, today), recentlyActive(sorted, today)));
+                    sorted, sorted.size(), statusOf(sorted, today), recentlyActive(sorted, today),
+                    isNew(sorted, today)));
         }
         return groups;
     }
@@ -182,6 +183,12 @@ public class Setlist {
         LocalDate cutoff = today.minusMonths(RECENT_MONTHS);
         return group.stream().map(Talk::date).max(Comparator.naturalOrder())
                 .map(d -> !d.isBefore(cutoff)).orElse(false);
+    }
+
+    static boolean isNew(List<Talk> group, LocalDate today) {
+        LocalDate cutoff = today.minusMonths(RECENT_MONTHS);
+        return group.stream().map(Talk::date).min(Comparator.naturalOrder())
+                .map(d -> !d.isBefore(cutoff) && !d.isAfter(today)).orElse(false);
     }
 
     static Stats stats(List<Talk> talks) {
