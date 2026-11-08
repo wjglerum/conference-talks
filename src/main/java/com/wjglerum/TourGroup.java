@@ -9,5 +9,6 @@ public record TourGroup(
         List<Talk> talks,
         int dateCount,
         String status,
-        boolean recentlyActive) {
+        boolean recentlyActive,
+        boolean isNew) {
 }

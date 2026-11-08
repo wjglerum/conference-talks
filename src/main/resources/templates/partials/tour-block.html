@@ -2,7 +2,7 @@
     <header class="tour-head">
         <div class="tour-status">
             {#if tour.status == 'now-touring'}<span class="pill touring"><span class="dot"></span>Upcoming</span>{/if}
-            {#if tour.recentlyActive && tour.status != 'now-touring'}<span class="pill new">New</span>{/if}
+            {#if tour.isNew}<span class="pill new">New</span>{/if}
         </div>
         <h3 class="tour-title">{tour.title}</h3>
         <p class="tour-sub">{tour.subtitle}</p>
